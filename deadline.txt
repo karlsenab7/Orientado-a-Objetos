@@ -1,0 +1,33 @@
+5 hari kelas selesai
+
+hari 1
+element
+skill -> element
+cell
+position
+
+hari 2
+engimon -> skill
+
+hari 3
+peta -> cell, position, engimon
+breed -> engimon -> element
+battle -> engimon,skill
+
+hari 4
+inventory
+
+hari 5 Kamis
+player -> inventory, peta, engimon, breed, battle
+
+---------------------------------------------------
+---------------------------------------------------
+
+hari >= 6 Jumat, Sabtu, Minggu
+GameManagement
+
+save
+	read & write (load & save)
+	database engimon
+	database skill
+	database player
