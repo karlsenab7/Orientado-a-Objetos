@@ -61,4 +61,9 @@ public class Skill {
     public void setMastery(int mastery){
         this.mastery = mastery;
     }
+    public static Skill clone(Skill s)
+    {
+        Skill temp = new Skill(s.ID, s.name, s.element, s.power, s.description, s.isUnique, s.uniqueTo);
+        return temp;
+    }
 }

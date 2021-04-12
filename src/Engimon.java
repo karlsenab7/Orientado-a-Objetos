@@ -1,3 +1,4 @@
+import java.security.cert.TrustAnchor;
 import java.util.*;
 
 public class Engimon {
@@ -26,6 +27,14 @@ public class Engimon {
         engimon_parents = new ArrayList<Engimon>();
         engimon_skills = new ArrayList<Skill>();
 
+        // Untuk testing
+        Element el = new Element("fire");
+        engimon_elements.add(el);
+        List<Element> e = new ArrayList<Element>();
+        e.add(new Element("fire"));
+        Skill s = new Skill("ID", "name", e, 10, "Test", true, "Dragon");
+        engimon_skills.add(s);
+        
         numOfCreated += 1;
         engimon_id = numOfCreated;
     }
@@ -89,7 +98,7 @@ public class Engimon {
     public void set_engimon_species(String species) { engimon_species = species; }
 
     // Parents
-    public void set_engimon_parents(ArrayList<Engimon> parents) {
+    public void set_engimon_parents(List<Engimon> parents) {
         if (engimon_parents.size() == parents.size()) {
             for(int i = 0; i < engimon_parents.size(); i++) { engimon_parents.set(i, parents.get(i)); }
         }
@@ -100,7 +109,7 @@ public class Engimon {
     }
 
     // Element
-    public void set_engimon_elements(ArrayList<Element> elements) {
+    public void set_engimon_elements(List<Element> elements) {
         if (engimon_elements.size() == elements.size()) { // Biar ga error index out of bounds
             for(int i = 0; i < engimon_elements.size(); i++) { engimon_elements.set(i, elements.get(i)); }
         }
@@ -111,7 +120,7 @@ public class Engimon {
     }
 
     // Skills
-    public void set_engimon_skills(ArrayList<Skill> skills) {
+    public void set_engimon_skills(List<Skill> skills) {
         if (engimon_skills.size() == skills.size()) { // Biar ga error index out of bounds
             for(int i = 0; i < engimon_skills.size(); i++) { engimon_skills.set(i, skills.get(i)); }
         }
