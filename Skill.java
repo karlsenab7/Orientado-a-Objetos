@@ -1,5 +1,5 @@
 import java.util.*;
-class Skill {
+public class Skill {
     private String ID;
     private String name;
     private List<Element> element;
@@ -43,10 +43,7 @@ class Skill {
         mastery++;
     }
     public boolean canBeLearned(Element element){
-        if(this.element.contains(element)){
-            return true;
-        }
-        return false;
+        return this.element.contains(element);
     }
     public void print(){
         System.out.println( ID); 
@@ -64,4 +61,4 @@ class Skill {
     public void setMastery(int mastery){
         this.mastery = mastery;
     }
-};
+}
