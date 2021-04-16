@@ -2,9 +2,9 @@ import java.util.*;
 
 public class Inventory<U> {
     private static int max_capacity = 50;
-    private int current_capacity;
-    private List<U> bag;
-    private List<Integer> bagCount;
+    protected static int current_capacity;
+    protected List<U> bag;
+    protected List<Integer> bagCount;
 
     Inventory() {
         bag = new ArrayList<>();
@@ -17,7 +17,7 @@ public class Inventory<U> {
     }
 
     public int get_total_stored_item() {
-        return this.current_capacity;
+        return current_capacity;
     }
 
     public void set_max_capacity(int newmax) {
@@ -40,10 +40,10 @@ public class Inventory<U> {
         return this.bagCount.get(index);
     }
 
-    public void addInventory(U items) {
-        if (this.current_capacity >= max_capacity) {
-            System.out.println("Inventory Penuh");
-        } else if (this.current_capacity > 0) {
+    public void addInventory(U items) throws Exception {
+        if (current_capacity >= max_capacity) {
+            throw new Exception("Inventory Penuh!");
+        } else if (current_capacity > 0) {
             for (int i = 0; i < this.bag.size(); i++) {
                 if (this.bag.get(i).equals(items)) {
                     int temp = this.bagCount.get(i);
@@ -53,7 +53,7 @@ public class Inventory<U> {
                 }
             }
         }
-        this.current_capacity++;
+        current_capacity++;
         this.bagCount.add(1);
         this.bag.add(items);
     }
@@ -65,5 +65,20 @@ public class Inventory<U> {
         }
         bag.remove(index);
         bagCount.remove(index);
+    }
+
+    public void removeInventory(int index, int amount) {
+        int res = bagCount.get(index) - amount;
+
+        if (res > 1) {
+            bagCount.set(index, (bagCount.get(index) - 1));
+            return;
+        }
+        bag.remove(index);
+        bagCount.remove(index);
+    }
+
+    public boolean isEmpty() {
+        return this.bag.isEmpty();
     }
 }
