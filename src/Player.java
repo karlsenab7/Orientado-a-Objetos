@@ -1,3 +1,4 @@
+import java.util.List;
 import java.util.Scanner;
 
 public class Player {
@@ -6,7 +7,6 @@ public class Player {
     private Position activeEngimonPosition = new Position();
     private int activeEngimonIdx;
     private Inventory<Skill> inventorySkill = new Inventory<>();
-
     private Inventory<Engimon> inventoryEngimon = new Inventory<>() {
         @Override
         public void addInventory(Engimon items) {
@@ -108,7 +108,20 @@ public class Player {
     }
 
     public void addEngimon(Engimon newEngimon) throws Exception {
-        this.inventoryEngimon.addInventory(newEngimon);
+        List<Engimon> inven = this.inventoryEngimon.getInventory();
+    }
+
+    public void addSkillItem(Skill item) {
+        List<Skill> skill = inventorySkill.getInventory();
+        if (!skill.isEmpty()) {
+            int i = 0;
+            while (item.getPower() < skill.get(i).getPower()) {
+                i++;
+            }
+            skill.add(i, item);
+            return;
+        }
+        skill.add(item);
     }
 
     public void showSkillItemList() {
