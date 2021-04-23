@@ -5,15 +5,15 @@ import java.util.Scanner;
 public class Battle {
     private int idxOwnEngimon;
     private Engimon second;
-    private Inventory<Engimon> inventoryEngimon;
-    private Inventory<Skill> inventorySkill;
+    // private Inventory<Engimon> inventoryEngimon;
+    // private Inventory<Skill> inventorySkill;
 
-    public Battle(int e1, Engimon e2, Inventory<Engimon> &inventoryEngimon, Inventory<Skill> &inventorySKill)
+    public Battle(int e1, Engimon e2)//, Inventory<Engimon> &inventoryEngimon, Inventory<Skill> &inventorySKill)
     {
         this.idxOwnEngimon = e1;
         this.second = e2;
-        this.inventoryEngimon = inventoryEngimon;
-        this.inventorySkill = inventorySkill;
+        // this.inventoryEngimon = inventoryEngimon;
+        // this.inventorySkill = inventorySkill;
     }
 
     public int get_first()
