@@ -98,10 +98,10 @@ public class Battle {
 
     public void get_reward()
     {
-        vector<Skill> skills = second.get_engimon_skills();
-        Skill s = skills[0];
-        inventorySkill.addInventory(s);
-        inventoryEngimon.getInventory()[idxOwnEngimon].add_exp(40);
+        // vector<Skill> skills = second.get_engimon_skills();
+        // Skill s = skills[0];
+        // inventorySkill.addInventory(s);
+        // inventoryEngimon.getInventory()[idxOwnEngimon].add_exp(40);
     
         System.out.println("REWARD : \n");
         System.out.println("Engimon : " + second.get_engimon_name() + " - Level " + second.get_level());
@@ -112,7 +112,7 @@ public class Battle {
 
     public void get_penalty()
     {
-        inventoryEngimon.removeInventory(idxOwnEngimon);
+        // inventoryEngimon.removeInventory(idxOwnEngimon);
         System.out.println("Your active engimon is dead!!\n\n");
     }
 
