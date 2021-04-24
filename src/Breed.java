@@ -1,3 +1,5 @@
+package src;
+
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
@@ -68,10 +70,15 @@ import java.util.Scanner;
 
         e.set_engimon_elements(childElements);
 
-        List<Engimon> parents = new ArrayList<Engimon>();
-        parents.add(first);
-        parents.add(second);
-        e.set_engimon_parents(parents);
+        List<String> parents = new ArrayList<String>();
+        parents.add(first.get_engimon_name());
+        parents.add(second.get_engimon_name());
+        e.set_engimon_parentName(parents);
+
+        List<String> parentSpecies = new ArrayList<String>();
+        parentSpecies.add(first.get_engimon_species());
+        parentSpecies.add(second.get_engimon_species());
+        e.set_engimon_parentSpecies(parentSpecies);
 
         e.set_engimon_species(species);
         

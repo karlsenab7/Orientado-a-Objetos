@@ -1,3 +1,7 @@
+package src;
+
+import javax.xml.crypto.Data;
+
 /**
  * Cell
  */
@@ -5,7 +9,7 @@
 // getCharCell tunggu engimon dulu
 
 
-enum CellType {grassland, sea};
+enum CellType {grassland, sea, tundra, mountain};
 enum Content {player, engimon, air};
 
 public class Cell {
@@ -13,13 +17,21 @@ public class Cell {
     private Position position;
     private CellType cellType;
     private Content content;
-    private int idxEngimonInCell;
+    private int idEngimonInCell;
+
+    public Cell()
+    {
+        position = new Position(0, 0);
+        cellType = CellType.grassland;
+        content = Content.air;
+        idEngimonInCell = -1;
+    }
 
     public Cell(Position newPosition, CellType newCellType, Content newContent) {
     this.position = newPosition;
     this.cellType = newCellType;
     this.content = newContent;
-    this.idxEngimonInCell = -1;
+    this.idEngimonInCell = -1;
     }
 
     public Cell(int pX, int pY, CellType newCellType, Content newContent) {
@@ -27,7 +39,7 @@ public class Cell {
     this.position.setY(pY);
     this.cellType = newCellType;
     this.content = newContent;
-    this.idxEngimonInCell = -1;
+    this.idEngimonInCell = -1;
     }
 
     public Position getPosition()
@@ -40,103 +52,59 @@ public class Cell {
         return this.cellType;
     }
     
-    // public char getCharCell()
-    // {
-    //     EngimonDatabase db;
-    
-    //     if (content == Content.player)
-    //     {
-    //         return 'P';
-    //     }
-    //     else if (content == Content.engimon)
-    //     {
-    //         if (idxEngimonInCell == -1)
-    //             return '-';
-    
-    //         //cout << "sdasd" << endl;
-    //         Engimon e = db.get_engimon_by_idx(idxEngimonInCell);
-    //         vector<Element> el = e.get_engimon_elements();
-    //         //cout << "ssssss";
-    //         if (el.size() > 1)
-    //         {
-    //             string el1 = el[0].get_element();
-    //             string el2 = el[1].get_element();
-    
-    //             if ((el1 == "Fire" && el2 == "Electric") || (el1 == "Electric" && el2 == "Fire") )
-    //             {
-    //                 if (e.get_level() >= 30)
-    //                     return 'L';
-    //                 else
-    //                     return 'l';
-    //             }
-    //             else if ((el1 == "Water" && el2 == "Ice") || (el1 == "Ice" && el2 == "Water") )
-    //             {
-    //                 if (e.get_level() >= 30)
-    //                     return 'S';
-    //                 else
-    //                     return 's';
-    //             }
-    //             else
-    //             {
-    //                 if (e.get_level() >= 30)
-    //                     return 'N';
-    //                 else
-    //                     return 'n';
-    //             }
-    //         }
-    //         else
-    //         {
-    //             if (el[0].get_element() == "Fire")
-    //             {
-    //                 if (e.get_level() >= 30)
-    //                     return 'F';
-    //                 else
-    //                     return 'f';
-    //             }
-    //             else if (el[0].get_element() == "Water")
-    //             {
-    //                 if (e.get_level() >= 30)
-    //                     return 'W';
-    //                 else
-    //                     return 'w';
-    //             }
-    //             else if (el[0].get_element() == "Ice")
-    //             {
-    //                 if (e.get_level() >= 30)
-    //                     return 'I';
-    //                 else
-    //                     return 'i';
-    //             }
-    //             else if (el[0].get_element() == "Ground")
-    //             {
-    //                 if (e.get_level() >= 30)
-    //                     return 'G';
-    //                 else
-    //                     return 'g';
-    //             }
-    //             else
-    //             {
-    //                 if (e.get_level() >= 30)
-    //                     return 'E';
-    //                 else
-    //                     return 'e';
-    //             }
-    //         }
-    
-    //     }
-    //     else if (content == Content.air)
-    //     {
-    //         if (cellType == CellType.grassland)
-    //         {
-    //             return '-';
-    //         } else if (cellType == CellType.sea)
-    //         {
-    //             return 'o';
-    //         }
-    //     }
-        
-    //     return '#';
-    // }
+    public String getCharCell()
+    {
+        String playerIconPath = "img/player.png";
+        String grassIconPath = "img/grass.png";
+        String seaIconPath = "img/sea.png";
+        String tundraIconPath = "img/tundra.png";
+        String mountainIconPath = "img/mountain.png";
+
+        if (content == Content.player)
+        {
+            return playerIconPath;
+        }
+        else if (content == Content.engimon)
+        {
+            if (idEngimonInCell != -1)
+            {
+                for (Engimon e : GameManagement.getPlayer().getInventoryEngimon().getInventory()) {
+                    if (e.get_engimon_id() == idEngimonInCell)
+                    {
+                        return e.get_icon();
+                    }
+                }
+
+                for (Engimon e : GameManagement.getEngimonLiar()) {
+                    if (e.get_engimon_id() == idEngimonInCell)
+                    {
+                        return e.get_icon();
+                    }
+                }
+            }
+        }
+        else
+        {
+            if (cellType == CellType.grassland)
+            {
+                return grassIconPath;
+            }
+            else if (cellType == CellType.sea)
+            {
+                return seaIconPath;
+            }
+            else if (cellType == CellType.tundra)
+            {
+                return tundraIconPath;
+            }
+            else
+            {
+                return mountainIconPath;
+            }
+        }
+
+        return grassIconPath;
+    }
     
     public Content getContent()
     {
@@ -166,7 +134,11 @@ public class Cell {
     }
     
     public void setIdxEngimonInCell(int idx) {
-        this.idxEngimonInCell = idx;
+        this.idEngimonInCell = idx;
+    }
+
+    public int getIdEngimonInCell() {
+        return this.idEngimonInCell;
     }
 
 }

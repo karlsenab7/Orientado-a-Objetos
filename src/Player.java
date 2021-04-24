@@ -1,3 +1,5 @@
+package src;
+
 import java.util.List;
 import java.util.Scanner;
 
@@ -60,19 +62,37 @@ public class Player {
     }
 
     public void moveUP() {
-        move(0, -1);
+
+        try {
+            move(0, -1);    
+        } catch (Exception e) {
+            //TODO: handle exception
+        }
+        
     }
 
     public void moveDOWN() {
-        move(0, 1);
+        try {
+            move(0, 1);    
+        } catch (Exception e) {
+            //TODO: handle exception
+        }
     }
 
     public void moveLEFT() {
-        move(-1, 0);
+        try {
+            move(-1, 0);    
+        } catch (Exception e) {
+            //TODO: handle exception
+        }
     }
 
     public void moveRIGHT() {
-        move(1, 0);
+        try {
+            move(1, 0);    
+        } catch (Exception e) {
+            //TODO: handle exception
+        }
     }
 
     public void showEngimon(int index) {
@@ -88,9 +108,9 @@ public class Player {
 
         // Show Parent and its species
         System.out.println("Parent Name | Species");
-        for (Engimon parent : engimon.get_engimon_parents()) {
-            System.out.println(parent.get_engimon_name() + " | " + parent.get_engimon_species());
-        }
+        // for (String parent : engimon.get_engimon_parentName()) {
+        //     System.out.println(parent.get_engimon_name() + " | " + parent.get_engimon_species());
+        // }
         System.out.println();
 
         // Show Element
@@ -163,7 +183,7 @@ public class Player {
     }
 
     public void battle(Engimon enemy) {
-        Battle newBattle = new Battle(activeEngimonIdx, enemy, inventoryEngimon, inventorySkill);
+        Battle newBattle = new Battle(activeEngimonIdx, enemy);
         newBattle.fight();
     }
 
@@ -187,5 +207,15 @@ public class Player {
 
     public boolean gameover() {
         return inventoryEngimon.isEmpty();
+    }
+
+    public Inventory<Engimon> getInventoryEngimon()
+    {
+        return inventoryEngimon;
+    }
+
+    public Inventory<Skill> getInventorySkill()
+    {
+        return inventorySkill;
     }
 }

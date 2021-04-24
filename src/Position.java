@@ -1,3 +1,5 @@
+package src;
+
 /**
  * Position
  */
@@ -37,6 +39,11 @@ public class Position {
         double jarakY = (this.y - other.getY()) * (this.y - other.getY());
         double distance = java.lang.Math.sqrt(jarakX + jarakY);
         return distance;
+    }
+
+    public void print()
+    {
+        System.out.println("("+this.x+","+this.y+")");
     }
 
     // driver test

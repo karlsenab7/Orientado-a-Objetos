@@ -1,0 +1,11 @@
+engimon = (idEngimon, element, idSkillUnique, species, deskripsi, icon)
+
+skill = (idSkill, element, name, basePower, baseMastery, deskripsi, icon)
+
+engimonSkillPlayer = (idEngimon, idSkill, power, mastery)
+playerEngimon = (idEngimon, name, parentName, parentSpecies, level, live, cumulativeExp, active)
+playerSkillItem = (idSkill, power, mastery, num)
+
+engimonLiar = (idEngimon, x, y)
+
+mapSave = (x, y, type, content)

@@ -1,3 +1,5 @@
+package src;
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -12,7 +14,7 @@ public class Peta {
     public Peta()
     {
         // arrOfCell = new vector<vector<Cell>>();
-        generatePeta();
+        //generatePeta();
     }
 
     public int getSizeX() {
@@ -32,122 +34,122 @@ public class Peta {
         System.out.println(str);
     }
 
-    public void generatePeta()
-    {
-        EngimonDatabase db;
-        printStr ( "Loading..." );
-        string filename;
-        string dir = "../map/map1.txt";
-        string myText;
-        // cin >> filename;
-        System.out.println();
+    // public void generatePeta()
+    // {
+    //     EngimonDatabase db;
+    //     printStr ( "Loading..." );
+    //     String filename;
+    //     String dir = "../map/map1.txt";
+    //     String myText;
+    //     // cin >> filename;
+    //     System.out.println();
 
-        ifstream MyReadFile(dir); // buka file
+    //     ifstream MyReadFile(dir); // buka file
 
-        if (MyReadFile.is_open()) // jika file berhasil terbuka
-        {
-            int j = 0;
-            while (getline(MyReadFile, myText))
-            {
-                // memproses masukkan dari file agar dapat dibaca oleh program
-                vector<Cell> temp;
-                for (int i = 0; i < myText.length(); i++)
-                {
-                    char ch = myText[i];
-                    if (ch == 'o') 
-                    {
-                        Cell c(i, j, CellType::sea, Content::air);
+    //     if (MyReadFile.is_open()) // jika file berhasil terbuka
+    //     {
+    //         int j = 0;
+    //         while (getline(MyReadFile, myText))
+    //         {
+    //             // memproses masukkan dari file agar dapat dibaca oleh program
+    //             vector<Cell> temp;
+    //             for (int i = 0; i < myText.length(); i++)
+    //             {
+    //                 char ch = myText[i];
+    //                 if (ch == 'o') 
+    //                 {
+    //                     Cell c(i, j, CellType::sea, Content::air);
 
-                        int timeToSpawn = randomInt();
-                        if (timeToSpawn < 3 && i != 0 && j != 0)
-                        {
-                            if (timeToSpawn % 2 == 0)
-                            {
-                                Element el("Water");
-                                int idx = db.get_idx_random_engimon_by_element(el);
-                                c.setContent(Content::engimon);
-                                c.setIdxEngimonInCell(idx);
+    //                     int timeToSpawn = randomInt();
+    //                     if (timeToSpawn < 3 && i != 0 && j != 0)
+    //                     {
+    //                         if (timeToSpawn % 2 == 0)
+    //                         {
+    //                             Element el("Water");
+    //                             int idx = db.get_idx_random_engimon_by_element(el);
+    //                             c.setContent(Content::engimon);
+    //                             c.setIdxEngimonInCell(idx);
                                 
-                            }
-                            else
-                            {
-                                Element el("Ice");
-                                int idx = db.get_idx_random_engimon_by_element(el);
-                                c.setContent(Content::engimon);
-                                c.setIdxEngimonInCell(idx);
-                            }
-                        }
+    //                         }
+    //                         else
+    //                         {
+    //                             Element el("Ice");
+    //                             int idx = db.get_idx_random_engimon_by_element(el);
+    //                             c.setContent(Content::engimon);
+    //                             c.setIdxEngimonInCell(idx);
+    //                         }
+    //                     }
                         
-                        temp.push_back(c);
-                    } else 
-                    {
-                        Cell c(i, j, CellType::grassland, Content::air);
+    //                     temp.push_back(c);
+    //                 } else 
+    //                 {
+    //                     Cell c(i, j, CellType::grassland, Content::air);
 
-                        int timeToSpawn = randomInt();
+    //                     int timeToSpawn = randomInt();
 
-                        if (timeToSpawn < 3 && i != 0 && j != 0)
-                        {
-                            if (timeToSpawn == 0)
-                            {
-                                Element el("Ground");
-                                int idx = db.get_idx_random_engimon_by_element(el);
-                                //cout << idx;
-                                c.setContent(Content::engimon);
-                                c.setIdxEngimonInCell(idx);
-                            }
-                            else if (timeToSpawn == 1)
-                            {
-                                Element el("Electric");
-                                int idx = db.get_idx_random_engimon_by_element(el);
-                                //cout << idx << " ";
-                                c.setContent(Content::engimon);
-                                c.setIdxEngimonInCell(idx);
-                            }
-                            else
-                            {
-                                Element el("Fire");
-                                int idx = db.get_idx_random_engimon_by_element(el);
-                                //cout << idx << " ";
-                                c.setContent(Content::engimon);
-                                c.setIdxEngimonInCell(idx);
-                            }
-                        }
+    //                     if (timeToSpawn < 3 && i != 0 && j != 0)
+    //                     {
+    //                         if (timeToSpawn == 0)
+    //                         {
+    //                             Element el("Ground");
+    //                             int idx = db.get_idx_random_engimon_by_element(el);
+    //                             //cout << idx;
+    //                             c.setContent(Content::engimon);
+    //                             c.setIdxEngimonInCell(idx);
+    //                         }
+    //                         else if (timeToSpawn == 1)
+    //                         {
+    //                             Element el("Electric");
+    //                             int idx = db.get_idx_random_engimon_by_element(el);
+    //                             //cout << idx << " ";
+    //                             c.setContent(Content::engimon);
+    //                             c.setIdxEngimonInCell(idx);
+    //                         }
+    //                         else
+    //                         {
+    //                             Element el("Fire");
+    //                             int idx = db.get_idx_random_engimon_by_element(el);
+    //                             //cout << idx << " ";
+    //                             c.setContent(Content::engimon);
+    //                             c.setIdxEngimonInCell(idx);
+    //                         }
+    //                     }
 
-                        temp.push_back(c);
-                    }
-                }
-                j++;
-                this.arrOfCell.push_back(temp);
-            }
-            this.sizeX = arrOfCell.size();
-            this.sizeY = arrOfCell[0].size();
-        }
-        else
-        {
-            printStr ( "format file salah atau file tidak ditemukan" );
-        }
-        System.out.println();
+    //                     temp.push_back(c);
+    //                 }
+    //             }
+    //             j++;
+    //             this.arrOfCell.push_back(temp);
+    //         }
+    //         this.sizeX = arrOfCell.size();
+    //         this.sizeY = arrOfCell[0].size();
+    //     }
+    //     else
+    //     {
+    //         printStr ( "format file salah atau file tidak ditemukan" );
+    //     }
+    //     System.out.println();
         
-        // menutup file
-        MyReadFile.close();
-    }
+    //     // menutup file
+    //     MyReadFile.close();
+    // }
 
-    public int randomInt()
-    {
-        srand(time(nullptr));
+    // public int randomInt()
+    // {
+    //     srand(time(nullptr));
 
-        int num = rand() % 10;
+    //     int num = rand() % 10;
 
-        return num;
-    }
+    //     return num;
+    // }
 
     public void showPeta() {
         for (int i = 0; i < this.sizeX; i++)
         {
             for (int j = 0; j < this.sizeY; j++)
             {
-                char ui = arrOfCell.get(x).get(y).getCharCell();
-                System.out.println(ui);
+                String uiPath = arrOfCell.get(i).get(j).getCharCell();
+                System.out.println(uiPath);
             }
             System.out.println();
         }
