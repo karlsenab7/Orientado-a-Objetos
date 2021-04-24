@@ -1,0 +1,14 @@
+Cara membuka GUI:
+1. Buka folder GUI lewat Intellij
+2. Di File->Project Settings->Libraries tambahkan lib dari javafx sdk (\javafx-sdk-<versi>\lib)
+3. Pastikan di Run->Edit Configurations sudah terdapat Add VM Options dan tertulis:
+
+--module-path "path\to\javafx-sdk-<versi>\lib" --add-modules javafx.controls,javafx.fxml
+
+dengan "path\to\javafx-sdk-<versi>\lib" diisi path menuju javafx sdk\lib
+
+3,5. Jika tidak terdapat Add VM Options, tambahkan dalam Edit Configurations melalui Modify options->Add VM Options
+4. Pastikan yang dijalankan adalah Class Main di folder src, akan ada tanda segitiga hijau kecil di simbol C sebagai tanda kelas yang dijalankan
+
+Tutorial yang membantu:
+https://www.youtube.com/watch?v=Ope4icw6bVk&list=PLZPZq0r_RZOM-8vJA3NQFZB7JroDcMwev&index=2
