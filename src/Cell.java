@@ -1,6 +1,6 @@
 package src;
 
-import javax.xml.crypto.Data;
+// import javax.xml.crypto.Data;
 
 /**
  * Cell
@@ -14,7 +14,7 @@ enum Content {player, engimon, air};
 
 public class Cell {
 
-    private Position position;
+    private Position position = new Position(0, 0);
     private CellType cellType;
     private Content content;
     private int idEngimonInCell;
@@ -28,18 +28,17 @@ public class Cell {
     }
 
     public Cell(Position newPosition, CellType newCellType, Content newContent) {
-    this.position = newPosition;
-    this.cellType = newCellType;
-    this.content = newContent;
-    this.idEngimonInCell = -1;
+        this.position = newPosition;
+        this.cellType = newCellType;
+        this.content = newContent;
+        this.idEngimonInCell = -1;
     }
 
     public Cell(int pX, int pY, CellType newCellType, Content newContent) {
-    this.position.setX(pX);
-    this.position.setY(pY);
-    this.cellType = newCellType;
-    this.content = newContent;
-    this.idEngimonInCell = -1;
+        this.position = new Position(pX, pY);
+        this.cellType = newCellType;
+        this.content = newContent;
+        this.idEngimonInCell = -1;
     }
 
     public Position getPosition()
@@ -68,15 +67,16 @@ public class Cell {
         {
             if (idEngimonInCell != -1)
             {
-                for (Engimon e : GameManagement.getPlayer().getInventoryEngimon().getInventory()) {
-                    if (e.get_engimon_id() == idEngimonInCell)
-                    {
-                        return e.get_icon();
-                    }
+                Position p = GameManagement.getPlayer().getActiveEngimon().get_position();
+
+                if (position.getX() == p.getX() && position.getY() == p.getY())
+                {
+                    return GameManagement.getPlayer().getActiveEngimon().get_icon();
                 }
 
                 for (Engimon e : GameManagement.getEngimonLiar()) {
-                    if (e.get_engimon_id() == idEngimonInCell)
+                    Position pLiar = e.get_position();
+                    if (pLiar.getX() == position.getX() && pLiar.getY()==position.getY())
                     {
                         return e.get_icon();
                     }

@@ -3,6 +3,8 @@ package src;
 import java.util.List;
 import java.util.Scanner;
 
+// import javax.xml.crypto.Data;
+
 public class Player {
     private String name;
     private Position position;
@@ -21,12 +23,13 @@ public class Player {
     public Player(String playername) {
         this.position = new Position();
         this.name = playername;
-        this.activeEngimonIdx = 0;
+        this.activeEngimonIdx = -1;
 
-        Engimon eng = new Engimon();
-        eng.set_engimon_name("Stater Pack Engimon");
+        // Engimon eng = new Engimon();
+        // eng.set_engimon_name("Stater Pack Engimon");
         try {
-            addEngimon(eng);
+            Engimon e1 = Database.getEngimonDBbyID(1);
+            addEngimon(e1);
         } catch (Exception e) {
             // do nothing
         }
@@ -41,7 +44,15 @@ public class Player {
     }
 
     public Position getActiveEngimonPosition() {
-        return this.activeEngimonPosition;
+        if (activeEngimonIdx == -1)
+            return null;
+
+        return inventoryEngimon.getInventory().get(activeEngimonIdx).get_position();
+    }
+
+    public Position getPosition()
+    {
+        return position;
     }
 
     public void change_active_engimon(int engimonidx) {

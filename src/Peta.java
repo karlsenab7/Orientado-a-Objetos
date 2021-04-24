@@ -1,7 +1,9 @@
 package src;
 
+import java.io.File;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Scanner;
 
 /**
  * Peta
@@ -13,8 +15,8 @@ public class Peta {
 
     public Peta()
     {
-        // arrOfCell = new vector<vector<Cell>>();
-        //generatePeta();
+        arrOfCell = new ArrayList<ArrayList<Cell>> ();
+        generatePeta();
     }
 
     public int getSizeX() {
@@ -27,112 +29,78 @@ public class Peta {
 
     public Cell getCell(int x, int y)
     {
-        return arrOfCell.get(x).get(y);
+        return arrOfCell.get(y).get(x);
     }
 
     public void printStr(String str) {
         System.out.println(str);
     }
 
-    // public void generatePeta()
-    // {
-    //     EngimonDatabase db;
-    //     printStr ( "Loading..." );
-    //     String filename;
-    //     String dir = "../map/map1.txt";
-    //     String myText;
-    //     // cin >> filename;
-    //     System.out.println();
+    public void generatePeta()
+    {
+        String mapPath = "db/map1.txt";
+        try {
 
-    //     ifstream MyReadFile(dir); // buka file
+            Scanner sc = new Scanner(new File(mapPath));
+            
+            int y = 0;
+            while(sc.hasNext())
+            {
+                String data[] = sc.nextLine().split(",");
+                ArrayList<Cell> temp = new ArrayList<>();
 
-    //     if (MyReadFile.is_open()) // jika file berhasil terbuka
-    //     {
-    //         int j = 0;
-    //         while (getline(MyReadFile, myText))
-    //         {
-    //             // memproses masukkan dari file agar dapat dibaca oleh program
-    //             vector<Cell> temp;
-    //             for (int i = 0; i < myText.length(); i++)
-    //             {
-    //                 char ch = myText[i];
-    //                 if (ch == 'o') 
-    //                 {
-    //                     Cell c(i, j, CellType::sea, Content::air);
+                for (int x = 0; x < data.length; x++) {
+                    int sign = Integer.parseInt(data[x]);
+                    Cell c = new Cell(x, y, CellType.grassland, Content.air);
+                    // System.out.println(12132);
+                    if (sign == 1)
+                        c.setCellType(CellType.sea);
+                    else if (sign == 2)
+                        c.setCellType(CellType.tundra);
+                    else if (sign == 3)
+                        c.setCellType(CellType.mountain);
+                        // System.out.println(1);
+                    Position pActiv = GameManagement.getPlayer().getActiveEngimonPosition();
+                    Position pPlayer = GameManagement.getPlayer().getPosition();
+                    // System.out.println(2312);
+                    if (pActiv != null)
+                    {
+                        if (pActiv.getX() == x && pActiv.getY() == y)
+                            c.setContent(Content.engimon);
+                    }
 
-    //                     int timeToSpawn = randomInt();
-    //                     if (timeToSpawn < 3 && i != 0 && j != 0)
-    //                     {
-    //                         if (timeToSpawn % 2 == 0)
-    //                         {
-    //                             Element el("Water");
-    //                             int idx = db.get_idx_random_engimon_by_element(el);
-    //                             c.setContent(Content::engimon);
-    //                             c.setIdxEngimonInCell(idx);
-                                
-    //                         }
-    //                         else
-    //                         {
-    //                             Element el("Ice");
-    //                             int idx = db.get_idx_random_engimon_by_element(el);
-    //                             c.setContent(Content::engimon);
-    //                             c.setIdxEngimonInCell(idx);
-    //                         }
-    //                     }
-                        
-    //                     temp.push_back(c);
-    //                 } else 
-    //                 {
-    //                     Cell c(i, j, CellType::grassland, Content::air);
+                    if (pPlayer.getX() == x && pPlayer.getY() == y)
+                    {
+                        // pPlayer.print();
+                        c.setContent(Content.player);
+                    }
 
-    //                     int timeToSpawn = randomInt();
+                    if (GameManagement.isEngimonLiar(new Position(x, y)))
+                    {
+                        c.setContent(Content.engimon);
+                    }
+                    // System.out.println(1);
+                    temp.add(c);
+                }
+                y++;
+                arrOfCell.add(temp);
+            }
 
-    //                     if (timeToSpawn < 3 && i != 0 && j != 0)
-    //                     {
-    //                         if (timeToSpawn == 0)
-    //                         {
-    //                             Element el("Ground");
-    //                             int idx = db.get_idx_random_engimon_by_element(el);
-    //                             //cout << idx;
-    //                             c.setContent(Content::engimon);
-    //                             c.setIdxEngimonInCell(idx);
-    //                         }
-    //                         else if (timeToSpawn == 1)
-    //                         {
-    //                             Element el("Electric");
-    //                             int idx = db.get_idx_random_engimon_by_element(el);
-    //                             //cout << idx << " ";
-    //                             c.setContent(Content::engimon);
-    //                             c.setIdxEngimonInCell(idx);
-    //                         }
-    //                         else
-    //                         {
-    //                             Element el("Fire");
-    //                             int idx = db.get_idx_random_engimon_by_element(el);
-    //                             //cout << idx << " ";
-    //                             c.setContent(Content::engimon);
-    //                             c.setIdxEngimonInCell(idx);
-    //                         }
-    //                     }
-
-    //                     temp.push_back(c);
-    //                 }
-    //             }
-    //             j++;
-    //             this.arrOfCell.push_back(temp);
-    //         }
-    //         this.sizeX = arrOfCell.size();
-    //         this.sizeY = arrOfCell[0].size();
-    //     }
-    //     else
-    //     {
-    //         printStr ( "format file salah atau file tidak ditemukan" );
-    //     }
-    //     System.out.println();
-        
-    //     // menutup file
-    //     MyReadFile.close();
-    // }
+            if (arrOfCell.size() == 0)
+            {
+                sizeX = 0;
+                sizeY = 0;
+            }
+            else
+            {
+                sizeY = arrOfCell.size();
+                sizeX = arrOfCell.get(0).size();
+            }
+            
+        } catch (Exception e) {
+            System.out.println(e.getMessage());
+        }
+    }
 
     // public int randomInt()
     // {
@@ -144,12 +112,13 @@ public class Peta {
     // }
 
     public void showPeta() {
-        for (int i = 0; i < this.sizeX; i++)
+        for (int i = 0; i < this.sizeY; i++)
         {
-            for (int j = 0; j < this.sizeY; j++)
+            for (int j = 0; j < this.sizeX; j++)
             {
                 String uiPath = arrOfCell.get(i).get(j).getCharCell();
-                System.out.println(uiPath);
+                System.out.print(uiPath);
+                new Position(j, i).print();
             }
             System.out.println();
         }
@@ -196,12 +165,17 @@ public class Peta {
     // }
 
     public void setCell(int pX, int pY, Cell c) {
-        this.arrOfCell[pX][pY] = c;
+        arrOfCell.get(pY).set(pX, c);
     }
 
     public void setCellContent(Position p, Content c)
     {
-        arrOfCell[p.getX()][p.getY()].setContent(c);
+        arrOfCell.get(p.getY()).get(p.getX()).setContent(c);
+    }
+
+    public Content getCellContent(int x, int y)
+    {
+        return arrOfCell.get(y).get(x).getContent();
     }
     
 }

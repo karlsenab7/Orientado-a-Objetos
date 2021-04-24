@@ -33,6 +33,7 @@ public class Engimon {
         exp = 0;
         cum_exp = 0;
         this.icon = "";
+        position = new Position(0,0);
 
         engimon_elements = new ArrayList<Element>();
         engimon_parentsName = new ArrayList<String>();
@@ -80,7 +81,7 @@ public class Engimon {
         for (i = 0; i < skills.size(); i++) {
             engimon_skills.add(skills.get(i));
         }
-
+        position = new Position(0,0);
         numOfCreated += 1;
         // engimon_id = numOfCreated;
     }

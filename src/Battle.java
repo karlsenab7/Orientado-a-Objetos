@@ -40,7 +40,7 @@ public class Battle {
 
     public float type_adv(Element el1, Element el2)
     {
-        return el1.getAdvantage(el2);
+        return (float) el1.getAdvantage(el2);
     }
 
     public float sum_power(Engimon e1, List <Element> els2) //Menunggu class skill
