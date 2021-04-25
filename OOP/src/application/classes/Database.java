@@ -29,6 +29,8 @@ public class Database {
     public static String fileNameEngimonLiar;
     public static String fileNameMapDB;
 
+    public static String path = "src/application/db/";
+
     public Database()
     {
         fileNameEngimon = "engimon.txt";
@@ -42,7 +44,6 @@ public class Database {
 
     public static List<Engimon> getEngimonDB()
     {
-        String path = "db/";
         int DATA_LENGTH = 6;
         try {
             List<Engimon> temp = new ArrayList<>();
@@ -99,7 +100,7 @@ public class Database {
 
     public static HashMap<Integer, List<Skill>> getEngimonSkillPlayerDB()
     {
-        String path = "db/";
+
         int DATA_LENGTH = 5;
         try {
             HashMap<Integer, List<Skill>> temp = new HashMap<>();
@@ -197,7 +198,7 @@ public class Database {
 
     public static List<Engimon> getPlayerEngimonDB()
     {
-        String path = "db/";
+
         int DATA_LENGTH = 8;
         try {
             List<Engimon> temp = new ArrayList<>();
@@ -264,6 +265,7 @@ public class Database {
             return temp;
 
         } catch (Exception e) {
+            System.out.println("Exception In getPlayerEngimon");
             System.out.println(e.getMessage());
             return null;
         }
@@ -285,7 +287,7 @@ public class Database {
 
     public static List<Skill> getSkillDB()
     {
-        String path = "db/";
+
         int DATA_LENGTH = 7;
         try {
             List<Skill> temp = new ArrayList<>();
@@ -335,7 +337,7 @@ public class Database {
 
     public static List<Skill> getPlayerSkillItemDB()
     {
-        String path = "db/";
+
         int DATA_LENGTH = 4;
         try {
             List<Skill> temp = new ArrayList<>();
@@ -377,7 +379,7 @@ public class Database {
 
     public static List<Engimon> getEngimonLiarDB()
     {
-        String path = "db/";
+
         int DATA_LENGTH = 3;
         try {
             List<Engimon> temp = new ArrayList<>();

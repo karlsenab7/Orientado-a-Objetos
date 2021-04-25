@@ -1,8 +1,10 @@
 package application.screen;
 
 import javafx.fxml.FXMLLoader;
+import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.layout.Pane;
+import javafx.stage.Stage;
 
 import java.util.HashMap;
 
@@ -25,8 +27,24 @@ public class ScreenController {
     public static void activate(String name){
         mainScene.setRoot(screenMap.get(name));
     }
-    public static Pane getWindow(String name)
+    public static void callPopupWindow(String name, String title)
     {
-        return  screenMap.get(name);
+        String path = "window/";
+        try
+        {
+//            Parent pane = FXMLLoader.load(getClass().getResource( path + name));
+            Pane pane = new Pane(screenMap.get(name));
+            Stage window = new Stage();
+            window.setTitle(title); // Pasang judul
+
+            Scene scene = new Scene(pane);
+            window.setScene(scene);
+            window.show();
+        }
+        catch (Exception e)
+        {
+            e.printStackTrace();
+        }
+
     }
 }

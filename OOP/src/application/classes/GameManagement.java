@@ -1,24 +1,55 @@
 package application.classes;
 
+import javax.xml.crypto.Data;
 import java.util.ArrayList;
 import java.util.List;
 
 public class GameManagement {
 
-    private static Player player;
-    private static List<Engimon> engimonLiar;
-    private static Peta peta;
+    public static Player player;
+    public static List<Engimon> engimonLiar;
+    public static Peta peta;
 
     public GameManagement()
     {
         engimonLiar = Database.getEngimonLiarDB();
         player = new Player("Karlsen");
-        // System.out.println("dasasd");
-        peta = new Peta();
-        if (engimonLiar == null)
+
+        if (player == null)
         {
-            engimonLiar = new ArrayList<>();
+            System.out.println("Player is null in GM");
+            return;
         }
+
+        try
+        {
+            peta = new Peta();
+            if (engimonLiar == null)
+            {
+                engimonLiar = new ArrayList<>();
+            }
+
+            List<Engimon> playerEngimon = Database.getPlayerEngimonDB();
+            if (playerEngimon == null)
+            {
+                System.out.println("player Engimon is NUlls");
+            }
+            System.out.println(playerEngimon.size());
+            for (Engimon e : playerEngimon)
+            {
+                System.out.println(e.get_engimon_name());
+                player.addEngimon(e);
+            }
+            System.out.println(player.getInventoryEngimon().getInventory().size());
+        }
+        catch (Exception e)
+        {
+            System.out.println("Exception in GM");
+            e.printStackTrace();
+        }
+
+        // System.out.println("dasasd");
+
     }
 
     public static void addEngimonLiar(Engimon e)

@@ -2,6 +2,7 @@ package application.screen.window;
 
 import application.classes.Engimon;
 import application.classes.Breed;
+import application.classes.GameManagement;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -45,24 +46,24 @@ public class BreedController {
     // Proses saat awawl scene dibuka
     @FXML
     private void initialize(){
-        // Data dummy untuk testing
-        dummy = new ArrayList<Engimon>();
-        Engimon temp = new Engimon();
-        temp.set_engimon_species("Pikachu");
-        temp.set_engimon_name("Pikapi");
-        temp.set_level(5);
-        dummy.add(temp);
-        temp = new Engimon();
-        temp.set_engimon_species("Pikachu");
-        temp.set_engimon_name("Piktwo");
-        temp.set_level(5);
-        dummy.add(temp);
 
-        // Memasukkan data ke choice box
-        for (Engimon x : dummy) {
-            Choice1.getItems().add(x.get_engimon_name());
-            Choice2.getItems().add(x.get_engimon_name());
+        resetState();
+
+        if (GameManagement.player == null)
+        {
+            System.out.println("Player is null");
         }
+        else
+        {
+            System.out.println("Set engimon dropdown in Breeding");
+            // Memasukkan data ke choice box
+            System.out.println("Inventory count : " + GameManagement.player.getInventoryEngimon().getInventory().size());
+            for (Engimon x : GameManagement.player.getInventoryEngimon().getInventory()) {
+                Choice1.getItems().add(x.get_engimon_name());
+                Choice2.getItems().add(x.get_engimon_name());
+            }
+        }
+
         Choice1.setValue("Pilih Engimon 1");
         Choice2.setValue("Pilih Engimon 2");
 
@@ -75,11 +76,25 @@ public class BreedController {
         );
     }
 
+    public void resetState()
+    {
+        Choice1.getSelectionModel().clearSelection();
+        Choice1.getItems().clear();
+        Choice2.getSelectionModel().clearSelection();
+        Choice2.getItems().clear();
+        Label1.setText("");
+        Label2.setText("");
+        Engimon1 = null;
+        Engimon2 = null;
+        Child = null;
+        System.out.println("Reset Breeding Window");
+    }
+
     // Untuk menampilkan informasi engimon
     private void setLabel(Object newValue, Label label) {
         String valStr = newValue.toString();
 
-        for(Engimon x : dummy) {
+        for(Engimon x : GameManagement.player.getInventoryEngimon().getInventory()) {
             if (valStr == x.get_engimon_name()) {
                 label.setText(
                         "Nama : " + x.get_engimon_name() +
@@ -104,11 +119,9 @@ public class BreedController {
     public void handleCancelButton(ActionEvent event) throws IOException {
         // Untuk mengganti scene
         // Jika ingin digunakan merujuk ke scene lain, ganti isi getResource()
-        root = FXMLLoader.load(getClass().getResource("/Scenes/Overworld.fxml"));
+//        root = FXMLLoader.load(getClass().getResource("/Scenes/Overworld.fxml"));
         stage = (Stage)((Node)event.getSource()).getScene().getWindow();
-        scene = new Scene(root);
-        stage.setScene(scene);
-        stage.show();
+        stage.close();
     }
 
     // Tombol breed
@@ -116,15 +129,23 @@ public class BreedController {
         // Mengambil data dari text field
         String childName = ChildName.getText();
 
+        if (childName.length() == 0)
+            return;
+
         try {
             // Panggil breed
-            if (Engimon1 != null && Engimon2 != null){
+            if (Engimon1 != null && Engimon2 != null && Engimon1.get_engimon_id() != Engimon2.get_engimon_id()){
                 Breed br = new Breed(Engimon1, Engimon2, childName);
                 Child = Engimon.clone(br.get_child());
+//                if (Child == null)
+//                    return;
+                GameManagement.getPlayer().getInventoryEngimon().addInventory(Child);
+                // Call Engimon Info
+                // Close this window
                 handleCancelButton(event);
             }
         } catch (Exception e) {
-            System.out.println(e);
+            System.out.println(e.getMessage());
         }
 
     }

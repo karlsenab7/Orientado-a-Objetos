@@ -27,12 +27,12 @@ public class Player {
 
         // Engimon eng = new Engimon();
         // eng.set_engimon_name("Stater Pack Engimon");
-        try {
-            Engimon e1 = Database.getEngimonDBbyID(1);
-            addEngimon(e1);
-        } catch (Exception e) {
-            // do nothing
-        }
+//        try {
+//            Engimon e1 = Database.getEngimonDBbyID(1);
+//            addEngimon(e1);
+//        } catch (Exception e) {
+//            // do nothing
+//        }
     }
 
     public void set_name(String name) {
@@ -139,7 +139,7 @@ public class Player {
     }
 
     public void addEngimon(Engimon newEngimon) throws Exception {
-        List<Engimon> inven = this.inventoryEngimon.getInventory();
+        this.inventoryEngimon.addInventory(newEngimon);
     }
 
     public void addSkillItem(Skill item) {

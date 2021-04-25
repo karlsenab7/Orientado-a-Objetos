@@ -1,5 +1,6 @@
 package application.screen;
 
+import application.classes.GameManagement;
 import javafx.fxml.FXML;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXMLLoader;
@@ -93,11 +94,7 @@ public class OverworldController {
     public void handleBreedButton(ActionEvent event) throws IOException {
         // Untuk mengganti scene
         // Jika ingin digunakan merujuk ke scene lain, ganti isi getResource()
-        root = FXMLLoader.load(getClass().getResource("/Scenes/BreedScene.fxml"));
-        stage = (Stage)((Node)event.getSource()).getScene().getWindow();
-        scene = new Scene(root);
-        stage.setScene(scene);
-        stage.show();
+        ScreenController.callPopupWindow("BreedScene", "Breed");
     }
 
     // Tombol Engimon Inventory
@@ -105,13 +102,7 @@ public class OverworldController {
         // Untuk mengganti scene
         // Jika ingin digunakan merujuk ke scene lain, ganti isi getResource()
 //        System.out.println("asdsad");
-        Stage legendWindow = new Stage();
-        Parent legend = FXMLLoader.load(getClass().getResource("window/EngimonInventory.fxml"));
-        legendWindow.setTitle("Engimon Inventory"); // Pasang judul
-        legendWindow.initModality(Modality.APPLICATION_MODAL);
-        Scene legendScene = new Scene(legend);
-        legendWindow.setScene(legendScene);
-        legendWindow.show();
+        ScreenController.callPopupWindow("EngimonInventory", "Engimon Inventory");
     }
 
     // Tombol Skill Inventory
@@ -137,12 +128,27 @@ public class OverworldController {
     }
 
     public void handleLegendButton(ActionEvent event) throws IOException {
-        Stage legendWindow = new Stage();
-        Parent legend = FXMLLoader.load(getClass().getResource("window/Legend.fxml"));
-        legendWindow.setTitle("Legend"); // Pasang judul
-
-        Scene legendScene = new Scene(legend);
-        legendWindow.setScene(legendScene);
-        legendWindow.show();
+        System.out.println(GameManagement.player.getInventoryEngimon().getInventory().size());
+       ScreenController.callPopupWindow("Legend", "Legend");
     }
+
+//    public void callPopupWindow(String name, String title)
+//    {
+//        String path = "window/";
+//        try
+//        {
+//            Parent pane = FXMLLoader.load(getClass().getResource( path + name));
+//            Stage window = new Stage();
+//            window.setTitle(title); // Pasang judul
+//
+//            Scene scene = new Scene(pane);
+//            window.setScene(scene);
+//            window.show();
+//        }
+//        catch (Exception e)
+//        {
+//            e.printStackTrace();
+//        }
+//
+//    }
 }
