@@ -1,7 +1,9 @@
 package application.screen.window;
 
+import application.classes.Database;
 import application.classes.Engimon;
 import application.classes.Battle;
+import application.classes.GameManagement;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -10,6 +12,8 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
+import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
 import javafx.stage.Stage;
 
 import java.io.IOException;
@@ -26,12 +30,16 @@ public class BattleController {
     @FXML
     private Button runbutton;
     @FXML
-    private Label Status1;
+    private Label statusLabelEnemy;
     @FXML
-    private Label Status2;
+    private Label statusLabelOwn;
+    @FXML
+    private ImageView imageViewEnemy;
+    @FXML
+    private ImageView imageViewOwn;
 
-    private int ActiveEngimon;
-    private Engimon EnemyEngimon = null;
+    private int activeEngimon;
+    private static Engimon enemyEngimon = null;
 
     // Tombol back
     public void handleBackButton(ActionEvent event) throws IOException {
@@ -62,4 +70,55 @@ public class BattleController {
         stage = (Stage)((Node)event.getSource()).getScene().getWindow();
         stage.close();
     }
+
+    public void resetStateBattle(Engimon engimon)
+    {
+        try {
+            enemyEngimon = engimon;
+            resetEnemyState();
+            resetOwnEngimonState();
+        }
+        catch (Exception e)
+        {
+            System.out.println("Exception in resetStateBattle");
+            System.out.println(e.getMessage());
+        }
+
+    }
+
+    public void resetEnemyState()
+    {
+        imageViewEnemy = new ImageView();
+        statusLabelEnemy = new Label();
+        String assetPath = "application/assets/";
+        imageViewEnemy.setImage(new Image(assetPath + enemyEngimon.get_icon()));
+        statusLabelEnemy.setText(
+                "Nama : " + enemyEngimon.get_engimon_name() +
+                        "\nSpesies : " + enemyEngimon.get_engimon_species() +
+                        "\nLevel : " + enemyEngimon.get_level() +
+                        "\nElemen Utama : " + enemyEngimon.get_engimon_elements().get(0).get_element() +
+                        "\nSkill Pertama : " + enemyEngimon.get_engimon_skills().get(0).getName()
+
+        ); //setText
+
+    }
+
+    public void resetOwnEngimonState()
+    {
+        imageViewOwn = new ImageView();
+        statusLabelOwn = new Label();
+        String assetPath = "application/assets/";
+        Engimon e = GameManagement.player.getActiveEngimon();
+        imageViewOwn.setImage(new Image(assetPath + e.get_icon()));
+        statusLabelOwn.setText(
+                "Nama : " + e.get_engimon_name() +
+                        "\nSpesies : " + e.get_engimon_species() +
+                        "\nLevel : " + e.get_level() +
+                        "\nElemen Utama : " + e.get_engimon_elements().get(0).get_element() +
+                        "\nSkill Pertama : " + e.get_engimon_skills().get(0).getName()
+
+        ); //setText
+
+    }
+
 }

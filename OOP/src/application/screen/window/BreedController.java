@@ -88,7 +88,7 @@ public class BreedController {
             String valStr = newValue.toString();
 
             for (Engimon x : GameManagement.player.getInventoryEngimon().getInventory()) {
-                if (valStr == x.get_engimon_name()) {
+                if (valStr.equals(x.get_engimon_name())) {
                     label.setText(
                             "Nama : " + x.get_engimon_name() +
                                     "\nSpesies : " + x.get_engimon_species() +

@@ -41,9 +41,11 @@
                                           <Button maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onAction="#handleBreedButton" prefHeight="50.0" prefWidth="100.0" text="Breed" />
                                        </children>
                                     </HBox>
-                                    <HBox alignment="CENTER" layoutX="22.0" layoutY="22.0" spacing="10.0">
+                                    <HBox alignment="CENTER" layoutX="22.0" layoutY="22.0" spacing="35.0">
                                        <children>
+                                          <Button fx:id="battleButton" mnemonicParsing="false" onAction="#handleBattleButton" prefHeight="50.0" prefWidth="100.0" text="Battle" />
                                           <Button maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onAction="#UpButton" prefHeight="50.0" prefWidth="50.0" text="W" />
+                                          <Region prefHeight="50.0" prefWidth="100.0" />
                                        </children>
                                     </HBox>
                                     <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0" spacing="5.0">
