@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.ButtonBar?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TextArea?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.VBox?>
+
+<VBox maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="768.0" prefWidth="1024.0" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1" fx:controller="application.screen.window.SkillDetailController">
+   <children>
+      <HBox prefHeight="307.0" prefWidth="984.0" style="-fx-background-color: lightblue;">
+         <VBox.margin>
+            <Insets bottom="20.0" left="20.0" right="20.0" top="20.0" />
+         </VBox.margin>
+         <children>
+            <HBox alignment="CENTER" prefHeight="307.0" prefWidth="658.0" style="-fx-background-color: red;">
+               <children>
+                  <ImageView fitHeight="316.0" fitWidth="301.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@../../assets/s1.png" />
+                     </image>
+                  </ImageView>
+               </children></HBox>
+            <HBox prefHeight="307.0" prefWidth="568.0" style="-fx-background-color: gray;">
+               <children>
+                  <VBox prefHeight="307.0" prefWidth="600.0" style="-fx-background-color: green;">
+                     <children>
+                        <Label alignment="CENTER" contentDisplay="BOTTOM" prefHeight="61.0" prefWidth="608.0" text="DETAIL SKILL" textFill="WHITE" />
+                        <TextArea editable="false" prefHeight="200.0" prefWidth="200.0" text="LOREM IPSUM &#10;LOREM IPSUM &#10;LOREM IPSUM &#10;LOREM IPSUM &#10;LOREM IPSUM LOREM IPSUM LOREM IPSUM LOREM IPSUM &#10;LOREM IPSUM LOREM IPSUM LOREM IPSUM LOREM IPSUM &#10;LOREM IPSUM &#10;LOREM IPSUM " wrapText="true" />
+                     </children>
+                  </VBox>
+               </children></HBox>
+         </children>
+      </HBox>
+      <HBox prefHeight="146.0" prefWidth="1024.0" style="-fx-background-color: yellow;">
+         <children>
+            <ButtonBar prefHeight="100.0" prefWidth="434.0">
+              <buttons>
+                <Button fx:id="close" mnemonicParsing="false" onAction="#handleButtonClose" prefHeight="44.0" prefWidth="102.0" text="CLOSE" />
+              </buttons>
+            </ButtonBar>
+            <ButtonBar prefHeight="100.0" prefWidth="290.0">
+              <buttons>
+                <Button fx:id="learn_skill" mnemonicParsing="false" onAction="#handleButtonLearnSkill" prefHeight="42.0" prefWidth="110.0" text="LEARN" />
+              </buttons>
+            </ButtonBar>
+         </children></HBox>
+      <HBox layoutX="30.0" layoutY="30.0" prefHeight="302.0" prefWidth="1024.0" style="-fx-background-color: green;">
+         <children>
+            <ButtonBar prefHeight="290.0" prefWidth="863.0">
+               <buttons>
+                  <TextField fx:id="NBuang" promptText="JUMLAH YANG DIUANG" />
+                <Button fx:id="Buang" mnemonicParsing="false" onAction="#handleButtonBuang" prefHeight="26.0" text="BUANG" />
+               </buttons>
+            </ButtonBar>
+         </children></HBox>
+   </children>
+</VBox>

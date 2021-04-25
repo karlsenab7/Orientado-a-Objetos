@@ -1,8 +1,13 @@
 package application.classes;
 
+import javafx.fxml.FXMLLoader;
+import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
+
+import application.screen.ScreenController;
+import javafx.scene.layout.Pane;
 
 //invent.getChildren().clear();
 //        Image item = new Image("application/assets/s1.png");
@@ -45,5 +50,6 @@ public class SkillButton extends Button
     public void skillButtonActionClick()
     {
         System.out.println("Call skill info window");
+        ScreenController.callPopupWindow("SkillDetail", "Skill Detail");
     }
 }

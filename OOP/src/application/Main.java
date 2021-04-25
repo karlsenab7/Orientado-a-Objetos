@@ -9,6 +9,8 @@ import javafx.scene.Scene;
 import javafx.scene.layout.Pane;
 import javafx.stage.Stage;
 
+import javax.xml.namespace.QName;
+
 public class Main extends Application {
 
     @Override
@@ -20,6 +22,8 @@ public class Main extends Application {
         Pane rootGameOver = FXMLLoader.load(getClass().getResource("screen/GameOver.fxml"));
         Pane rootOption = FXMLLoader.load(getClass().getResource("screen/Option.fxml"));
         Pane rootMainDisplay = FXMLLoader.load(getClass().getResource("screen/Overworld.fxml"));
+        Pane rootSkillDetail = FXMLLoader.load(getClass().getResource("screen/window/SkillDetail.fxml"));
+        Pane rootLearnSkill = FXMLLoader.load(getClass().getResource("screen/window/LearnSkill.fxml"));
 
         Pane rootEngimonInventory = FXMLLoader.load(getClass().getResource("screen/window/EngimonInventory.fxml"));
         Pane rootBreedScene = FXMLLoader.load(getClass().getResource("screen/window/BreedScene.fxml"));
@@ -34,6 +38,8 @@ public class Main extends Application {
         sc.addScreen("GameOver", rootGameOver);
         sc.addScreen("Option", rootOption);
         sc.addScreen("MainDisplay", rootMainDisplay);
+        sc.addScreen("SkillDetail", rootSkillDetail);
+        sc.addScreen("LearnSkill", rootLearnSkill);
 
         sc.addScreen("EngimonInventory", rootEngimonInventory);
         sc.addScreen("BreedScene", rootBreedScene);
