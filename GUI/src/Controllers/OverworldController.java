@@ -7,6 +7,7 @@ import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.shape.Circle;
+import javafx.stage.Modality;
 import javafx.stage.Stage;
 
 import java.io.IOException;
@@ -20,14 +21,15 @@ public class OverworldController {
 
     // Untuk "Player"
     @FXML private Circle object; // Cocokkan nama variabel dengan fx:id dan tipenya
+    @FXML private Circle follower;
     private Double startingX;
     private Double startingY;
     private Double deltaMove = 15d; // Ubah sesuai tampilan
 
     // Bounds dihitung dari titik awal saja
     // Misal titik awal 100 mau batasin di 150 di sb X, cukup masukin 50
-    private Double xBounds = 150d;
-    private Double yBounds = 200d;
+    private Double xBounds = 350d;
+    private Double yBounds = 210d;
 
     // Dijalankan saat scene dibuat
     @FXML
@@ -42,6 +44,8 @@ public class OverworldController {
         // Batas
         if (y > startingY - yBounds) {
             object.setCenterY(y -= deltaMove);
+            follower.setCenterX(object.getCenterX());
+            follower.setCenterY(object.getCenterY()-5); // Note: entah kenapa harus getCenterY()-25 baru pas di posisi object
         }
     }
 
@@ -51,6 +55,8 @@ public class OverworldController {
         // Batas
         if (y < startingY + yBounds) {
             object.setCenterY(y += deltaMove);
+            follower.setCenterX(object.getCenterX());
+            follower.setCenterY(object.getCenterY()-50);
         }
     }
 
@@ -60,6 +66,8 @@ public class OverworldController {
         // Batas
         if (x < startingX + xBounds) {
             object.setCenterX(x += deltaMove);
+            follower.setCenterX(object.getCenterX()-25);
+            follower.setCenterY(object.getCenterY()-25);
         }
     }
 
@@ -69,6 +77,8 @@ public class OverworldController {
         // Batas
         if (x > startingX - xBounds) {
             object.setCenterX(x -= deltaMove);
+            follower.setCenterX(object.getCenterX()+25);
+            follower.setCenterY(object.getCenterY()-25);
         }
     }
 
@@ -125,5 +135,15 @@ public class OverworldController {
         scene = new Scene(root);
         stage.setScene(scene);
         stage.show();
+    }
+
+    public void handleLegendButton(ActionEvent event) throws IOException {
+        Stage legendWindow = new Stage();
+        Parent legend = FXMLLoader.load(getClass().getResource("/Scenes/Legend.fxml"));
+        legendWindow.setTitle("Legend"); // Pasang judul
+
+        Scene legendScene = new Scene(legend);
+        legendWindow.setScene(legendScene);
+        legendWindow.show();
     }
 }
