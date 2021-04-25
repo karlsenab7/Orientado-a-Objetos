@@ -47,7 +47,7 @@ public class Inventory<U> {
             throw new Exception("Inventory Penuh!");
         } else if (current_capacity > 0) {
             for (int i = 0; i < this.bag.size(); i++) {
-                if (this.bag.get(i).equals(items)) {
+                if (isEqual(this.bag.get(i), items)) {
                     int temp = this.bagCount.get(i);
                     this.bagCount.set(i, (temp + 1));
                     current_capacity++;
@@ -58,6 +58,18 @@ public class Inventory<U> {
         current_capacity++;
         this.bagCount.add(1);
         this.bag.add(items);
+    }
+
+    public boolean isEqual(U item1, U item2)
+    {
+        if (item1 instanceof Engimon)
+        {
+            return Engimon.isEqual((Engimon) item1, (Engimon) item2);
+        }
+        else
+        {
+            return Skill.isEqual((Skill) item1, (Skill) item2);
+        }
     }
 
     public void removeInventory(int index) {

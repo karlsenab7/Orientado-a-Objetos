@@ -32,15 +32,27 @@ public class GameManagement {
             List<Engimon> playerEngimon = Database.getPlayerEngimonDB();
             if (playerEngimon == null)
             {
-                System.out.println("player Engimon is NUlls");
+                System.out.println("player Engimon is NUlls in GM");
+                return;
             }
-            System.out.println(playerEngimon.size());
+
             for (Engimon e : playerEngimon)
             {
-                System.out.println(e.get_engimon_name());
+//                System.out.println(e.get_engimon_name());
                 player.addEngimon(e);
             }
-            System.out.println(player.getInventoryEngimon().getInventory().size());
+
+            List<Skill> playerEngimonSkill = Database.getPlayerSkillItemDB();
+            if (playerEngimonSkill == null)
+            {
+                System.out.println("Player Engimon Skill is null in GM");
+                return;
+            }
+
+            for(Skill s : playerEngimonSkill)
+            {
+                player.getInventorySkill().addInventory(s);
+            }
         }
         catch (Exception e)
         {

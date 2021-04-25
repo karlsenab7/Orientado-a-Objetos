@@ -260,4 +260,39 @@ public class Engimon {
         return temp;
     }
 
+    public static boolean isEqual (Engimon e1, Engimon e2)
+    {
+        boolean skillSame = true;
+
+        if (e1.engimon_skills.size() != e2.engimon_skills.size())
+            return false;
+        else
+        {
+            for (int i = 0; i < e1.engimon_skills.size(); i++)
+            {
+                if (!Skill.isEqual(e1.engimon_skills.get(i), e2.engimon_skills.get(i)))
+                {
+                    return  false;
+                }
+            }
+        }
+
+        if (e1.engimon_elements.size() != e2.engimon_elements.size())
+        {
+            return false;
+        }
+        else
+        {
+            for (int i = 0; i < e1.engimon_elements.size(); i++)
+            {
+                String name1 = e1.engimon_elements.get(i).get_element();
+                String name2 = e2.engimon_elements.get(i).get_element();
+                if (!name1.equals(name2))
+                    return false;
+            }
+        }
+
+        return false;
+    }
+
 }

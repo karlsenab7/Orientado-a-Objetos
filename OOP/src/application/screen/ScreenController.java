@@ -36,7 +36,7 @@ public class ScreenController {
             Pane pane = new Pane(screenMap.get(name));
             Stage window = new Stage();
             window.setTitle(title); // Pasang judul
-
+            
             Scene scene = new Scene(pane);
             window.setScene(scene);
             window.show();
