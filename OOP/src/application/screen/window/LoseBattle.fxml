@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.image.*?>
+<?import java.lang.*?>
+<?import java.util.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.paint.*?>
+<?import javafx.scene.text.*?>
+
+<VBox prefHeight="400.0" prefWidth="640.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1">
+  <children>
+    <AnchorPane maxHeight="-1.0" maxWidth="-1.0" prefHeight="-1.0" prefWidth="-1.0" VBox.vgrow="ALWAYS">
+      <children>
+        <Label alignment="CENTER" layoutX="225.0" layoutY="14.0" style="&#10;" text="YOU LOSE" textAlignment="CENTER" wrapText="false">
+          <font>
+            <Font name="Impact" size="53.0" />
+          </font>
+        </Label>
+            <ImageView fitHeight="249.0" fitWidth="224.0" layoutX="50.0" layoutY="106.0" pickOnBounds="true" preserveRatio="true" />
+            <Label fx:id="Status" layoutX="438.0" layoutY="166.0" text="Status or DEAD" />
+            <Button fx:id="closebutton" layoutX="549.0" layoutY="355.0" mnemonicParsing="false" text="CLOSE" />
+      </children>
+    </AnchorPane>
+  </children>
+</VBox>
