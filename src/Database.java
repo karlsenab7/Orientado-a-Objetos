@@ -1,5 +1,6 @@
 package application.classes;
 import java.io.File;
+import java.io.PrintWriter;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -29,6 +30,8 @@ public class Database {
     public static String fileNameEngimonLiar;
     public static String fileNameMapDB;
 
+    public static String path = "src/application/db/";
+
     public Database()
     {
         fileNameEngimon = "engimon.txt";
@@ -42,7 +45,6 @@ public class Database {
 
     public static List<Engimon> getEngimonDB()
     {
-        String path = "db/";
         int DATA_LENGTH = 6;
         try {
             List<Engimon> temp = new ArrayList<>();
@@ -99,7 +101,7 @@ public class Database {
 
     public static HashMap<Integer, List<Skill>> getEngimonSkillPlayerDB()
     {
-        String path = "db/";
+
         int DATA_LENGTH = 5;
         try {
             HashMap<Integer, List<Skill>> temp = new HashMap<>();
@@ -197,7 +199,7 @@ public class Database {
 
     public static List<Engimon> getPlayerEngimonDB()
     {
-        String path = "db/";
+
         int DATA_LENGTH = 8;
         try {
             List<Engimon> temp = new ArrayList<>();
@@ -264,6 +266,7 @@ public class Database {
             return temp;
 
         } catch (Exception e) {
+            System.out.println("Exception In getPlayerEngimon");
             System.out.println(e.getMessage());
             return null;
         }
@@ -285,7 +288,7 @@ public class Database {
 
     public static List<Skill> getSkillDB()
     {
-        String path = "db/";
+
         int DATA_LENGTH = 7;
         try {
             List<Skill> temp = new ArrayList<>();
@@ -335,7 +338,7 @@ public class Database {
 
     public static List<Skill> getPlayerSkillItemDB()
     {
-        String path = "db/";
+
         int DATA_LENGTH = 4;
         try {
             List<Skill> temp = new ArrayList<>();
@@ -377,7 +380,7 @@ public class Database {
 
     public static List<Engimon> getEngimonLiarDB()
     {
-        String path = "db/";
+
         int DATA_LENGTH = 3;
         try {
             List<Engimon> temp = new ArrayList<>();
@@ -413,6 +416,35 @@ public class Database {
         
     }
 
+    public static void saveEngimonSkillPlayerDB()
+    {
+        try {
+            PrintWriter writer = new PrintWriter(path + fileNameEngimonSkillPlayer, "UTF-8");
+            int count = 0;
+            for (Engimon e : GameManagement.player.getInventoryEngimon().getInventory())
+            {
+                if (e.get_engimon_skills().size() == 0)
+                    continue;
 
+                for (int i = 0; i < e.get_engimon_skills().size(); i++)
+                {
+                    Skill s = e.get_engimon_skills().get(i);
+
+                    String data = "";
+                    data += e.get_engimon_id() + ",";
+                    data += s.getID() + ",";
+                    data += s.getPower() + ",";
+                    data += s.getMastery();
+                    writer.println(data);
+                    count++;
+                }
+            }
+
+            writer.close();
+        } catch (Exception e) {
+            System.out.println("Exception in saveEngimonSkillPlayerDB DB");
+            System.out.print(e.getMessage());
+        }
+    }
 
 }

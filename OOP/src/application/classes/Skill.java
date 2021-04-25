@@ -87,7 +87,14 @@ public class Skill {
     // }
 
     public boolean canBeLearned(Element element){
-        return this.element.contains(element);
+        for(Element el : this.element)
+        {
+            if (el.get_element().equals(element.get_element()))
+            {
+                return true;
+            }
+        }
+        return false;
     }
     public void print(){
         System.out.println("ID : " + this.ID); 

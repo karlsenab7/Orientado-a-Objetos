@@ -112,4 +112,28 @@ public class Skill {
         Skill temp = new Skill(s.ID, s.name, s.element, s.power, s.mastery, s.description, s.isUnique, s.uniqueTo, s.icon);
         return temp;
     }
+
+    public static boolean isEqual(Skill s1, Skill s2)
+    {
+//        boolean sameElement = true;
+        if (s1.element.size() != s2.element.size())
+        {
+            return false;
+        }
+        else
+        {
+            for (int i = 0; i < s1.element.size(); i++)
+            {
+                String name1 = s1.element.get(i).get_element();
+                String name2 = s2.element.get(i).get_element();
+                if (!name1.equals(name2))
+                    return false;
+            }
+        }
+        return s1.getID().equals(s2.getID()) &&
+                s1.getName().equals(s2.getName()) &&
+                s1.getPower() == s2.getPower() &&
+                s1.getMastery() == s2.getMastery() &&
+                s1.getDescription().equals(s2.getDescription());
+    }
 }

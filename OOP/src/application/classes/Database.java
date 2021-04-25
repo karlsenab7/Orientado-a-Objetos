@@ -1,5 +1,9 @@
 package application.classes;
+import javafx.geometry.Pos;
+import javafx.stage.PopupWindow;
+
 import java.io.File;
+import java.io.PrintWriter;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -28,6 +32,7 @@ public class Database {
     public static String fileNamePlayerSkillItem;
     public static String fileNameEngimonLiar;
     public static String fileNameMapDB;
+    public static String fileNamePosPlayerPosActive;
 
     public static String path = "src/application/db/";
 
@@ -40,6 +45,7 @@ public class Database {
         fileNamePlayerSkillItem = "playerSkillItem.txt";
         fileNameEngimonLiar = "engimonLiar.txt";
         fileNameMapDB = "mapSave.txt";
+        fileNamePosPlayerPosActive = "posPlayerPosActive.txt";
     }
 
     public static List<Engimon> getEngimonDB()
@@ -108,9 +114,10 @@ public class Database {
             while (sc.hasNext())
             {
                 String[] data = sc.nextLine().split(",");
-                
+
                 if (data.length >= DATA_LENGTH)
                 {
+//                    System.out.println(data[0]);
                     String idEngimonTemp = data[0];
                     String idSkillTemp = data[1];
                     String powerTemp = data[2];
@@ -130,10 +137,12 @@ public class Database {
 
                     if (temp.containsKey(idEngimon))
                     {
+//                        System.out.println("Add skill for engimon " + idEngimon);
                         temp.get(idEngimon).add(s);
                     }
                     else
                     {
+//                        System.out.println("Engimon id in has map "+idEngimon);
                         List<Skill> ss = new ArrayList<>();
                         ss.add(s);
                         temp.put(idEngimon, ss);
@@ -155,15 +164,21 @@ public class Database {
         HashMap<Integer, List<Skill>> ls = getEngimonSkillPlayerDB();
         if (ls == null)
         {
-            // System.out.println(9999);
-            return null;
+            System.out.println("List skill getEngimonSKillplayerDBbyID is Null");
+            return new ArrayList<Skill>();
         }
         try {
+//            System.out.println("Length of hasmap " + ls.size());
+            if (ls.get(id) == null)
+            {
+                System.out.println("ID "+ id + " Engimon SKill is nul in hasMap, in getEngimonSkillplayerdbbyid");
+            }
             return ls.get(id);
         } catch (Exception e) {
             //TODO: handle exception
+            System.out.println("Exception in getEngimonSkillPlayerDBbyID");
             System.out.println(e.getMessage());
-            return null;
+            return new ArrayList<Skill>();
         }
     }
 
@@ -186,7 +201,10 @@ public class Database {
         List<Skill> skills = getSkillDB();
 
         if (skills == null)
+        {
+            System.out.println("skills is null in getSkillDBbyID");
             return null;
+        }
 
         for (Skill skill : skills) {
             if (skill.getID().equals(id))
@@ -235,7 +253,9 @@ public class Database {
                     int cumExp = Integer.parseInt(cumExpTemp);
                     int active = Integer.parseInt(activeTemp);
 
+
                     List<Skill> engimonSkill = getEngimonSkillPlayerDBbyID(idEngimon);
+
                     // engimonSkill.get(0).print();
                     // System.out.println(12);
                     Engimon e = getEngimonDBbyID(idEngimon);
@@ -252,7 +272,10 @@ public class Database {
                     e.set_live(live);
                     e.set_active(active);
                     // System.out.println(10);
+                    if (engimonSkill == null)
+                        System.out.println("engimon skill is null, in getplayerengimon");
                     e.set_engimon_skills(engimonSkill);
+
                     // e.get_engimon_skills().get(0).print();
                     // System.out.println(4);
                     
@@ -415,5 +438,204 @@ public class Database {
         
     }
 
+    public static List<Position> getPosPlayerPosActiveDB()
+    {
 
+        int DATA_LENGTH = 2;
+        try {
+            List<Position> temp = new ArrayList<>();
+            Scanner sc = new Scanner(new File(path + fileNamePosPlayerPosActive));
+            while (sc.hasNext())
+            {
+                String[] data = sc.nextLine().split(",");
+
+                if (data.length >= DATA_LENGTH)
+                {
+                    String xTemp = data[0];
+                    String yTemp = data[1];
+
+                    int x = Integer.parseInt(xTemp);
+                    int y = Integer.parseInt(yTemp);
+
+                    Position p = new Position(x, y);
+                    temp.add(p);
+                }
+            }
+
+            return temp;
+
+        } catch (Exception e) {
+            System.out.println("Exception in getPosPlayerPosActiveDB");
+            System.out.println(e.getMessage());
+            return null;
+        }
+    }
+
+    public static void saveEngimonSkillPlayerDB()
+    {
+        try {
+            PrintWriter writer = new PrintWriter(path + fileNameEngimonSkillPlayer, "UTF-8");
+            int count = 0;
+            for (Engimon e : GameManagement.player.getInventoryEngimon().getInventory())
+            {
+                if (e.get_engimon_skills().size() == 0)
+                    continue;
+
+                for (int i = 0; i < e.get_engimon_skills().size(); i++)
+                {
+                    Skill s = e.get_engimon_skills().get(i);
+
+                    String data = "";
+                    data += e.get_engimon_id() + ",";
+                    data += s.getID() + ",";
+                    data += s.getPower() + ",";
+                    data += s.getMastery() + ",";
+                    data += s.getSlot();
+                    writer.println(data);
+                    count++;
+                }
+            }
+
+            writer.close();
+        } catch (Exception e) {
+            System.out.println("Exception in saveEngimonSkillPlayerDB DB");
+            System.out.print(e.getMessage());
+        }
+    }
+
+    public static void savePosPlayerPosActiveDB()
+    {
+        try {
+            PrintWriter writer = new PrintWriter(path + fileNamePosPlayerPosActive, "UTF-8");
+            int count = 0;
+
+            String data = "";
+            data += GameManagement.player.getPosition().getX() + ",";
+            data += GameManagement.player.getPosition().getY();
+
+            writer.println(data);
+
+            data = "";
+            if (GameManagement.player.getActiveEngimonIdx() == -1)
+            {
+                data += "-1" + "," + "-1";
+            }else
+            {
+                data += GameManagement.player.getActiveEngimonPosition().getX() + ",";
+                data += GameManagement.player.getActiveEngimonPosition().getY();
+            }
+
+            writer.println(data);
+
+            writer.close();
+        } catch (Exception e) {
+            System.out.println("Exception in saveEngimonSkillPlayerDB DB");
+            System.out.print(e.getMessage());
+        }
+    }
+
+    public static void savePlayerEngimonDB()
+    {
+        try {
+            PrintWriter writer = new PrintWriter(path + fileNamePlayerEngimon, "UTF-8");
+            int count = 0;
+            for (Engimon e : GameManagement.player.getInventoryEngimon().getInventory())
+            {
+                String data = "";
+                data += e.get_engimon_id() + ",";
+                data += e.get_engimon_name() + ",";
+
+                String parent = "";
+                if (e.get_engimon_parentName().size() == 2)
+                    parent += e.get_engimon_parentName().get(0) + "/" + e.get_engimon_parentName().get(1);
+                else if (e.get_engimon_parentName().size() == 1)
+                    parent += e.get_engimon_parentName().get(0);
+                else
+                    parent += "null";
+                data += parent + ",";
+
+                String parentSpec = "";
+                if (e.get_engimon_parentSpecies().size() == 2)
+                    parentSpec += e.get_engimon_parentSpecies().get(0) + "/" + e.get_engimon_parentSpecies().get(1);
+                else if (e.get_engimon_parentSpecies().size() == 1)
+                    parentSpec += e.get_engimon_parentSpecies().get(0);
+                else
+                    parentSpec += "null";
+                data += parentSpec + ",";
+
+                data += e.get_level() + ",";
+                data += e.get_live() + ",";
+                data += e.get_cum_exp() + ",";
+                data += e.get_active();
+
+                writer.println(data);
+                count++;
+            }
+
+            writer.close();
+        } catch (Exception e) {
+            System.out.println("Exception in savePlayerEngimonDB");
+            System.out.print(e.getMessage());
+        }
+    }
+
+    public static void savePlayerSkillItemDB()
+    {
+        try {
+            PrintWriter writer = new PrintWriter(path + fileNamePlayerSkillItem, "UTF-8");
+            int count = 0;
+
+            int n = GameManagement.getPlayer().getInventorySkill().getInventory().size();
+            for (int i = 0; i < n; i++) {
+                int num = GameManagement.player.getInventorySkill().getInventoryCount(i);
+                Skill s = GameManagement.player.getInventorySkill().getInventory(i);
+
+                String data = "";
+                data += s.getID() + ",";
+                data += s.getPower() + ",";
+                data += s.getMastery() + ",";
+                data += num;
+
+                writer.println(data);
+                count++;
+            }
+
+            writer.close();
+        } catch (Exception e) {
+            System.out.println("Exception in savePlayerSkillItemDB");
+            System.out.print(e.getMessage());
+        }
+    }
+
+    public static void saveEngimonLiarDB()
+    {
+        try {
+            PrintWriter writer = new PrintWriter(path + fileNameEngimonLiar, "UTF-8");
+            int count = 0;
+            for (Engimon e : GameManagement.engimonLiar)
+            {
+                String data = "";
+                data += e.get_engimon_id() + ",";
+                data += e.get_position().getX() + ",";
+                data += e.get_position().getY();
+
+                writer.println(data);
+                count++;
+            }
+
+            writer.close();
+        } catch (Exception e) {
+            System.out.println("Exception in savePlayerEngimonDB");
+            System.out.print(e.getMessage());
+        }
+    }
+
+    public static void saveDatabase()
+    {
+        saveEngimonSkillPlayerDB();
+        savePlayerEngimonDB();
+        savePlayerSkillItemDB();
+        saveEngimonLiarDB();
+        savePosPlayerPosActiveDB();
+    }
 }

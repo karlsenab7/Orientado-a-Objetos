@@ -192,7 +192,9 @@ public class Engimon {
     public void add_skill(Skill skill) {
         // Masih string
         // TIDAK mengatur batasan elemen dalam belajar skill
+
         if (engimon_skills.size() > 4) {
+
             throw new ArithmeticException("Skill limit of 4 reached, cannot add more skill");
             // JANGAN LUPA HANDLE EXCEPTION, bisa dengan method selanjutnya
         } else if (is_skill_learned(skill)) {
@@ -200,11 +202,13 @@ public class Engimon {
         } else {
             for (Element el : engimon_elements) {
                 if (skill.canBeLearned(el)) {
+
+                    skill.setSlot(engimon_skills.size());
                     engimon_skills.add(skill);
-                    break;
+                    return;
                 }
             }
-            return;
+//            System.out.println("Learning the skill .....");
         }
         System.out.println("Skill not learnable by engimon");
     }

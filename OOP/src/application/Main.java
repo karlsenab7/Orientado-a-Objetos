@@ -14,7 +14,7 @@ public class Main extends Application {
     @Override
     public void start(Stage primaryStage) throws Exception{
         Database db = new Database();
-        GameManagement gm = new GameManagement();
+        GameManagement gm = new GameManagement(false);
 
         Pane rootMainMenu = FXMLLoader.load(getClass().getResource("screen/MainMenu.fxml"));
         Pane rootGameOver = FXMLLoader.load(getClass().getResource("screen/GameOver.fxml"));

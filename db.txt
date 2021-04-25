@@ -2,10 +2,10 @@ engimon = (idEngimon, element, idSkillUnique, species, deskripsi, icon)
 
 skill = (idSkill, element, name, basePower, baseMastery, deskripsi, icon)
 
-engimonSkillPlayer = (idEngimon, idSkill, power, mastery)
+engimonSkillPlayer = (idEngimon, idSkill, power, mastery, slot)
 playerEngimon = (idEngimon, name, parentName, parentSpecies, level, live, cumulativeExp, active)
 playerSkillItem = (idSkill, power, mastery, num)
 
 engimonLiar = (idEngimon, x, y)
 
-mapSave = (x, y, type, content)
+posPlayerPosActive = (x, y)  // 2 baris; baris pertama posisi player; baris kedua posisi active engimon (-1, -1, jika tidak ada activeEngimon) 

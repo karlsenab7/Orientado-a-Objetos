@@ -24,6 +24,10 @@ public class Player {
         this.position = new Position();
         this.name = playername;
         this.activeEngimonIdx = -1;
+        inventorySkill = new Inventory<>();
+        inventoryEngimon = new Inventory<>();
+        activeEngimonIdx = -1;
+        activeEngimonPosition = new Position();
 
         // Engimon eng = new Engimon();
         // eng.set_engimon_name("Stater Pack Engimon");
@@ -41,6 +45,23 @@ public class Player {
 
     public Engimon getActiveEngimon() {
         return this.inventoryEngimon.getInventory(this.activeEngimonIdx);
+    }
+
+    public void set_activeEngimonIdx(int idx)
+    {
+        if (idx < 0 || idx >= inventoryEngimon.getInventory().size())
+            return;
+        for (Engimon e : inventoryEngimon.getInventory())
+        {
+            e.set_active(0);
+        }
+        inventoryEngimon.getInventory().get(idx).set_active(1);
+        activeEngimonIdx = idx;
+    }
+
+    public int getActiveEngimonIdx()
+    {
+        return activeEngimonIdx;
     }
 
     public Position getActiveEngimonPosition() {
@@ -139,6 +160,7 @@ public class Player {
     }
 
     public void addEngimon(Engimon newEngimon) throws Exception {
+        newEngimon.set_active(0);
         this.inventoryEngimon.addInventory(newEngimon);
     }
 
