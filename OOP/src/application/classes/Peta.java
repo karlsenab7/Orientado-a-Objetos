@@ -38,7 +38,7 @@ public class Peta {
 
     public void generatePeta()
     {
-        String mapPath = "db/map1.txt";
+        String mapPath = "src/application/db/map1.txt";
         try {
 
             Scanner sc = new Scanner(new File(mapPath));
