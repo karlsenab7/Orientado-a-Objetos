@@ -69,7 +69,7 @@ public class Controller implements Initializable {
     }
     public void loadSkill(){
         invent.getChildren().clear();
-        Image item = new Image("1254995-middle.png");
+        Image item = new Image("s1.png");
         for(int i = 0; i < 10;i++){
             Button b = new Button();
             b.setMaxSize(18,18);

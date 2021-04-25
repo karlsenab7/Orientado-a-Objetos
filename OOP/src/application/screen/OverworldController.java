@@ -224,39 +224,17 @@ public class OverworldController implements Initializable {
 
     public void loadEngimon(){
         invent.getChildren().clear();
-        Image engi = new Image("application/assets/1.png");
         for(int i = 0; i < p.getInventoryEngimon().getInventory().size();i++){
-            Button b = new Button();
-            b.setMaxSize(18,18);
-            ImageView im = new ImageView(engi);
-            im.setFitWidth(15);
-            im.setFitHeight(15);
-            b.setGraphic(im);
-            if(p.getInventoryEngimon().getInventory(i).get_engimon_elements().contains(new Element("Fire"))){
-                b.setStyle("-fx-border-color: red");
-            }else if(p.getInventoryEngimon().getInventory(i).get_engimon_elements().contains(new Element("Water"))){
-                b.setStyle("-fx-border-color: blue");
-            }else if(p.getInventoryEngimon().getInventory(i).get_engimon_elements().contains(new Element("Electric"))){
-                b.setStyle("-fx-border-color: yellow");
-            }else if(p.getInventoryEngimon().getInventory(i).get_engimon_elements().contains(new Element("Ground"))){
-                b.setStyle("-fx-border-color: brown");
-            }else if(p.getInventoryEngimon().getInventory(i).get_engimon_elements().contains(new Element("Ice"))){
-                b.setStyle("-fx-border-color: white");
-            }
-            invent.getChildren().add(b);
+            EngimonButton eb = new EngimonButton(p.getInventoryEngimon().getInventory(i));
+            invent.getChildren().add(eb);
         }
     }
     public void loadSkill(){
         invent.getChildren().clear();
-        Image item = new Image("application/assets/1254995-middle.png");
+//        Image item = new Image("application/assets/s1.png");
         for(int i = 0; i < p.getInventorySkill().getInventory().size();i++){
-            Button b = new Button();
-            b.setMaxSize(18,18);
-            ImageView im = new ImageView(item);
-            im.setFitWidth(15);
-            im.setFitHeight(15);
-            b.setGraphic(im);
-            invent.getChildren().add(b);
+            SkillButton sb = new SkillButton(p.getInventorySkill().getInventory(i));
+            invent.getChildren().add(sb);
         }
     }
 
