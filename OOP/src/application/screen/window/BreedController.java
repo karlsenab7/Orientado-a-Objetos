@@ -1,7 +1,7 @@
-package Controllers;
+package application.screen.window;
 
-import Classes.Breed;
-import Classes.Engimon;
+import application.classes.Engimon;
+import application.classes.Breed;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -120,7 +120,7 @@ public class BreedController {
             // Panggil breed
             if (Engimon1 != null && Engimon2 != null){
                 Breed br = new Breed(Engimon1, Engimon2, childName);
-                Child = new Engimon(br.get_child());
+                Child = Engimon.clone(br.get_child());
                 handleCancelButton(event);
             }
         } catch (Exception e) {

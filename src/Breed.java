@@ -1,4 +1,7 @@
-package src;
+package application.classes;
+
+import Classes.Element;
+import Classes.Engimon;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -13,15 +16,17 @@ import java.util.Scanner;
     private Engimon first;
     private Engimon second;
     private Engimon child;
+    private String childName;
 
-    public Breed(Engimon e1, Engimon e2) throws Exception
+    public Breed(Engimon e1, Engimon e2, String newName) throws Exception
     {
         this.first = e1;
         this.second = e2;
+        this.childName = newName;
 
         if (e1.get_level() < 4 || e2.get_level() < 4)
             throw new Exception("Parents Level is not enough!!");
-        
+
         this.child = breed();
     }
 
@@ -42,7 +47,7 @@ import java.util.Scanner;
 
     public Engimon breed()
     {
-        String name = getChildName();
+        String name = childName;
         List<Skill> childSkills = inheritSkills();
 
         String species = "";
@@ -70,15 +75,10 @@ import java.util.Scanner;
 
         e.set_engimon_elements(childElements);
 
-        List<String> parents = new ArrayList<String>();
-        parents.add(first.get_engimon_name());
-        parents.add(second.get_engimon_name());
-        e.set_engimon_parentName(parents);
-
-        List<String> parentSpecies = new ArrayList<String>();
-        parentSpecies.add(first.get_engimon_species());
-        parentSpecies.add(second.get_engimon_species());
-        e.set_engimon_parentSpecies(parentSpecies);
+        List<Engimon> parents = new ArrayList<Engimon>();
+        parents.add(first);
+        parents.add(second);
+        e.set_engimon_parents(parents);
 
         e.set_engimon_species(species);
         

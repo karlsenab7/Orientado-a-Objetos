@@ -117,8 +117,8 @@ public class Engimon {
     public int get_total_power() {
         int sum = 0;
         Skill skill;
-        for (int i = 0; i < engimon_skills.size(); i++) {
-            skill = engimon_skills.get(i);
+        for (Skill engimon_skill : engimon_skills) {
+            skill = engimon_skill;
             sum += skill.getMastery() * skill.getPower();
         }
         return sum;
@@ -132,15 +132,11 @@ public class Engimon {
     // Parents
     public void set_engimon_parentName(List<String> parents) {
         engimon_parentsName.clear();
-        for (String string : parents) {
-            engimon_parentsName.add(string);
-        }
+        engimon_parentsName.addAll(parents);
     }
     public void set_engimon_parentSpecies(List<String> parents) {
         engimon_parentSpecies.clear();
-        for (String string : parents) {
-            engimon_parentSpecies.add(string);
-        }
+        engimon_parentSpecies.addAll(parents);
     }
     // Add parent satu-satu
     public void add_parentName(String parent) {
@@ -164,9 +160,7 @@ public class Engimon {
     // Element
     public void set_engimon_elements(List<Element> els) {
         engimon_elements.clear();
-        for (Element element : els) {
-            engimon_elements.add(element);
-        }
+        engimon_elements.addAll(els);
     }
     // Add element satu-satu
     public void add_element(Element element) {
@@ -246,6 +240,24 @@ public class Engimon {
             throw new ArithmeticException("Level cap reached");
             // JANGAN LUPA HANDLE EXCEPTION
         }
+    }
+
+    public static Engimon clone(Engimon s)
+    {
+        Engimon temp = new Engimon(s.engimon_id,
+                s.engimon_name,
+                s.engimon_species,
+                new ArrayList<String>(),
+                new ArrayList<String>(),
+                new ArrayList<Element>(),
+                new ArrayList<Skill>(),
+                s.level, s.exp, s.cum_exp, s.icon);
+        temp.set_engimon_parentName(s.engimon_parentsName);
+        temp.set_engimon_parentSpecies(s.engimon_parentSpecies);
+        temp.set_engimon_elements(s.engimon_elements);
+        temp.set_engimon_skills(s.engimon_skills);
+        temp.deskripsi = s.deskripsi;
+        return temp;
     }
 
 }

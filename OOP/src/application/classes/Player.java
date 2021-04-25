@@ -185,7 +185,7 @@ public class Player {
     public void breed(int engimon1, int engimon2) {
         try {
             Breed seed = new Breed(this.inventoryEngimon.getInventory(engimon1),
-                    this.inventoryEngimon.getInventory(engimon2));
+                    this.inventoryEngimon.getInventory(engimon2), "lalalal");
             // Menambahkan child ke Inventory
             this.addEngimon(seed.get_child());
         } catch (Exception e) {

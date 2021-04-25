@@ -47,28 +47,28 @@ public class Battle {
     {
         int l1 = e1.get_level();
         List <Element> els1 = e1.get_engimon_elements();
-        float maks = type_adv(els1[0], els2[0]);
+        float maks = type_adv(els1.get(0), els2.get(0));
         for (int i = 0; i < els1.size(); i++)
         {
             for (int j = 0; j < els2.size(); j++)
             {
-                float maks_tmp = type_adv(els1[i], els2[j]);
+                float maks_tmp = type_adv(els1.get(i), els2.get(j));
                 if (maks_tmp > maks)
                 {
                     maks = maks_tmp;
                 }
             }
         }
-        int sum = e1.get_total_skill_power();
-        int sp = l1 * maks + sum;
+        int sum = e1.get_total_power();
+        float sp = l1 * maks + sum;
         return sp;
 
     }
 
     public void fight()
     {
-        float fp1 = sum_power(inventoryEngimon.getInventory()[idxOwnEngimon], second.get_engimon_elements());
-        float fp2 = sum_power(second, inventoryEngimon.getInventory()[idxOwnEngimon].get_engimon_elements());
+        float fp1 = sum_power(GameManagement.getPlayer().getInventoryEngimon().getInventory(idxOwnEngimon), second.get_engimon_elements());
+        float fp2 = sum_power(second, GameManagement.getPlayer().getInventoryEngimon().getInventory(idxOwnEngimon).get_engimon_elements());
     
         System.out.println("Your Engimon Power : " + fp1);
         System.out.println("Enemy Power : " + fp2);
@@ -100,8 +100,8 @@ public class Battle {
 
     public void get_reward()
     {
-        // vector<Skill> skills = second.get_engimon_skills();
-        // Skill s = skills[0];
+         List<Skill> skills = second.get_engimon_skills();
+         Skill s = skills.get(0);
         // inventorySkill.addInventory(s);
         // inventoryEngimon.getInventory()[idxOwnEngimon].add_exp(40);
     

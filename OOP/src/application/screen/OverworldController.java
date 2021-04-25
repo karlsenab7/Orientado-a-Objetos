@@ -1,4 +1,4 @@
-package Controllers;
+package application.screen;
 
 import javafx.fxml.FXML;
 import javafx.event.ActionEvent;
@@ -86,11 +86,7 @@ public class OverworldController {
     public void handleExitButton(ActionEvent event) throws IOException {
         // Untuk mengganti scene
         // Jika ingin digunakan merujuk ke scene lain, ganti isi getResource()
-        root = FXMLLoader.load(getClass().getResource("/Scenes/MainMenu.fxml"));
-        stage = (Stage)((Node)event.getSource()).getScene().getWindow();
-        scene = new Scene(root);
-        stage.setScene(scene);
-        stage.show();
+        ScreenController.activate("MainMenu");
     }
 
     // Tombol Breeding
@@ -108,11 +104,14 @@ public class OverworldController {
     public void handleEngimonInventoryButton(ActionEvent event) throws IOException {
         // Untuk mengganti scene
         // Jika ingin digunakan merujuk ke scene lain, ganti isi getResource()
-        root = FXMLLoader.load(getClass().getResource("/Scenes/EngimonInventory.fxml"));
-        stage = (Stage)((Node)event.getSource()).getScene().getWindow();
-        scene = new Scene(root);
-        stage.setScene(scene);
-        stage.show();
+//        System.out.println("asdsad");
+        Stage legendWindow = new Stage();
+        Parent legend = FXMLLoader.load(getClass().getResource("window/EngimonInventory.fxml"));
+        legendWindow.setTitle("Engimon Inventory"); // Pasang judul
+        legendWindow.initModality(Modality.APPLICATION_MODAL);
+        Scene legendScene = new Scene(legend);
+        legendWindow.setScene(legendScene);
+        legendWindow.show();
     }
 
     // Tombol Skill Inventory
@@ -139,7 +138,7 @@ public class OverworldController {
 
     public void handleLegendButton(ActionEvent event) throws IOException {
         Stage legendWindow = new Stage();
-        Parent legend = FXMLLoader.load(getClass().getResource("/Scenes/Legend.fxml"));
+        Parent legend = FXMLLoader.load(getClass().getResource("window/Legend.fxml"));
         legendWindow.setTitle("Legend"); // Pasang judul
 
         Scene legendScene = new Scene(legend);

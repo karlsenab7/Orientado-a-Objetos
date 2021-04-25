@@ -4,7 +4,7 @@
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.layout.AnchorPane?>
 
-<AnchorPane prefHeight="600.0" prefWidth="800.0" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Controllers.EngimonInventoryController">
+<AnchorPane prefHeight="600.0" prefWidth="800.0" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1" fx:controller="application.screen.window.EngimonInventoryController">
    <children>
       <Button layoutX="379.0" layoutY="287.0" mnemonicParsing="false" onAction="#handleBackButton" text="Back" />
       <Label layoutX="332.0" layoutY="182.0" text="This is Engimon Inventory" />

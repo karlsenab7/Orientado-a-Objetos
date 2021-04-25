@@ -1,4 +1,4 @@
-package Controllers;
+package application.screen.window;
 
 import javafx.event.ActionEvent;
 import javafx.fxml.FXMLLoader;
@@ -9,7 +9,7 @@ import javafx.stage.Stage;
 
 import java.io.IOException;
 
-public class EngimonInventoryController {
+public class BattleController {
 
     // Untuk ganti scene
     private Stage stage;
