@@ -3,6 +3,7 @@ package application.screen.window;
 import application.classes.Engimon;
 import application.classes.Breed;
 import application.classes.GameManagement;
+import application.screen.ScreenController;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -19,8 +20,6 @@ import java.util.ArrayList;
 
 
 public class BreedController {
-    // Data dummy untuk testing
-    ArrayList<Engimon> dummy;
 
     // Untuk memodifikasi value di layar (misal menampilkan info)
     // Cocokkan nama variabel dengan fx:id dan tipenya
@@ -43,29 +42,11 @@ public class BreedController {
     private Engimon Engimon2 = null;
     private Engimon Child = null;
 
-    // Proses saat awawl scene dibuka
+    // Proses saat awal scene dibuka
     @FXML
     private void initialize(){
 
         resetState();
-
-        if (GameManagement.player == null)
-        {
-            System.out.println("Player is null");
-        }
-        else
-        {
-            System.out.println("Set engimon dropdown in Breeding");
-            // Memasukkan data ke choice box
-            System.out.println("Inventory count : " + GameManagement.player.getInventoryEngimon().getInventory().size());
-            for (Engimon x : GameManagement.player.getInventoryEngimon().getInventory()) {
-                Choice1.getItems().add(x.get_engimon_name());
-                Choice2.getItems().add(x.get_engimon_name());
-            }
-        }
-
-        Choice1.setValue("Pilih Engimon 1");
-        Choice2.setValue("Pilih Engimon 2");
 
         // Menampilkan informasi engimon
         Choice1.getSelectionModel().selectedItemProperty().addListener(
@@ -82,37 +63,53 @@ public class BreedController {
         Choice1.getItems().clear();
         Choice2.getSelectionModel().clearSelection();
         Choice2.getItems().clear();
-        Label1.setText("");
-        Label2.setText("");
+        Label1.setText("Info Engimon 1");
+        Label2.setText("Info Engimon 2");
         Engimon1 = null;
         Engimon2 = null;
         Child = null;
-        System.out.println("Reset Breeding Window");
+        //System.out.println("Reset Breeding Window");
+
+        //System.out.println("Set engimon dropdown in Breeding");
+        // Memasukkan data ke choice box
+        //System.out.println("Inventory count : " + GameManagement.player.getInventoryEngimon().getInventory().size());
+        for (Engimon x : GameManagement.player.getInventoryEngimon().getInventory()) {
+            Choice1.getItems().add(x.get_engimon_name());
+            Choice2.getItems().add(x.get_engimon_name());
+        }
+
+        Choice1.setValue("Pilih Engimon 1");
+        Choice2.setValue("Pilih Engimon 2");
     }
 
     // Untuk menampilkan informasi engimon
     private void setLabel(Object newValue, Label label) {
-        String valStr = newValue.toString();
+        try {
+            String valStr = newValue.toString();
 
-        for(Engimon x : GameManagement.player.getInventoryEngimon().getInventory()) {
-            if (valStr == x.get_engimon_name()) {
-                label.setText(
-                        "Nama : " + x.get_engimon_name() +
-                                "\nSpesies : " + x.get_engimon_species() +
-                                "\nLevel : " + x.get_level() +
-                                "\nElemen Utama : " + x.get_engimon_elements().get(0).get_element() +
-                                "\nSkill Pertama : " + x.get_engimon_skills().get(0).getName()
+            for (Engimon x : GameManagement.player.getInventoryEngimon().getInventory()) {
+                if (valStr == x.get_engimon_name()) {
+                    label.setText(
+                            "Nama : " + x.get_engimon_name() +
+                                    "\nSpesies : " + x.get_engimon_species() +
+                                    "\nLevel : " + x.get_level() +
+                                    "\nElemen Utama : " + x.get_engimon_elements().get(0).get_element() +
+                                    "\nSkill Pertama : " + x.get_engimon_skills().get(0).getName()
 
-                ); //setText
+                    ); //setText
 
-                if (label == Label1) {
-                    Engimon1 = x;
-                } else {
-                    Engimon2 = x;
-                }
+                    if (label == Label1) { Engimon1 = x; }
+                    else { Engimon2 = x; }
 
-            } //endif
-        } //endfor
+                } //endif
+            } //endfor
+
+        } catch (NullPointerException e) {
+            //Ignore NullPointerException
+            //NullPointerException terjadi saat mereset pilihan choicebox menjadi null, yang ditangkap oleh listener
+            //Tidak mengganggu fungsionalitas, aman diabaikan
+        }
+
     } //endfuct
 
     // Tombol back
@@ -121,6 +118,7 @@ public class BreedController {
         // Jika ingin digunakan merujuk ke scene lain, ganti isi getResource()
 //        root = FXMLLoader.load(getClass().getResource("/Scenes/Overworld.fxml"));
         stage = (Stage)((Node)event.getSource()).getScene().getWindow();
+        resetState();
         stage.close();
     }
 
@@ -137,14 +135,14 @@ public class BreedController {
             if (Engimon1 != null && Engimon2 != null && Engimon1.get_engimon_id() != Engimon2.get_engimon_id()){
                 Breed br = new Breed(Engimon1, Engimon2, childName);
                 Child = Engimon.clone(br.get_child());
-//                if (Child == null)
-//                    return;
                 GameManagement.getPlayer().getInventoryEngimon().addInventory(Child);
                 // Call Engimon Info
+
                 // Close this window
                 handleCancelButton(event);
             }
         } catch (Exception e) {
+            ScreenController.callPopupWindow("ParentLevelException", "Parent Level Not Enough");
             System.out.println(e.getMessage());
         }
 

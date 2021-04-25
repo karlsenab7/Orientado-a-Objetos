@@ -1,5 +1,5 @@
 Cara membuka GUI:
-1. Buka folder GUI lewat Intellij
+1. Buka folder OOP lewat Intellij
 2. Di File->Project Settings->Libraries tambahkan lib dari javafx sdk (\javafx-sdk-<versi>\lib)
 3. Pastikan di Run->Edit Configurations sudah terdapat Add VM Options dan tertulis:
 
