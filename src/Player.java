@@ -1,4 +1,4 @@
-package src;
+package application.classes;
 
 import java.util.List;
 import java.util.Scanner;
