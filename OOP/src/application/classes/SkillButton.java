@@ -1,5 +1,6 @@
 package application.classes;
 
+import application.screen.ScreenController;
 import javafx.scene.control.Button;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
@@ -45,5 +46,6 @@ public class SkillButton extends Button
     public void skillButtonActionClick()
     {
         System.out.println("Call skill info window");
+//        ScreenController.callPopupWindow("SkillDetail", "Skill Detail");
     }
 }

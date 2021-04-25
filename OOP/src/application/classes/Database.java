@@ -77,6 +77,8 @@ public class Database {
                     }
                     
                     Skill skill = getSkillDBbyID(idSkillUniqueTemp);
+                    List<Skill> skills = new ArrayList<>();
+                    skills.add(skill);
                     String species = speciesTemp;
                     String deskripsi = deskripsiTemp;
                     String icon = iconTemp;
@@ -86,7 +88,7 @@ public class Database {
                     e.set_engimon_name(species);
                     e.set_engimon_id(id);
                     e.set_engimon_elements(els);
-                    e.add_skill(skill);
+                    e.set_engimon_skills(skills);
                     e.set_engimon_species(species);
                     e.set_deskripsi(deskripsi);
                     e.set_icon(icon);

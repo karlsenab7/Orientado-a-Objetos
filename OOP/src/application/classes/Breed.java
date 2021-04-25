@@ -2,6 +2,7 @@ package application.classes;
 
 import application.classes.Element;
 import application.classes.Engimon;
+import org.w3c.dom.ls.LSException;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -45,6 +46,48 @@ import java.util.Scanner;
         return this.child;
     }
 
+    public Engimon getEngimonDBbyElement(List<Element> els2)
+    {
+        List<Engimon> engimons = Database.getEngimonDB();
+        for (Engimon engimon : engimons)
+        {
+            List<Element> els1 = engimon.get_engimon_elements();
+            if (els1.size() != els2.size())
+            {
+                continue;
+            }
+            else
+            {
+                if (els1.size() == 1)
+                {
+                    if (els1.get(0).get_element().equals(els2.get(0).get_element()))
+                    {
+                        return engimon;
+                    }
+                }
+                else
+                {
+                    if (isListElementContaint(els1, els2.get(0)) && isListElementContaint(els1, els2.get(1)))
+                    {
+                        return engimon;
+                    }
+                }
+            }
+        }
+
+        return new Engimon();
+    }
+
+    public boolean isListElementContaint(List<Element> els, Element el)
+    {
+        for (Element e : els)
+        {
+            if (e.get_element().equals(el.get_element()))
+                return true;
+        }
+        return false;
+    }
+
     public Engimon breed()
     {
         String name = childName;
@@ -54,21 +97,24 @@ import java.util.Scanner;
         List<Element> childElements = inheritElements(species);
 
         // AMBIL DARI DATABASE
-        Engimon e = new Engimon();
+        Engimon e = getEngimonDBbyElement(childElements);
 
         List<Skill> eSkill = e.get_engimon_skills();
-        int idx = childSkills.indexOf(eSkill.get(0));
+        boolean idx = false;
+        for (Skill skill : childSkills)
+        {
+            if (Skill.isEqual(skill, eSkill.get(0)))
+                idx = true;
+        }
 
-        if (idx != -1)
+        if (idx)
         {
             e.set_engimon_skills(childSkills);
         }
         else
         {
-            for (Skill skill : childSkills) 
-            {
-                e.add_skill(skill);
-            }
+            childSkills.add(eSkill.get(0));
+            e.set_engimon_skills(childSkills);
         }
 
         e.set_engimon_name(name);

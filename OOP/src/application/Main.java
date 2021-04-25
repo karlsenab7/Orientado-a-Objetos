@@ -41,7 +41,7 @@ public class Main extends Application {
         sc.addScreen("ParentLevelException", ParentException);
 
         primaryStage.setScene(mainScene);
-        primaryStage.setTitle("Menu");
+        primaryStage.setTitle("Gokemon GO!!");
         primaryStage.show();
     }
 

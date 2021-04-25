@@ -1,5 +1,8 @@
 package application.classes;
 
+import application.screen.ScreenController;
+import javafx.fxml.FXMLLoader;
+
 import java.util.List;
 import java.util.Scanner;
 
@@ -49,14 +52,51 @@ public class Player {
 
     public void set_activeEngimonIdx(int idx)
     {
+        this.activeEngimonIdx = idx;
+        this.inventoryEngimon.getInventory().get(idx).set_active(1);
+    }
+
+    public void switchActivEngimon(int idx)
+    {
         if (idx < 0 || idx >= inventoryEngimon.getInventory().size())
             return;
+
         for (Engimon e : inventoryEngimon.getInventory())
         {
             e.set_active(0);
         }
         inventoryEngimon.getInventory().get(idx).set_active(1);
         activeEngimonIdx = idx;
+        Position p1 = new Position(this.position.getX()+1, this.position.getY());
+        Position p2 = new Position(this.position.getX()-1, this.position.getY());
+        Position p3 = new Position(this.position.getX(), this.position.getY()+1);
+        Position p4 = new Position(this.position.getX(), this.position.getY()-1);
+        String content1 = GameManagement.getPeta().getCell(p1.getX(), p1.getY()).getCharCellContent();
+        String content2 = GameManagement.getPeta().getCell(p2.getX(), p2.getY()).getCharCellContent();
+        String content3 = GameManagement.getPeta().getCell(p3.getX(), p3.getY()).getCharCellContent();
+        String content4 = GameManagement.getPeta().getCell(p4.getX(), p4.getY()).getCharCellContent();
+        if (content1.equals("air"))
+        {
+            getActiveEngimon().set_position(p1);
+        }
+        else if (content2.equals("air"))
+        {
+            getActiveEngimon().set_position(p2);
+        }
+        else if (content3.equals("air"))
+        {
+            getActiveEngimon().set_position(p3);
+        }
+        else if (content4.equals("air"))
+        {
+            getActiveEngimon().set_position(p4);
+        }
+        else
+        {
+            getActiveEngimon().set_active(0);
+            activeEngimonIdx = -1;
+        }
+
     }
 
     public int getActiveEngimonIdx()
@@ -88,8 +128,16 @@ public class Player {
         } else if (this.position.getX() + dirX < 0 || this.position.getY() + dirY>= GameManagement.getPeta().getSizeY()) {
             throw new Exception("Out of Boundaries");
         } else {
-            this.position.setY(this.position.getY() + dirY);
-            this.position.setX(this.position.getX() + dirX);
+            Position targetPos = new Position(this.position.getX()+dirX, this.position.getY()+dirY);
+            Position prevPos = this.position;
+            if (GameManagement.getEngimonLiarInPos(targetPos) != null)
+                throw new Exception("Cannot move");
+
+            this.position = new Position(targetPos.getX(), targetPos.getY());
+            if (activeEngimonIdx != -1)
+            {
+                this.getActiveEngimon().set_position(prevPos);
+            }
         }
     }
 
@@ -99,6 +147,7 @@ public class Player {
             move(0, -1);
         } catch (Exception e) {
             //TODO: handle exception
+            System.out.println(e.getMessage());
         }
         
     }
@@ -108,6 +157,7 @@ public class Player {
             move(0, 1);
         } catch (Exception e) {
             //TODO: handle exception
+            System.out.println(e.getMessage());
         }
     }
 
@@ -116,6 +166,7 @@ public class Player {
             move(-1, 0);
         } catch (Exception e) {
             //TODO: handle exception
+            System.out.println(e.getMessage());
         }
     }
 
@@ -124,6 +175,7 @@ public class Player {
             move(1, 0);
         } catch (Exception e) {
             //TODO: handle exception
+            System.out.println(e.getMessage());
         }
     }
 

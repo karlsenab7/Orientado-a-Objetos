@@ -1,2 +1,2 @@
-s1,fire,fight,10,1,master Karlsen,s1.png
+s1,electric,fight,10,1,master Karlsen,s1.png
 s2,electric,salto,20,3,sadas,s2.png

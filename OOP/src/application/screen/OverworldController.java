@@ -2,23 +2,26 @@ package application.screen;
 
 import application.classes.*;
 import javafx.event.ActionEvent;
+import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.geometry.Orientation;
 import javafx.geometry.Pos;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
+import javafx.scene.control.Label;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.StackPane;
 import javafx.scene.layout.TilePane;
+import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
 
 import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
 
-public class OverworldController implements Initializable {
+public class OverworldController {
     //Map
     public TilePane Map;
     public TilePane invent;
@@ -26,6 +29,17 @@ public class OverworldController implements Initializable {
     private Stage stage;
     private Scene scene;
     private Parent root;
+
+    @FXML
+    private Button saveButton;
+    @FXML
+    private Label activeHPLabel;
+    @FXML
+    private Label activeLevelLabel;
+    @FXML
+    private Label activeExpLabel;
+    @FXML
+    private ImageView activeEngimonImageView;
 
     // Untuk "Player"
     private Player p;
@@ -98,6 +112,12 @@ public class OverworldController implements Initializable {
         ScreenController.callPopupWindow("EngimonInventory", "Engimon Inventory");
     }
 
+    public void handleSaveButton(ActionEvent event) throws IOException
+    {
+        Database.saveDatabase();
+        System.out.println("Data Saved");
+    }
+
     public void handleLegendButton(ActionEvent event) throws IOException {
         System.out.println(GameManagement.player.getInventoryEngimon().getInventory().size());
        ScreenController.callPopupWindow("Legend", "Legend");
@@ -107,8 +127,7 @@ public class OverworldController implements Initializable {
         System.out.println(p.getActiveEngimon().get_deskripsi());
     }
 
-    @Override
-    public void initialize(URL location, ResourceBundle resources) {
+    public void initialize() {
         //Setting inventory
         invent.setPrefColumns(10);
         invent.setPrefRows(10);
@@ -132,8 +151,33 @@ public class OverworldController implements Initializable {
         System.out.println(p.getPosition().getX() + p.getPosition().getY());
         loadImageMap();
         loadEngimon();
-
+        resetActivEngimonView();
     }
+
+    public void resetActivEngimonView()
+    {
+        String assetsPath = "application/assets/";
+        try {
+
+            if (GameManagement.player.getActiveEngimonIdx() == -1)
+            {
+//                System.out.println("Exception in ds");
+                activeEngimonImageView.setImage(null);
+                return;
+            }
+
+            activeEngimonImageView.setImage(new Image(assetsPath + GameManagement.player.getActiveEngimon().get_icon()));
+            activeHPLabel.setText("HP:" + GameManagement.player.getActiveEngimon().get_live());
+            activeLevelLabel.setText("LV:" + GameManagement.player.getActiveEngimon().get_level());
+            activeExpLabel.setText("EXP:" + GameManagement.player.getActiveEngimon().get_exp() + "/100");
+        }
+        catch (Exception e)
+        {
+            System.out.println("Exception in resetEngimonView");
+            System.out.println(e.getMessage());
+        }
+    }
+
 
 //    private void loadImage(){
 ////        System.out.println("Load Image");

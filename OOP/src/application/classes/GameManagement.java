@@ -139,6 +139,7 @@ public class GameManagement {
 //                System.out.println(e.get_engimon_skills().size());
                 if (e.get_active() == 1)
                 {
+//                    System.out.println("Exceptisdadasdsa");
                     e.get_position().setX(playerPosAndActivePos.get(1).getX());
                     e.get_position().setY(playerPosAndActivePos.get(1).getY());
                     player.addEngimon(e);
