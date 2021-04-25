@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.ButtonBar?>
+<?import javafx.scene.control.ComboBox?>
+<?import javafx.scene.control.TextArea?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.VBox?>
+
+<VBox maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1">
+   <children>
+      <HBox prefHeight="417.0" prefWidth="600.0" style="-fx-background-color: green;">
+         <children>
+            <HBox alignment="CENTER" prefHeight="340.0" prefWidth="318.0">
+               <children>
+                  <ImageView fitHeight="175.0" fitWidth="264.0" nodeOrientation="INHERIT" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@image/Background.jpg" />
+                     </image>
+                  </ImageView>
+               </children></HBox>
+            <HBox prefHeight="336.0" prefWidth="366.0">
+               <children>
+                  <VBox prefHeight="280.0" prefWidth="326.0">
+                     <children>
+                        <HBox alignment="CENTER" prefHeight="101.0" prefWidth="309.0">
+                           <children>
+                              <ComboBox editable="true" prefWidth="150.0" promptText="Plh slot skll" />
+                           </children></HBox>
+                        <HBox prefHeight="160.0" prefWidth="270.0">
+                           <children>
+                              <TextArea prefHeight="160.0" prefWidth="314.0" text="info skill" />
+                           </children></HBox>
+                     </children>
+                  </VBox>
+               </children>
+            </HBox>
+         </children>
+      </HBox>
+      <HBox prefHeight="257.0" prefWidth="600.0" style="-fx-background-color: blue;">
+         <children>
+            <HBox prefHeight="206.0" prefWidth="320.0">
+               <children>
+                  <ButtonBar prefHeight="206.0" prefWidth="255.0">
+                    <buttons>
+                      <Button mnemonicParsing="false" text="Cancel" />
+                    </buttons>
+                  </ButtonBar>
+               </children>
+            </HBox>
+            <HBox prefHeight="206.0" prefWidth="280.0">
+               <children>
+                  <ButtonBar prefHeight="206.0" prefWidth="117.0">
+                    <buttons>
+                      <Button alignment="CENTER" contentDisplay="CENTER" mnemonicParsing="false" text="Learn" />
+                    </buttons>
+                  </ButtonBar>
+               </children>
+            </HBox>
+         </children></HBox>
+   </children>
+</VBox>
