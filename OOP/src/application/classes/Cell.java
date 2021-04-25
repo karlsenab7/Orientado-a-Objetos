@@ -9,8 +9,6 @@ package application.classes;
 // getCharCell tunggu engimon dulu
 
 
-enum CellType {grassland, sea, tundra, mountain};
-enum Content {player, engimon, air};
 
 public class Cell {
 

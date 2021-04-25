@@ -83,9 +83,9 @@ public class Player {
     }
 
     private void move(int dirX, int dirY) throws Exception {
-        if (this.position.getY() + dirY < 0) {
+        if (this.position.getY() + dirY < 0 || this.position.getX() + dirX >= GameManagement.getPeta().getSizeX()) {
             throw new Exception("Out of Boundaries");
-        } else if (this.position.getX() + dirX < 0) {
+        } else if (this.position.getX() + dirX < 0 || this.position.getY() + dirY>= GameManagement.getPeta().getSizeY()) {
             throw new Exception("Out of Boundaries");
         } else {
             this.position.setY(this.position.getY() + dirY);
@@ -96,7 +96,7 @@ public class Player {
     public void moveUP() {
 
         try {
-            move(0, -1);    
+            move(0, -1);
         } catch (Exception e) {
             //TODO: handle exception
         }
@@ -105,7 +105,7 @@ public class Player {
 
     public void moveDOWN() {
         try {
-            move(0, 1);    
+            move(0, 1);
         } catch (Exception e) {
             //TODO: handle exception
         }
@@ -113,7 +113,7 @@ public class Player {
 
     public void moveLEFT() {
         try {
-            move(-1, 0);    
+            move(-1, 0);
         } catch (Exception e) {
             //TODO: handle exception
         }
@@ -121,7 +121,7 @@ public class Player {
 
     public void moveRIGHT() {
         try {
-            move(1, 0);    
+            move(1, 0);
         } catch (Exception e) {
             //TODO: handle exception
         }
