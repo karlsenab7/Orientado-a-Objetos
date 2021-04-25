@@ -81,7 +81,7 @@
                                  <children>
                                     <ImageView fitHeight="150.0" fitWidth="200.0" pickOnBounds="true" preserveRatio="true">
                                        <image>
-                                          <Image url="@../assets/263-2639555_transparent-agumon-png-pixel-pac-man-png-png.png" />
+                                          <Image url="@../assets/2.png" />
                                        </image>
                                     </ImageView>
                                     <VBox alignment="CENTER" prefHeight="200.0" prefWidth="100.0">

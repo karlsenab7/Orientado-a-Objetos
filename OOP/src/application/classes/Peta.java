@@ -65,21 +65,26 @@ public class Peta {
                     Position pActiv = GameManagement.getPlayer().getActiveEngimonPosition();
                     Position pPlayer = GameManagement.getPlayer().getPosition();
                     // System.out.println(2312);
+                    c.setIdxEngimonInCell(-1);
                     if (pActiv != null)
                     {
-                        if (pActiv.getX() == x && pActiv.getY() == y)
+                        if (pActiv.getX() == x && pActiv.getY() == y) {
                             c.setContent(Content.engimon);
+                            c.setIdxEngimonInCell(GameManagement.player.getActiveEngimon().get_engimon_id());
+                        }
                     }
 
                     if (pPlayer.getX() == x && pPlayer.getY() == y)
                     {
                         // pPlayer.print();
+                        c.setIdxEngimonInCell(-1);
                         c.setContent(Content.player);
                     }
 
                     if (GameManagement.isEngimonLiar(new Position(x, y)))
                     {
                         c.setContent(Content.engimon);
+                        c.setIdxEngimonInCell(GameManagement.getEngimonLiarInPos(new Position(x, y)).get_engimon_id());
                     }
                     // System.out.println(1);
                     temp.add(c);
@@ -100,6 +105,7 @@ public class Peta {
             }
             
         } catch (Exception e) {
+            System.out.println("Exception in GeneratePeta");
             System.out.println(e.getMessage());
         }
     }
@@ -118,7 +124,7 @@ public class Peta {
         {
             for (int j = 0; j < this.sizeX; j++)
             {
-                String uiPath = arrOfCell.get(i).get(j).getCharCell();
+                String uiPath = arrOfCell.get(i).get(j).getCharCellContent();
                 System.out.print(uiPath);
                 new Position(j, i).print();
             }

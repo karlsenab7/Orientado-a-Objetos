@@ -28,7 +28,7 @@ public class Controller implements Initializable {
     }
 
     private void loadImage(){
-        Image img = new Image("mapTile_022.png");
+        Image img = new Image("grass.png");
         Map.setPrefColumns(25);
         Map.setPrefRows(10);
         Map.setPrefTileHeight(33);
@@ -46,7 +46,7 @@ public class Controller implements Initializable {
                 Map.getChildren().add(s);
             }
         }
-        Image engi = new Image("114-1146777_pixel-art-agumon-pixel-art.png");
+        Image engi = new Image("1.png");
         ImageView im = new ImageView(engi);
         im.fitHeightProperty().bind(Map.tileHeightProperty());
         im.fitWidthProperty().bind(Map.tileWidthProperty());
@@ -55,7 +55,7 @@ public class Controller implements Initializable {
     }
     public void loadEngimon(){
         invent.getChildren().clear();
-        Image engi = new Image("114-1146777_pixel-art-agumon-pixel-art.png");
+        Image engi = new Image("1.png");
         for(int i = 0; i < 10;i++){
             Button b = new Button();
             b.setMaxSize(18,18);

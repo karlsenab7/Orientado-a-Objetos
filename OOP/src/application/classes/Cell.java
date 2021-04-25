@@ -2,6 +2,8 @@ package application.classes;
 
 // import javax.xml.crypto.Data;
 
+import javafx.geometry.Pos;
+
 /**
  * Cell
  */
@@ -48,60 +50,54 @@ public class Cell {
     {
         return this.cellType;
     }
-    
-    public String getCharCell()
-    {
-        String playerIconPath = "img/player.png";
-        String grassIconPath = "img/grass.png";
-        String seaIconPath = "img/sea.png";
-        String tundraIconPath = "img/tundra.png";
-        String mountainIconPath = "img/mountain.png";
 
-        if (content == Content.player)
+    public String getCharCellType()
+    {
+        String grassIconPath = "grass.png";
+        String seaIconPath = "sea.png";
+        String tundraIconPath = "tundra.png";
+        String mountainIconPath = "mountain.png";
+
+        if (cellType == CellType.sea)
+            return seaIconPath;
+        else if (cellType == CellType.tundra)
+            return tundraIconPath;
+        else if (cellType == CellType.mountain)
+            return mountainIconPath;
+
+        return grassIconPath;
+    }
+
+    public String getCharCellContent()
+    {
+        String playerIconPath = "player.png";
+
+        int x = position.getX();
+        int y = position.getY();
+
+        if (position.getX() == GameManagement.player.getPosition().getX() && position.getY() == GameManagement.player.getPosition().getY())
         {
             return playerIconPath;
         }
-        else if (content == Content.engimon)
-        {
-            if (idEngimonInCell != -1)
-            {
-                Position p = GameManagement.getPlayer().getActiveEngimon().get_position();
 
-                if (position.getX() == p.getX() && position.getY() == p.getY())
-                {
-                    return GameManagement.getPlayer().getActiveEngimon().get_icon();
-                }
-
-                for (Engimon e : GameManagement.getEngimonLiar()) {
-                    Position pLiar = e.get_position();
-                    if (pLiar.getX() == position.getX() && pLiar.getY()==position.getY())
-                    {
-                        return e.get_icon();
-                    }
-                }
-            }
-        }
-        else
+        if (GameManagement.player.getActiveEngimonIdx() != -1)
         {
-            if (cellType == CellType.grassland)
+            Position ac = GameManagement.player.getActiveEngimonPosition();
+            if (x == ac.getX() && y == ac.getY())
             {
-                return grassIconPath;
-            }
-            else if (cellType == CellType.sea)
-            {
-                return seaIconPath;
-            }
-            else if (cellType == CellType.tundra)
-            {
-                return tundraIconPath;
-            }
-            else
-            {
-                return mountainIconPath;
+                return GameManagement.player.getActiveEngimon().get_icon();
             }
         }
 
-        return grassIconPath;
+        for (Engimon e : GameManagement.engimonLiar)
+        {
+            if (x == e.get_position().getX() && y == e.get_position().getY())
+            {
+                return e.get_icon();
+            }
+        }
+
+        return "air";
     }
     
     public Content getContent()

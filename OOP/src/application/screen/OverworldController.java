@@ -1,13 +1,10 @@
 package application.screen;
 
 import application.classes.*;
-import javafx.fxml.FXML;
 import javafx.event.ActionEvent;
-import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.geometry.Orientation;
 import javafx.geometry.Pos;
-import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
@@ -15,8 +12,6 @@ import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.StackPane;
 import javafx.scene.layout.TilePane;
-import javafx.scene.shape.Circle;
-import javafx.stage.Modality;
 import javafx.stage.Stage;
 
 import java.io.IOException;
@@ -45,7 +40,7 @@ public class OverworldController implements Initializable {
         map.setCellContent(new Position(oldX,oldY), Content.air);
         map.setCellContent(p.getPosition(), Content.player);
         Map.getChildren().clear();
-        loadImage();
+        loadImageMap();
     }
 
     // Tombol Down
@@ -56,7 +51,7 @@ public class OverworldController implements Initializable {
         map.setCellContent(new Position(oldX,oldY), Content.air);
         map.setCellContent(p.getPosition(), Content.player);
         Map.getChildren().clear();
-        loadImage();
+        loadImageMap();
     }
 
     // Tombol Right
@@ -67,7 +62,7 @@ public class OverworldController implements Initializable {
         map.setCellContent(new Position(oldX,oldY), Content.air);
         map.setCellContent(p.getPosition(), Content.player);
         Map.getChildren().clear();
-        loadImage();
+        loadImageMap();
     }
 
     // Tombol Left
@@ -78,7 +73,7 @@ public class OverworldController implements Initializable {
         map.setCellContent(new Position(oldX,oldY), Content.air);
         map.setCellContent(p.getPosition(), Content.player);
         Map.getChildren().clear();
-        loadImage();
+        loadImageMap();
     }
 
     // Tombol Exit
@@ -135,58 +130,101 @@ public class OverworldController implements Initializable {
         p = GameManagement.getPlayer();
 //        System.out.println(p.getActiveEngimonPosition().getX()+ p.getActiveEngimonPosition().getY());
         System.out.println(p.getPosition().getX() + p.getPosition().getY());
-        loadImage();
+        loadImageMap();
         loadEngimon();
 
     }
 
-    private void loadImage(){
-        for (int i = 0; i < map.getSizeX(); i++){
-            for(int j = 0; j < map.getSizeY(); j++){
-                Image cell;
-                switch (map.getCell(i,j).getCellType()){
-                    case sea -> {
-                        cell = new Image("application/assets/mapTile_187.png");;
-                        break;
+//    private void loadImage(){
+////        System.out.println("Load Image");
+//        String pathAssets = "application/assets/";
+//        for (int i = 0; i < map.getSizeX(); i++){
+//            for(int j = 0; j < map.getSizeY(); j++){
+//                Image cell;
+//                switch (map.getCell(i,j).getCellType()){
+//                    case sea -> {
+//                        cell = new Image("application/assets/sea.png");;
+//                        break;
+//                    }
+//                    case tundra -> {
+//                        cell = new Image("application/assets/tundra.png");;
+//                        break;
+//                    }
+//                    case mountain -> {
+//                        cell = new Image("application/assets/mountain.png");
+//                        break;
+//                    }
+//                    default -> {
+//                        cell = new Image("application/assets/grass.png");
+//                        break;
+//                    }
+//                }
+//                ImageView im = new ImageView(cell);
+//                im.fitHeightProperty().bind(Map.tileHeightProperty());
+//                im.fitWidthProperty().bind(Map.tileWidthProperty());
+//                StackPane s = new StackPane();
+//                s.getChildren().add(im);
+//                Map.getChildren().add(s);
+//                if(map.getCellContent(i,j) == Content.engimon){
+//                    Image engi = new Image("application/assets/1.png");
+//                    ImageView im1 = new ImageView(engi);
+//                    im1.fitHeightProperty().bind(Map.tileHeightProperty());
+//                    im1.fitWidthProperty().bind(Map.tileWidthProperty());
+//                    s.getChildren().add(im1);
+//                }else if (map.getCellContent(i,j) == Content.player){
+//                    Image player = new Image("application/assets/player.png");
+//                    ImageView im1 = new ImageView(player);
+//                    im1.fitHeightProperty().bind(Map.tileHeightProperty());
+//                    im1.fitWidthProperty().bind(Map.tileWidthProperty());
+//                    s.getChildren().add(im1);
+//                }
+//            }
+//        }
+//    }
+
+    public void loadImageMap()
+    {
+        try
+        {
+//            System.out.println("Load Image Map");
+            String pathAssets = "application/assets/";
+            for (int i = 0; i < map.getSizeX(); i++){
+                for(int j = 0; j < map.getSizeY(); j++){
+
+                    String typePath = GameManagement.peta.getCell(i, j).getCharCellType();
+                    Image cell = new Image(pathAssets + typePath);
+                    ImageView im = new ImageView(cell);
+                    im.fitHeightProperty().bind(Map.tileHeightProperty());
+                    im.fitWidthProperty().bind(Map.tileWidthProperty());
+                    StackPane s = new StackPane();
+                    s.getChildren().add(im);
+                    Map.getChildren().add(s);
+
+                    String contentPath = GameManagement.peta.getCell(i, j).getCharCellContent();
+
+                    if (!contentPath.equals("air"))
+                    {
+                        Image content = new Image(pathAssets + contentPath);
+                        ImageView im1 = new ImageView(content);
+                        im1.fitHeightProperty().bind(Map.tileHeightProperty());
+                        im1.fitWidthProperty().bind(Map.tileWidthProperty());
+                        s.getChildren().add(im1);
                     }
-                    case tundra -> {
-                        cell = new Image("application/assets/mapTile_077.png");;
-                        break;
-                    }
-                    case mountain -> {
-                        cell = new Image("application/assets/mapTile_027.png");
-                        break;
-                    }
-                    default -> {
-                        cell = new Image("application/assets/mapTile_022.png");
-                        break;
-                    }
-                }
-                ImageView im = new ImageView(cell);
-                im.fitHeightProperty().bind(Map.tileHeightProperty());
-                im.fitWidthProperty().bind(Map.tileWidthProperty());
-                StackPane s = new StackPane();
-                s.getChildren().add(im);
-                Map.getChildren().add(s);
-                if(map.getCellContent(i,j) == Content.engimon){
-                    Image engi = new Image("application/assets/114-1146777_pixel-art-agumon-pixel-art.png");
-                    ImageView im1 = new ImageView(engi);
-                    im1.fitHeightProperty().bind(Map.tileHeightProperty());
-                    im1.fitWidthProperty().bind(Map.tileWidthProperty());
-                    s.getChildren().add(im1);
-                }else if (map.getCellContent(i,j) == Content.player){
-                    Image player = new Image("application/assets/Pokemon_Trainer_Boy-512.png");
-                    ImageView im1 = new ImageView(player);
-                    im1.fitHeightProperty().bind(Map.tileHeightProperty());
-                    im1.fitWidthProperty().bind(Map.tileWidthProperty());
-                    s.getChildren().add(im1);
+//                    System.out.println("type:" + typePath + " content:" + contentPath);
                 }
             }
         }
+        catch (Exception e)
+        {
+            System.out.println("Exception in LoadImageMap Overworl!");
+            System.out.println(e.getMessage());
+        }
+
     }
+
     public void loadEngimon(){
         invent.getChildren().clear();
-        Image engi = new Image("application/assets/114-1146777_pixel-art-agumon-pixel-art.png");
+        Image engi = new Image("application/assets/1.png");
         for(int i = 0; i < p.getInventoryEngimon().getInventory().size();i++){
             Button b = new Button();
             b.setMaxSize(18,18);
