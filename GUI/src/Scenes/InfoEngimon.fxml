@@ -1,0 +1,109 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Rectangle2D?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.ChoiceBox?>
+<?import javafx.scene.control.TextArea?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.text.Font?>
+
+<AnchorPane minHeight="-Infinity" minWidth="-Infinity" prefHeight="768.0" prefWidth="1024.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1">
+   <children>
+      <TextArea editable="false" layoutX="765.0" layoutY="43.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="50.0" prefWidth="200.0" text="Parent">
+         <font>
+            <Font size="24.0" />
+         </font>
+      </TextArea>
+      <TextArea editable="false" layoutX="765.0" layoutY="100.0" minHeight="-Infinity" minWidth="-Infinity" prefHeight="50.0" prefWidth="200.0" text="Element">
+         <font>
+            <Font size="24.0" />
+         </font>
+      </TextArea>
+      <TextArea layoutX="520.0" layoutY="42.0" minHeight="-Infinity" minWidth="-Infinity" prefHeight="50.0" prefWidth="200.0" text="Name">
+         <font>
+            <Font size="24.0" />
+         </font>
+      </TextArea>
+      <TextArea editable="false" layoutX="519.0" layoutY="99.0" minHeight="-Infinity" minWidth="-Infinity" prefHeight="50.0" prefWidth="200.0" text="Species">
+         <font>
+            <Font size="24.0" />
+         </font>
+      </TextArea>
+      <TextArea editable="false" layoutX="517.0" layoutY="156.0" minHeight="-Infinity" minWidth="-Infinity" prefHeight="50.0" prefWidth="200.0" text="Level">
+         <font>
+            <Font size="24.0" />
+         </font>
+      </TextArea>
+      <ImageView fitHeight="350.0" fitWidth="450.0" layoutX="22.0" layoutY="21.0" pickOnBounds="true" preserveRatio="true">
+         <viewport>
+            <Rectangle2D />
+         </viewport>
+         <image>
+            <Image url="@../../../../OneDrive/Pictures/Screenshots/pokemon_pikachu-min.png" />
+         </image>
+      </ImageView>
+      <TextArea editable="false" layoutX="566.0" layoutY="300.0" minHeight="-Infinity" minWidth="-Infinity" prefHeight="130.0" prefWidth="380.0" text="Slogan">
+         <font>
+            <Font size="18.0" />
+         </font>
+      </TextArea>
+      <Button layoutX="629.0" layoutY="465.0" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" prefHeight="43.0" prefWidth="100.0" text="Close">
+         <font>
+            <Font size="18.0" />
+         </font>
+      </Button>
+      <Button layoutX="805.0" layoutY="461.0" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" prefHeight="48.0" prefWidth="100.0" text="Set Active">
+         <font>
+            <Font size="17.0" />
+         </font>
+      </Button>
+      <Button layoutX="822.0" layoutY="624.0" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" prefHeight="75.0" prefWidth="81.0" text="Throw">
+         <font>
+            <Font size="18.0" />
+         </font>
+      </Button>
+      <ChoiceBox layoutX="739.0" layoutY="630.0" prefHeight="25.0" prefWidth="62.0" />
+      <Button layoutX="45.0" layoutY="401.0" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" prefHeight="43.0" prefWidth="100.0" text="Skill 1">
+         <font>
+            <Font size="18.0" />
+         </font>
+      </Button>
+      <Button layoutX="45.0" layoutY="467.0" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" prefHeight="43.0" prefWidth="100.0" text="Skill 2">
+         <font>
+            <Font size="18.0" />
+         </font>
+      </Button>
+      <Button layoutX="45.0" layoutY="538.0" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" prefHeight="43.0" prefWidth="100.0" text="Skill 3">
+         <font>
+            <Font size="18.0" />
+         </font>
+      </Button>
+      <Button layoutX="45.0" layoutY="605.0" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" prefHeight="43.0" prefWidth="100.0" text="Skill 4">
+         <font>
+            <Font size="18.0" />
+         </font>
+      </Button>
+      <TextArea editable="false" layoutX="185.0" layoutY="402.0" minHeight="-Infinity" minWidth="-Infinity" prefHeight="50.0" prefWidth="271.0" text="Power, Mastery Level">
+         <font>
+            <Font size="24.0" />
+         </font>
+      </TextArea>
+      <TextArea editable="false" layoutX="185.0" layoutY="470.0" minHeight="-Infinity" minWidth="-Infinity" prefHeight="50.0" prefWidth="271.0" text="Power, Mastery Level">
+         <font>
+            <Font size="24.0" />
+         </font>
+      </TextArea>
+      <TextArea editable="false" layoutX="187.0" layoutY="535.0" minHeight="-Infinity" minWidth="-Infinity" prefHeight="50.0" prefWidth="267.0" text="Power, Mastery Level">
+         <font>
+            <Font size="24.0" />
+         </font>
+      </TextArea>
+      <TextArea editable="false" layoutX="191.0" layoutY="606.0" minHeight="-Infinity" minWidth="-Infinity" prefHeight="50.0" prefWidth="266.0" text="Power, Mastery Level">
+         <font>
+            <Font size="24.0" />
+         </font>
+      </TextArea>
+   </children>
+</AnchorPane>
