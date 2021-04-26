@@ -1,7 +1,10 @@
 package application.classes;
 
+
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
+
+import application.screen.ScreenController;
 import javafx.scene.control.Button;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
@@ -32,6 +35,8 @@ public class SkillButton extends Button
         super();
         this.setMaxSize(18, 18);
         this.skill = skillTemp;
+        String hexColor = getHexColor(skill.getElement().get(0));
+        this.setStyle("-fx-background-color: " + hexColor + ";");
         try {
             icon = new ImageView(new Image(assetsPath + skill.getIcon()));
             icon.setFitWidth(15);
@@ -51,5 +56,22 @@ public class SkillButton extends Button
     {
         System.out.println("Call skill info window");
         ScreenController.callPopupWindow("SkillDetail", "Skill Detail");
+//        ScreenController.callPopupWindow("SkillDetail", "Skill Detail");
+    }
+
+    public String getHexColor(Element element)
+    {
+        String electricHex = "#ebf700";
+        String waterHex = "#00cbff";
+        String fireHex  = "#ff0000";
+        String iceHex = "#c8f4ff";
+        String groundHex = "#ae6900";
+        return switch (element.get_element()) {
+            case "electric" -> electricHex;
+            case "water" -> waterHex;
+            case "fire" -> fireHex;
+            case "ice" -> iceHex;
+            default -> groundHex;
+        };
     }
 }

@@ -60,8 +60,6 @@ public class LearnSkillController {
         slotSkill.getItems().add("Slot 2");
         slotSkill.getItems().add("Slot 3");
         slotSkill.getItems().add("Slot 4");
-
-
     }
 
     public void handleButtonCancel(ActionEvent event) throws IOException {
@@ -69,4 +67,5 @@ public class LearnSkillController {
         resetState();
         stage.close();
     }
+
 }

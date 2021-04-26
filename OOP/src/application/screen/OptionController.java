@@ -1,5 +1,6 @@
 package application.screen;
 
+import com.sun.javafx.charts.Legend;
 import javafx.fxml.FXML;
 
 import javafx.event.ActionEvent;
@@ -40,7 +41,7 @@ public class OptionController implements Initializable {
     public void legendButtonActionClick(ActionEvent event)
     {
         System.out.println("Legend");
-        optionContentTextArea.setText("Legend");
+        ScreenController.callPopupWindow("Legend", "Legend");
     }
     public void closeButtonActionClick(ActionEvent event)
     {

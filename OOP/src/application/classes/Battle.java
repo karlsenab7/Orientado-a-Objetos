@@ -105,17 +105,29 @@ public class Battle {
         // inventorySkill.addInventory(s);
         // inventoryEngimon.getInventory()[idxOwnEngimon].add_exp(40);
     
-        System.out.println("REWARD : \n");
-        System.out.println("Engimon : " + second.get_engimon_name() + " - Level " + second.get_level());
-        System.out.println("Skill : " + s.getName() + " - Mastery Level " + s.getMastery());
-        System.out.println();
+//        System.out.println("REWARD : \n");
+//        System.out.println("Engimon : " + second.get_engimon_name() + " - Level " + second.get_level());
+//        System.out.println("Skill : " + s.getName() + " - Mastery Level " + s.getMastery());
+//        System.out.println();
 
+        try {
+            Engimon engimonReward = Engimon.clone(second);
+            GameManagement.player.getInventoryEngimon().addInventory(engimonReward);
+            GameManagement.player.getInventorySkill().addInventory(s);
+            GameManagement.getEngimonLiar().remove(second);
+        }
+        catch (Exception e)
+        {
+            System.out.println("Exception in get_reward");
+            System.out.println(e.getMessage());
+        }
     }
 
     public void get_penalty()
     {
         // inventoryEngimon.removeInventory(idxOwnEngimon);
-        System.out.println("Your active engimon is dead!!\n\n");
+//        System.out.println("Your active engimon is dead!!\n\n");
+        GameManagement.player.getActiveEngimon().set_live(GameManagement.player.getActiveEngimon().get_live()-1);
     }
 
 }

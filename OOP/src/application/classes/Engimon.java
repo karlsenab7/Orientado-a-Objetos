@@ -32,7 +32,7 @@ public class Engimon {
         level = 1;
         exp = 0;
         cum_exp = 0;
-        this.icon = "";
+        this.icon = "1.png";
         position = new Position(0,0);
 
         engimon_elements = new ArrayList<Element>();

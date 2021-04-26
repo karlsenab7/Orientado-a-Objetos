@@ -1,24 +1,30 @@
 package application.screen;
 
 import application.classes.*;
+import application.screen.window.BattleController;
 import javafx.event.ActionEvent;
+import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
+import javafx.geometry.Insets;
 import javafx.geometry.Orientation;
 import javafx.geometry.Pos;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
+import javafx.scene.control.Label;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
-import javafx.scene.layout.StackPane;
-import javafx.scene.layout.TilePane;
+import javafx.scene.layout.*;
+import javafx.scene.paint.Color;
 import javafx.stage.Stage;
 
 import java.io.IOException;
 import java.net.URL;
+import java.security.spec.ECField;
 import java.util.ResourceBundle;
 
-public class OverworldController implements Initializable {
+public class OverworldController {
     //Map
     public TilePane Map;
     public TilePane invent;
@@ -26,6 +32,17 @@ public class OverworldController implements Initializable {
     private Stage stage;
     private Scene scene;
     private Parent root;
+
+    @FXML
+    private Button saveButton;
+    @FXML
+    private Label activeHPLabel;
+    @FXML
+    private Label activeLevelLabel;
+    @FXML
+    private Label activeExpLabel;
+    @FXML
+    private ImageView activeEngimonImageView;
 
     // Untuk "Player"
     private Player p;
@@ -98,6 +115,78 @@ public class OverworldController implements Initializable {
         ScreenController.callPopupWindow("EngimonInventory", "Engimon Inventory");
     }
 
+    public void handleBattleButton(ActionEvent event)
+    {
+//        ScreenController.callPopupWindow("Battle", "Battle");
+//        BattleController bc = new BattleController();
+//        bc.resetStateBattle(new Engimon());
+        try{
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/application/screen/window/Battle.fxml"));
+            Pane root = loader.load();
+            BattleController bc = loader.getController();
+            Scene scene = new Scene(root);
+            Stage stage = new Stage();
+            stage.setScene(scene);
+            bc.resetStateBattle(GameManagement.player.getActiveEngimon());
+            stage.show();
+
+        }
+        catch (Exception e)
+        {
+            System.out.println("Exception in handleBattleButton");
+            System.out.println(e.getMessage());
+        }
+
+
+
+//        if (GameManagement.player.getActiveEngimonIdx() == -1)
+//        {
+//            System.out.println("Engimon is not active!!");
+//            return;
+//        }
+//
+//        try {
+//            Position playerPosition = GameManagement.player.getPosition();
+//            Engimon e = null;
+//            for (int i = 0; i < 4; i++)
+//            {
+//                Position p;
+//                if (i == 0)
+//                    p = new Position(playerPosition.getX()+1, playerPosition.getY());
+//                else if (i == 1)
+//                    p = new Position(playerPosition.getX()-1, playerPosition.getY());
+//                else if (i == 2)
+//                    p = new Position(playerPosition.getX(), playerPosition.getY()+1);
+//                else
+//                    p = new Position(playerPosition.getX(), playerPosition.getY()-1);
+//
+//                e = GameManagement.getEngimonLiarInPos(p);
+//                if (e != null)
+//                    break;
+//            }
+//            if (e == null)
+//            {
+//                System.out.println("Enemy is not found!!");
+//                return;
+//            }
+//
+//            GameManagement.player.battle(e);
+//        }
+//        catch (Exception e)
+//        {
+//            System.out.println("Exception in handleBattleButton");
+//            System.out.println(e.getMessage());
+//        }
+
+
+    }
+
+    public void handleSaveButton(ActionEvent event) throws IOException
+    {
+        Database.saveDatabase();
+        System.out.println("Data Saved");
+    }
+
     public void handleLegendButton(ActionEvent event) throws IOException {
         System.out.println(GameManagement.player.getInventoryEngimon().getInventory().size());
        ScreenController.callPopupWindow("Legend", "Legend");
@@ -107,8 +196,7 @@ public class OverworldController implements Initializable {
         System.out.println(p.getActiveEngimon().get_deskripsi());
     }
 
-    @Override
-    public void initialize(URL location, ResourceBundle resources) {
+    public void initialize() {
         //Setting inventory
         invent.setPrefColumns(10);
         invent.setPrefRows(10);
@@ -132,8 +220,33 @@ public class OverworldController implements Initializable {
         System.out.println(p.getPosition().getX() + p.getPosition().getY());
         loadImageMap();
         loadEngimon();
-
+        resetActivEngimonView();
     }
+
+    public void resetActivEngimonView()
+    {
+        String assetsPath = "application/assets/";
+        try {
+
+            if (GameManagement.player.getActiveEngimonIdx() == -1)
+            {
+//                System.out.println("Exception in ds");
+                activeEngimonImageView.setImage(null);
+                return;
+            }
+
+            activeEngimonImageView.setImage(new Image(assetsPath + GameManagement.player.getActiveEngimon().get_icon()));
+            activeHPLabel.setText("HP:" + GameManagement.player.getActiveEngimon().get_live());
+            activeLevelLabel.setText("LV:" + GameManagement.player.getActiveEngimon().get_level());
+            activeExpLabel.setText("EXP:" + GameManagement.player.getActiveEngimon().get_exp() + "/100");
+        }
+        catch (Exception e)
+        {
+            System.out.println("Exception in resetEngimonView");
+            System.out.println(e.getMessage());
+        }
+    }
+
 
 //    private void loadImage(){
 ////        System.out.println("Load Image");
@@ -225,18 +338,39 @@ public class OverworldController implements Initializable {
     public void loadEngimon(){
         invent.getChildren().clear();
         for(int i = 0; i < p.getInventoryEngimon().getInventory().size();i++){
+            HBox inventHbox = new HBox();
+            inventHbox.setMaxSize(36, 18);
+
             EngimonButton eb = new EngimonButton(p.getInventoryEngimon().getInventory(i));
+            Label countLabel = new Label();
+            countLabel.setMaxSize(18, 18);
+            countLabel.setText(Integer.toString(p.getInventoryEngimon().getInventoryCount(i)));
+
             invent.getChildren().add(eb);
+            invent.getChildren().add(countLabel);
         }
     }
     public void loadSkill(){
         invent.getChildren().clear();
 //        Image item = new Image("application/assets/s1.png");
         for(int i = 0; i < p.getInventorySkill().getInventory().size();i++){
-            SkillButton sb = new SkillButton(p.getInventorySkill().getInventory(i));
+            Skill s = p.getInventorySkill().getInventory(i);
+
+            HBox inventHbox = new HBox();
+            inventHbox.setMaxSize(36, 18);
+
+            SkillButton sb = new SkillButton(s);
+
+            Label countLabel = new Label();
+            countLabel.setMaxSize(18, 18);
+            countLabel.setText(Integer.toString(p.getInventorySkill().getInventoryCount(i)));
+
             invent.getChildren().add(sb);
+            invent.getChildren().add(countLabel);
         }
     }
+
+
 
 //    public void callPopupWindow(String name, String title)
 //    {

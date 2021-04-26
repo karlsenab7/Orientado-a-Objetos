@@ -29,6 +29,7 @@ public class Main extends Application {
         Pane rootBreedScene = FXMLLoader.load(getClass().getResource("screen/window/BreedScene.fxml"));
         Pane rootLegend = FXMLLoader.load(getClass().getResource("screen/window/Legend.fxml"));
         Pane ParentException = FXMLLoader.load(getClass().getResource("screen/window/ParentLevelException.fxml"));
+        Pane rootBattle = FXMLLoader.load(getClass().getResource("screen/window/Battle.fxml"));
 
 
         Scene mainScene = new Scene(rootMainMenu, 1024, 768);
@@ -45,9 +46,10 @@ public class Main extends Application {
         sc.addScreen("BreedScene", rootBreedScene);
         sc.addScreen("Legend", rootLegend);
         sc.addScreen("ParentLevelException", ParentException);
+        sc.addScreen("Battle", rootBattle);
 
         primaryStage.setScene(mainScene);
-        primaryStage.setTitle("Menu");
+        primaryStage.setTitle("Gokemon GO!!");
         primaryStage.show();
     }
 

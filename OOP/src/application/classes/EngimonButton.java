@@ -16,21 +16,15 @@ public class EngimonButton extends Button {
         super();
         engimon = engimonTemp;
         this.setMaxSize(18, 18);
+
+        String hexColor = getHexColor(engimon.get_engimon_elements().get(0));
+        this.setStyle("-fx-background-color: " + hexColor + ";");
+
         icon = new ImageView(new Image(assetsPath + engimon.get_icon()));
         icon.setFitWidth(15);
         icon.setFitHeight(15);
         this.setGraphic(icon);
-        if(engimon.get_engimon_elements().contains(new Element("Fire"))){
-            this.setStyle("-fx-border-color: red");
-        }else if(engimon.get_engimon_elements().contains(new Element("Water"))){
-            this.setStyle("-fx-border-color: blue");
-        }else if(engimon.get_engimon_elements().contains(new Element("Electric"))){
-            this.setStyle("-fx-border-color: yellow");
-        }else if(engimon.get_engimon_elements().contains(new Element("Ground"))){
-            this.setStyle("-fx-border-color: brown");
-        }else if(engimon.get_engimon_elements().contains(new Element("Ice"))){
-            this.setStyle("-fx-border-color: white");
-        }
+
 
         this.setOnAction(e -> engimonButtonActionClick());
 
@@ -39,6 +33,23 @@ public class EngimonButton extends Button {
     public void engimonButtonActionClick()
     {
         System.out.println("Call engimon info");
+        System.out.println(engimon.get_icon());
+    }
+
+    public String getHexColor(Element element)
+    {
+        String electricHex = "#ebf700";
+        String waterHex = "#00cbff";
+        String fireHex  = "#ff0000";
+        String iceHex = "#c8f4ff";
+        String groundHex = "#ae6900";
+        return switch (element.get_element()) {
+            case "electric" -> electricHex;
+            case "water" -> waterHex;
+            case "fire" -> fireHex;
+            case "ice" -> iceHex;
+            default -> groundHex;
+        };
     }
 
 }

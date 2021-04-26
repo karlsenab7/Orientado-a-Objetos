@@ -1,13 +1,20 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import java.lang.*?>
-<?import javafx.scene.image.*?>
-<?import javafx.geometry.*?>
-<?import javafx.scene.control.*?>
-<?import javafx.scene.layout.*?>
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.SplitPane?>
+<?import javafx.scene.control.TitledPane?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.Pane?>
+<?import javafx.scene.layout.Region?>
+<?import javafx.scene.layout.TilePane?>
+<?import javafx.scene.layout.VBox?>
 
-
-<Pane fx:controller="application.screen.OverworldController" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1">
+<Pane xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1" fx:controller="application.screen.OverworldController">
    <children>
       <SplitPane dividerPositions="0.6306532663316583" layoutX="10.0" layoutY="10.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" orientation="VERTICAL" prefHeight="768.0" prefWidth="1024.0">
          <items>
@@ -30,13 +37,15 @@
                                     <HBox alignment="CENTER" spacing="10.0">
                                        <children>
                                           <Button maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onAction="#handleLegendButton" prefHeight="50.0" prefWidth="100.0" text="Info" />
-                                          <Button maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" prefHeight="50.0" prefWidth="100.0" text="Interact" onAction="#handleInteractionButton" />
+                                          <Button maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onAction="#handleInteractionButton" prefHeight="50.0" prefWidth="100.0" text="Interact" />
                                           <Button maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onAction="#handleBreedButton" prefHeight="50.0" prefWidth="100.0" text="Breed" />
                                        </children>
                                     </HBox>
-                                    <HBox alignment="CENTER" layoutX="22.0" layoutY="22.0" spacing="10.0">
+                                    <HBox alignment="CENTER" layoutX="22.0" layoutY="22.0" spacing="35.0">
                                        <children>
+                                          <Button fx:id="battleButton" mnemonicParsing="false" onAction="#handleBattleButton" prefHeight="50.0" prefWidth="100.0" text="Battle" />
                                           <Button maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onAction="#UpButton" prefHeight="50.0" prefWidth="50.0" text="W" />
+                                          <Region prefHeight="50.0" prefWidth="100.0" />
                                        </children>
                                     </HBox>
                                     <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0" spacing="5.0">
@@ -50,7 +59,7 @@
                                        <children>
                                           <Button maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onAction="#handleExitButton" prefHeight="50.0" prefWidth="100.0" text="Exit" />
                                           <Region maxHeight="-Infinity" maxWidth="-Infinity" prefHeight="200.0" prefWidth="200.0" />
-                                          <Button maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" prefHeight="50.0" prefWidth="100.0" text="Save" />
+                                          <Button fx:id="saveButton" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onAction="#handleSaveButton" prefHeight="50.0" prefWidth="100.0" text="Save" />
                                        </children>
                                        <VBox.margin>
                                           <Insets />
@@ -79,16 +88,16 @@
                            <content>
                               <VBox>
                                  <children>
-                                    <ImageView fitHeight="150.0" fitWidth="200.0" pickOnBounds="true" preserveRatio="true">
+                                    <ImageView fx:id="activeEngimonImageView" fitHeight="150.0" fitWidth="200.0" pickOnBounds="true" preserveRatio="true">
                                        <image>
                                           <Image url="@../assets/2.png" />
                                        </image>
                                     </ImageView>
-                                    <VBox alignment="CENTER" prefHeight="200.0" prefWidth="100.0">
+                                    <VBox fx:id="activeEngimonStatPanel" alignment="CENTER" prefHeight="200.0" prefWidth="100.0">
                                        <children>
-                                          <Label text="HP: 3" />
-                                          <Label text="LV: 2" />
-                                          <Label text="XP: 50/100" />
+                                          <Label fx:id="activeHPLabel" text="HP: 3" />
+                                          <Label fx:id="activeLevelLabel" text="LV: 2" />
+                                          <Label fx:id="activeExpLabel" text="XP: 50/100" />
                                        </children>
                                     </VBox>
                                  </children>

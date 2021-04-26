@@ -27,6 +27,12 @@ public class ScreenController {
     public static void activate(String name){
         mainScene.setRoot(screenMap.get(name));
     }
+
+    public static Pane getPane(String name)
+    {
+        return screenMap.get(name);
+    }
+
     public static void callPopupWindow(String name, String title)
     {
         String path = "window/";
