@@ -52,4 +52,10 @@ public class WinBattleController
             rewardPanel.getChildren().add(sb);
         }
     }
+
+    public void handleCloseButton(ActionEvent event)
+    {
+        Stage stage = (Stage)((Node)event.getSource()).getScene().getWindow();
+        stage.close();
+    }
 }

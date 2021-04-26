@@ -34,12 +34,14 @@ public class SkillButton extends Button
     private String assetsPath = "application/assets/";
     private Skill skill;
     private ImageView icon;
+    private boolean learnable;
 
     public SkillButton(Skill skillTemp, boolean learnable)
     {
         super();
         this.setMaxSize(18, 18);
         this.skill = skillTemp;
+        this.learnable = learnable;
         String hexColor = getHexColor(skill.getElement().get(0));
         this.setStyle("-fx-background-color: " + hexColor + ";");
         try {
@@ -65,7 +67,7 @@ public class SkillButton extends Button
             FXMLLoader loader = new FXMLLoader(getClass().getResource("/application/screen/window/SkillDetail.fxml"));
             Parent root = (Parent) loader.load();
             SkillDetailController sc = loader.getController();
-            sc.setSkill(skill);
+            sc.setSkill(skill, learnable);
             sc.resetState();
             Stage stage = new Stage();
             stage.setScene(new Scene(root));

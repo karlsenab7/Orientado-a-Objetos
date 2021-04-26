@@ -25,6 +25,7 @@ public class SkillDetailController {
     private Scene scene;
     private Parent root;
     private Skill skill;
+    private boolean learnable;
 
     @FXML
     private Button close;
@@ -48,8 +49,9 @@ public class SkillDetailController {
         showSkillDesc();
     }
 
-    public void setSkill(Skill skill) {
+    public void setSkill(Skill skill, boolean learnable) {
         this.skill = skill;
+        this.learnable = learnable;
     }
 
     public void showSkillDesc() {
@@ -77,14 +79,14 @@ public class SkillDetailController {
     }
 
     public void handleButtonLearnSkill(ActionEvent event) throws IOException {
-        if (event.getSource() == learn_skill) {
+        if (event.getSource() == learn_skill && learnable) {
             System.out.println("Learn Skill");
             ScreenController.callPopupWindow("LearnSkill", "Learn Skill");
         }
     }
 
     public void handleButtonBuang(ActionEvent event) throws  IOException {
-        if (event.getSource() == Buang) {
+        if (event.getSource() == Buang && learnable) {
             System.out.println("Membuang Skill");
             String count = NBuang.getText();
             System.out.println("Total yang dibuang : " + count);

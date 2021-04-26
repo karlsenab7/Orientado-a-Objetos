@@ -232,6 +232,9 @@ public class OverworldController {
             {
 //                System.out.println("Exception in ds");
                 activeEngimonImageView.setImage(null);
+                activeExpLabel.setText("");
+                activeLevelLabel.setText("");
+                activeHPLabel.setText("");
                 return;
             }
 

@@ -117,10 +117,8 @@ public class Engimon {
 
     public int get_total_power() {
         int sum = 0;
-        Skill skill;
         for (Skill engimon_skill : engimon_skills) {
-            skill = engimon_skill;
-            sum += skill.getMastery() * skill.getPower();
+            sum += engimon_skill.getMastery() * engimon_skill.getPower();
         }
         return sum;
     }
