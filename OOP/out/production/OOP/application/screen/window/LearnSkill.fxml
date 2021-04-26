@@ -14,7 +14,7 @@
          <children>
             <HBox alignment="CENTER" prefHeight="340.0" prefWidth="318.0">
                <children>
-                  <ImageView fx:id="ImgSkill" fitHeight="175.0" fitWidth="264.0" nodeOrientation="INHERIT" pickOnBounds="true" preserveRatio="true" />
+                  <ImageView fx:id="imgSkill" fitHeight="175.0" fitWidth="264.0" nodeOrientation="INHERIT" pickOnBounds="true" preserveRatio="true" />
                </children></HBox>
             <HBox prefHeight="336.0" prefWidth="366.0">
                <children>

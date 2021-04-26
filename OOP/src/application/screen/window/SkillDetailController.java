@@ -99,7 +99,7 @@ public class SkillDetailController {
 
     public void handleButtonLearnSkill(ActionEvent event) throws IOException {
 //        ScreenController.callPopupWindow("LearnSkill", "Learn Skill");
-        if (!learnable) {
+        if (!learnable || GameManagement.player.getActiveEngimonIdx() == -1) {
             System.out.println("Cannot learn");
             return;
         }
