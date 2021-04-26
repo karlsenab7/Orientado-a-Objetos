@@ -6,7 +6,10 @@ import application.classes.Skill;
 import javafx.fxml.FXML;
 
 import javafx.event.ActionEvent;
+import javafx.fxml.FXMLLoader;
+import javafx.scene.Scene;
 import javafx.scene.control.Button;
+import javafx.scene.layout.Pane;
 import javafx.stage.Stage;
 
 import javax.xml.crypto.Data;
@@ -32,33 +35,14 @@ public class MainMenuController {
     public void newGameButtonActionClick(ActionEvent event)
     {
         System.out.println("New Game");
+        initGameData(true);
         ScreenController.activate("MainDisplay");
     }
 
     public void continueButtonActionClick(ActionEvent event)
     {
-        Skill s = Database.getSkillDBbyID("s2");
-//        GameManagement.player.getInventoryEngimon().getInventory().get(0).add_skill(s);
-//        System.out.println(GameManagement.player.getInventoryEngimon().getInventory().get(1).get_engimon_skills().get(1).getName());
-        GameManagement.player.getInventoryEngimon().getInventory().get(0).set_engimon_name("QQQQ");
-//        try
-//        {
-//            GameManagement.player.getInventorySkill().addInventory(s);
-//        }
-//        catch (Exception e)
-//        {
-//            e.printStackTrace();
-//        }
-//        GameManagement.engimonLiar.get(0).get_position().setX(9999);
-//        GameManagement.player.getActiveEngimonPosition().setX(9999);
-//        Database.saveEngimonSkillPlayerDB();
-//        Database.savePlayerEngimonDB();
-//        Database.savePlayerSkillItemDB();
-//        Database.saveEngimonLiarDB();
-//        Database.savePosPlayerPosActiveDB();
-
-//        Database.saveDatabase();
         System.out.println("Continue");
+        initGameData(false);
         ScreenController.activate("MainDisplay");
     }
 
@@ -67,4 +51,48 @@ public class MainMenuController {
         System.out.println("Option");
         ScreenController.activate("Option");
     }
+
+    public void initGameData(boolean newGame)
+    {
+        try {
+            Database db = new Database();
+            GameManagement gm = new GameManagement(newGame);
+
+
+            Pane rootGameOver = FXMLLoader.load(getClass().getResource("GameOver.fxml"));
+//            System.out.println("dsdas");
+
+            Pane rootMainDisplay = FXMLLoader.load(getClass().getResource("Overworld.fxml"));
+            Pane rootSkillDetail = FXMLLoader.load(getClass().getResource("window/SkillDetail.fxml"));
+            Pane rootLearnSkill = FXMLLoader.load(getClass().getResource("window/LearnSkill.fxml"));
+
+            Pane rootEngimonInventory = FXMLLoader.load(getClass().getResource("window/EngimonInventory.fxml"));
+            Pane rootBreedScene = FXMLLoader.load(getClass().getResource("window/BreedScene.fxml"));
+            Pane rootLegend = FXMLLoader.load(getClass().getResource("window/Legend.fxml"));
+            Pane ParentException = FXMLLoader.load(getClass().getResource("window/ParentLevelException.fxml"));
+            Pane rootBattle = FXMLLoader.load(getClass().getResource("window/Battle.fxml"));
+
+
+            ScreenController sc = new ScreenController();
+
+
+            sc.addScreen("GameOver", rootGameOver);
+
+            sc.addScreen("MainDisplay", rootMainDisplay);
+            sc.addScreen("SkillDetail", rootSkillDetail);
+            sc.addScreen("LearnSkill", rootLearnSkill);
+
+            sc.addScreen("EngimonInventory", rootEngimonInventory);
+            sc.addScreen("BreedScene", rootBreedScene);
+            sc.addScreen("Legend", rootLegend);
+            sc.addScreen("ParentLevelException", ParentException);
+            sc.addScreen("Battle", rootBattle);
+        }
+        catch (Exception e)
+        {
+            System.out.println("Execption in initGameData");
+            System.out.println(e.getMessage());
+        }
+    }
+
 }

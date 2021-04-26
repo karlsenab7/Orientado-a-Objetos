@@ -71,16 +71,26 @@ public class Player {
         {
             e.set_active(0);
         }
+
         inventoryEngimon.getInventory().get(idx).set_active(1);
         activeEngimonIdx = idx;
         Position p1 = new Position(this.position.getX()+1, this.position.getY());
         Position p2 = new Position(this.position.getX()-1, this.position.getY());
         Position p3 = new Position(this.position.getX(), this.position.getY()+1);
         Position p4 = new Position(this.position.getX(), this.position.getY()-1);
-        String content1 = GameManagement.getPeta().getCell(p1.getX(), p1.getY()).getCharCellContent();
-        String content2 = GameManagement.getPeta().getCell(p2.getX(), p2.getY()).getCharCellContent();
-        String content3 = GameManagement.getPeta().getCell(p3.getX(), p3.getY()).getCharCellContent();
-        String content4 = GameManagement.getPeta().getCell(p4.getX(), p4.getY()).getCharCellContent();
+        String content1 = "null";
+        String content2 = "null";
+        String content3 = "null";
+        String content4 = "null";
+        if (p1.getX() >= 0 && p1.getX() < GameManagement.peta.getSizeX() && p1.getY() >= 0 && p1.getY() < GameManagement.peta.getSizeY())
+            content1 = GameManagement.getPeta().getCell(p1.getX(), p1.getY()).getCharCellContent();
+        if (p2.getX() >= 0 && p2.getX() < GameManagement.peta.getSizeX() && p2.getY() >= 0 && p2.getY() < GameManagement.peta.getSizeY())
+            content2 = GameManagement.getPeta().getCell(p2.getX(), p2.getY()).getCharCellContent();
+        if (p3.getX() >= 0 && p3.getX() < GameManagement.peta.getSizeX() && p3.getY() >= 0 && p3.getY() < GameManagement.peta.getSizeY())
+            content3 = GameManagement.getPeta().getCell(p3.getX(), p3.getY()).getCharCellContent();
+        if (p4.getX() >= 0 && p4.getX() < GameManagement.peta.getSizeX() && p4.getY() >= 0 && p4.getY() < GameManagement.peta.getSizeY())
+            content4 = GameManagement.getPeta().getCell(p4.getX(), p4.getY()).getCharCellContent();
+
         if (content1.equals("air"))
         {
             getActiveEngimon().set_position(p1);

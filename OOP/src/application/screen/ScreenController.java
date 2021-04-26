@@ -12,6 +12,8 @@ public class ScreenController {
     private static final HashMap<String, Pane> screenMap = new HashMap<>();
     private static Scene mainScene;
 
+    public ScreenController(){}
+
     public ScreenController(Scene mainSceneTemp) {
         mainScene = mainSceneTemp;
     }
