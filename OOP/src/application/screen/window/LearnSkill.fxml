@@ -4,7 +4,6 @@
 <?import javafx.scene.control.ButtonBar?>
 <?import javafx.scene.control.ComboBox?>
 <?import javafx.scene.control.TextArea?>
-<?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.VBox?>
@@ -15,11 +14,7 @@
          <children>
             <HBox alignment="CENTER" prefHeight="340.0" prefWidth="318.0">
                <children>
-                  <ImageView fx:id="ImgSkill" fitHeight="175.0" fitWidth="264.0" nodeOrientation="INHERIT" pickOnBounds="true" preserveRatio="true">
-                     <image>
-                        <Image url="@../../assets/1.png" />
-                     </image>
-                  </ImageView>
+                  <ImageView fx:id="ImgSkill" fitHeight="175.0" fitWidth="264.0" nodeOrientation="INHERIT" pickOnBounds="true" preserveRatio="true" />
                </children></HBox>
             <HBox prefHeight="336.0" prefWidth="366.0">
                <children>
@@ -27,11 +22,11 @@
                      <children>
                         <HBox alignment="CENTER" prefHeight="101.0" prefWidth="309.0">
                            <children>
-                              <ComboBox fx:id="slotSkill" editable="true" prefWidth="150.0" promptText="Pliih slot skll" />
+                              <ComboBox fx:id="slotSkill" editable="true" prefWidth="150.0" promptText="Pliih slot skill" />
                            </children></HBox>
                         <HBox prefHeight="160.0" prefWidth="270.0">
                            <children>
-                              <TextArea fx:id="detailSkill" editable="false" prefHeight="160.0" prefWidth="314.0" text="info skill" />
+                              <TextArea fx:id="detailSkill" editable="false" prefHeight="160.0" prefWidth="314.0" />
                            </children></HBox>
                      </children>
                   </VBox>
@@ -54,7 +49,7 @@
                <children>
                   <ButtonBar prefHeight="206.0" prefWidth="117.0">
                     <buttons>
-                      <Button fx:id="learnSkill" alignment="CENTER" contentDisplay="CENTER" mnemonicParsing="false" text="Learn" />
+                      <Button fx:id="learnSkill" alignment="CENTER" contentDisplay="CENTER" mnemonicParsing="false" onAction="#handleButtonLearn" text="Learn" />
                     </buttons>
                   </ButtonBar>
                </children>
