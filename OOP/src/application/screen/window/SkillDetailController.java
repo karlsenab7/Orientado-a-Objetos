@@ -24,6 +24,7 @@ public class SkillDetailController {
     private Parent root;
     private Skill skill;
     private Integer NItem;
+    private boolean learnable;
 
     @FXML
     private Button close;
@@ -52,8 +53,9 @@ public class SkillDetailController {
         showSkillDesc();
     }
 
-    public void setSkill(Skill skill) {
+    public void setSkill(Skill skill, boolean learnable) {
         this.skill = skill;
+        this.learnable = learnable;
     }
 
     public void setNItem(Integer NItem) {
@@ -105,7 +107,7 @@ public class SkillDetailController {
     }
 
     public void handleButtonBuang(ActionEvent event) throws  IOException {
-        if (event.getSource() == Buang) {
+        if (event.getSource() == Buang && learnable) {
             System.out.println("Membuang Skill");
             Integer selectedIdx = NBuang.getSelectionModel().getSelectedIndex();
             Integer selectedVal = NBuang.getItems().get(selectedIdx); // total yang dibuang

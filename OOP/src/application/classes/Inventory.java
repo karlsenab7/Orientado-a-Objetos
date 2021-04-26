@@ -84,7 +84,7 @@ public class Inventory<U> {
     public void removeInventory(int index, int amount) {
         int res = bagCount.get(index) - amount;
 
-        if (res > 1) {
+        if (res > 0) {
             bagCount.set(index, (bagCount.get(index) - 1));
             return;
         }

@@ -1,9 +1,15 @@
 package application.classes;
 
+import application.screen.window.InfoEngimonController;
+import application.screen.window.WinBattleController;
 import javafx.event.ActionEvent;
+import javafx.fxml.FXMLLoader;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
+import javafx.stage.Stage;
 
 
 public class EngimonButton extends Button {
@@ -32,8 +38,25 @@ public class EngimonButton extends Button {
 
     public void engimonButtonActionClick()
     {
-        System.out.println("Call engimon info");
-        System.out.println(engimon.get_icon());
+        showEngimonInfo();
+    }
+
+    public void showEngimonInfo()
+    {
+        try {
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/application/screen/window/InfoEngimon.fxml"));
+            Parent root = (Parent) loader.load();
+            InfoEngimonController ic = loader.getController();
+            ic.resetState(engimon);
+            Stage stage = new Stage();
+            stage.setScene(new Scene(root));
+            stage.show();
+        }
+        catch (Exception e)
+        {
+            System.out.println("Exception in showEngimonInfo EngimonButton");
+            System.out.println(e.getMessage());
+        }
     }
 
     public String getHexColor(Element element)

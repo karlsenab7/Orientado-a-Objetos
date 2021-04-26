@@ -77,6 +77,7 @@ public class Database {
                     }
                     
                     Skill skill = getSkillDBbyID(idSkillUniqueTemp);
+                    skill.setSlot(0);
                     List<Skill> skills = new ArrayList<>();
                     skills.add(skill);
                     String species = speciesTemp;

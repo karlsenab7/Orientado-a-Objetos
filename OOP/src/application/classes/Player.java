@@ -274,13 +274,16 @@ public class Player {
     }
 
     // Membuang X jumlah item skill
-    public void discardItem(int idx, int amount) {
-        inventorySkill.removeInventory(idx);
+    public void discardSkill(int idx, int amount) {
+        inventorySkill.removeInventory(idx, amount);
     }
 
     // Melepaskan Engimon
-    public void discardEngimon(int index) {
-        inventoryEngimon.removeInventory(index);
+    public void discardEngimon(int index, int amount) {
+        int sisa = inventoryEngimon.getInventoryCount(index) - amount;
+        if (sisa <= 0)
+            set_activeEngimonIdx(-1);
+        inventoryEngimon.removeInventory(index, amount);
     }
 
     public void changeEngimonName(int index, String name) {

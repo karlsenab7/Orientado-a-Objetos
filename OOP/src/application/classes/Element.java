@@ -17,26 +17,26 @@ public class Element
         int idxEl1 = -1;
         int idxEl2 = -1;
     
-        if (e1.equals("Fire"))
+        if (e1.equals("fire"))
             idxEl1 = 0;
-        else if (e1.equals("Water"))
+        else if (e1.equals("water"))
             idxEl1 = 1;
-        else if (e1.equals("Electric"))
+        else if (e1.equals("electric"))
             idxEl1 = 2;
-        else if (e1.equals("Ground"))
+        else if (e1.equals("ground"))
             idxEl1 = 3;
-        else if (e1.equals("Ice"))
+        else if (e1.equals("ice"))
             idxEl1 = 4;
         
-        if (e2.equals("Fire"))
+        if (e2.equals("fire"))
             idxEl2 = 0;
-        else if (e2.equals("Water"))
+        else if (e2.equals("water"))
             idxEl2 = 1;
-        else if (e2.equals("Electric"))
+        else if (e2.equals("electric"))
             idxEl2 = 2;
-        else if (e2.equals("Ground"))
+        else if (e2.equals("ground"))
             idxEl2 = 3;
-        else if (e2.equals("Ice"))
+        else if (e2.equals("ice"))
             idxEl2 = 4;
     
         double[][] adva = 

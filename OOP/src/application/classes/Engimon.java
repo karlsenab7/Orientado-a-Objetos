@@ -30,6 +30,7 @@ public class Engimon {
         engimon_name = "-";
         engimon_species = "-";
         level = 1;
+        live = 5;
         exp = 0;
         cum_exp = 0;
         this.icon = "1.png";
@@ -43,10 +44,10 @@ public class Engimon {
         // Untuk testing
         Element el = new Element("fire");
         engimon_elements.add(el);
-        List<Element> e = new ArrayList<Element>();
-        e.add(new Element("fire"));
-        Skill s = new Skill("ID", "name", e, 10, 1,"Test", true, "Dragon", "id.png");
-        engimon_skills.add(s);
+//        List<Element> e = new ArrayList<Element>();
+//        e.add(new Element("fire"));
+//        Skill s = new Skill("ID", "name", e, 10, 1,"Test", true, "Dragon", "id.png");
+//        engimon_skills.add(s);
         
         numOfCreated += 1;
         // engimon_id = numOfCreated;
@@ -116,10 +117,8 @@ public class Engimon {
 
     public int get_total_power() {
         int sum = 0;
-        Skill skill;
         for (Skill engimon_skill : engimon_skills) {
-            skill = engimon_skill;
-            sum += skill.getMastery() * skill.getPower();
+            sum += engimon_skill.getMastery() * engimon_skill.getPower();
         }
         return sum;
     }
@@ -131,12 +130,14 @@ public class Engimon {
 
     // Parents
     public void set_engimon_parentName(List<String> parents) {
-        engimon_parentsName.clear();
-        engimon_parentsName.addAll(parents);
+        engimon_parentsName = new ArrayList<String>();
+        for(String par : parents)
+            engimon_parentsName.add(par);
     }
     public void set_engimon_parentSpecies(List<String> parents) {
-        engimon_parentSpecies.clear();
-        engimon_parentSpecies.addAll(parents);
+        engimon_parentSpecies = new ArrayList<String>();
+        for(String par : parents)
+            engimon_parentSpecies.add(par);
     }
     // Add parent satu-satu
     public void add_parentName(String parent) {
@@ -169,7 +170,7 @@ public class Engimon {
 
     // Skills
     public void set_engimon_skills(List<Skill> skills) {
-        engimon_skills.clear();
+        engimon_skills = new ArrayList<>();
         for (Skill skill : skills) {
             engimon_skills.add(skill);
         }
@@ -248,19 +249,19 @@ public class Engimon {
 
     public static Engimon clone(Engimon s)
     {
-        Engimon temp = new Engimon(s.engimon_id,
-                s.engimon_name,
-                s.engimon_species,
-                new ArrayList<String>(),
-                new ArrayList<String>(),
-                new ArrayList<Element>(),
-                new ArrayList<Skill>(),
-                s.level, s.exp, s.cum_exp, s.icon);
-        temp.set_engimon_parentName(s.engimon_parentsName);
-        temp.set_engimon_parentSpecies(s.engimon_parentSpecies);
-        temp.set_engimon_elements(s.engimon_elements);
-        temp.set_engimon_skills(s.engimon_skills);
-        temp.deskripsi = s.deskripsi;
+        Engimon temp = new Engimon();
+        temp.set_engimon_id(s.get_engimon_id());
+        temp.engimon_name = s.engimon_name;
+        temp.level = s.level;
+        temp.exp = s.exp;
+        temp.cum_exp = s.cum_exp;
+        temp.set_engimon_elements(s.get_engimon_elements());
+        temp.set_engimon_skills(s.get_engimon_skills());
+        temp.set_engimon_parentName(s.get_engimon_parentName());
+        temp.set_engimon_parentSpecies(s.get_engimon_parentSpecies());
+        temp.set_engimon_skills(s.get_engimon_skills());
+        temp.set_deskripsi(s.get_deskripsi());
+        temp.set_icon(s.get_icon());
         return temp;
     }
 
