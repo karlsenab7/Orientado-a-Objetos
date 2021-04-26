@@ -199,6 +199,27 @@ public class Database {
         return null;
     }
 
+    public static List<Engimon> getEngimonDBbyElement(Element element)
+    {
+        List<Engimon> en = getEngimonDB();
+        if (en == null)
+            return null;
+
+        List<Engimon> engimonByElement = new ArrayList<>();
+        for (Engimon engimon : en) {
+            List<Element> els = engimon.get_engimon_elements();
+            for (Element el : els)
+            {
+                if (el.get_element().equals(element.get_element())) {
+                    engimonByElement.add(engimon);
+                    break;
+                }
+            }
+        }
+
+        return engimonByElement;
+    }
+
     public static Skill getSkillDBbyID(String id)
     {
         List<Skill> skills = getSkillDB();

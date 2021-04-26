@@ -309,4 +309,10 @@ public class Engimon {
             GameManagement.player.set_activeEngimonIdx(-1);
         }
     }
+
+    public void move(Position p)
+    {
+        this.position = new Position(p.getX(), p.getY());
+    }
+
 }
