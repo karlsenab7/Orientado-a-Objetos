@@ -125,7 +125,7 @@ public class Battle {
             GameManagement.player.getInventoryEngimon().addInventory(engimonReward);
             GameManagement.player.getInventorySkill().addInventory(s);
             GameManagement.getEngimonLiar().remove(second);
-//            GameManagement.player.getActiveEngimon().add_exp(EXP_REWARD);
+            GameManagement.player.getActiveEngimon().add_exp(EXP_REWARD);
             showWinWindow(engimonReward, s);
         }
         catch (Exception e)
