@@ -2,6 +2,7 @@ package application.screen.window;
 
 import application.classes.GameManagement;
 import application.classes.Skill;
+import application.screen.ScreenController;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -11,7 +12,10 @@ import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.TextArea;
+import javafx.scene.image.Image;
+import javafx.stage.Screen;
 import javafx.stage.Stage;
+import javafx.scene.image.ImageView;
 
 import java.io.IOException;
 
@@ -31,6 +35,10 @@ public class SkillDetailController {
 
     @FXML
     private TextArea skillDesc;
+
+    @FXML
+    private ImageView img;
+
     @FXML
     private Button learn_skill;
 
@@ -44,6 +52,10 @@ public class SkillDetailController {
     {
         NBuang.getSelectionModel().clearSelection();
         NBuang.getItems().clear();
+
+        String assetPath = "application/assets/";
+        img.setImage(new Image(assetPath + skill.getIcon()));
+
         if (!learnable || NItem == -1)
             return;
         for (int i = 1; i <= NItem; i++) {
@@ -87,7 +99,7 @@ public class SkillDetailController {
 
     public void handleButtonLearnSkill(ActionEvent event) throws IOException {
 //        ScreenController.callPopupWindow("LearnSkill", "Learn Skill");
-        if (!learnable) {
+        if (!learnable || GameManagement.player.getActiveEngimonIdx() == -1) {
             System.out.println("Cannot learn");
             return;
         }
@@ -97,10 +109,12 @@ public class SkillDetailController {
             Parent root = (Parent) loader.load();
             LearnSkillController lc = loader.getController();
             lc.setSkill(skill);
+            lc.setImg(img.getImage());
             lc.resetState();
             Stage stage = new Stage();
             stage.setScene(new Scene(root));
             stage.show();
+            handleButtonClose(event);
         } catch (IOException e) {
             System.out.println("Couldn't load file :(");
             e.printStackTrace();
@@ -111,12 +125,12 @@ public class SkillDetailController {
     public void handleButtonBuang(ActionEvent event) throws  IOException {
         if (event.getSource() == Buang && NItem != -1) {
 //            System.out.println("Membuang Skill");
-            Integer selectedIdx = NBuang.getSelectionModel().getSelectedIndex();
+            int selectedIdx = NBuang.getSelectionModel().getSelectedIndex();
             if (selectedIdx == -1)
                 return;
             Integer selectedVal = NBuang.getItems().get(selectedIdx); // total yang dibuang
 //            System.out.println("Total yang dibuang : " + selectedVal);
-            Integer skillIdx = GameManagement.getPlayer().getInventorySkill().getInventory().indexOf(skill);
+            int skillIdx = GameManagement.getPlayer().getInventorySkill().getInventory().indexOf(skill);
 
             GameManagement.player.discardSkill(skillIdx, selectedVal);
             handleButtonClose(event);

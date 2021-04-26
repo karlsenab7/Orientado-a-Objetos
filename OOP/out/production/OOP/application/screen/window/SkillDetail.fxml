@@ -6,7 +6,6 @@
 <?import javafx.scene.control.ComboBox?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.TextArea?>
-<?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.VBox?>
@@ -20,11 +19,7 @@
          <children>
             <HBox alignment="CENTER" prefHeight="307.0" prefWidth="658.0" style="-fx-background-color: red;">
                <children>
-                  <ImageView fitHeight="316.0" fitWidth="301.0" pickOnBounds="true" preserveRatio="true">
-                     <image>
-                        <Image url="@../../assets/s1.png" />
-                     </image>
-                  </ImageView>
+                  <ImageView fx:id="img" fitHeight="316.0" fitWidth="301.0" pickOnBounds="true" preserveRatio="true" />
                </children></HBox>
             <HBox prefHeight="307.0" prefWidth="568.0" style="-fx-background-color: gray;">
                <children>
