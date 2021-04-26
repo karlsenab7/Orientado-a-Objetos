@@ -7,6 +7,7 @@ import application.screen.ScreenController;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
+import javafx.fxml.Initializable;
 import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
@@ -16,15 +17,17 @@ import javafx.scene.control.TextField;
 import javafx.stage.Stage;
 
 import java.io.IOException;
+import java.net.URL;
 import java.util.ArrayList;
+import java.util.ResourceBundle;
 
 
-public class BreedController {
+public class BreedController implements Initializable {
 
     // Untuk memodifikasi value di layar (misal menampilkan info)
     // Cocokkan nama variabel dengan fx:id dan tipenya
-    @FXML private ChoiceBox Choice1;
-    @FXML private ChoiceBox Choice2;
+    @FXML private ChoiceBox<String> Choice1;
+    @FXML private ChoiceBox<String> Choice2;
     @FXML private Label Label1;
     @FXML private Label Label2;
 
@@ -43,8 +46,8 @@ public class BreedController {
     private Engimon Child = null;
 
     // Proses saat awal scene dibuka
-    @FXML
-    private void initialize(){
+    @Override
+    public void initialize(URL location, ResourceBundle resources){
 
         resetState();
 
