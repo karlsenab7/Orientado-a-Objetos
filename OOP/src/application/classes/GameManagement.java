@@ -133,6 +133,11 @@ public class GameManagement {
         }
     }
 
+    public static void gameOver()
+    {
+        System.out.println("Game Over");
+    }
+
     public static boolean isPlayerOrActiveEngimonInPos(Position position)
     {
         if (player.getPosition().getX() == position.getX() && player.getPosition().getY() == position.getY())
@@ -161,10 +166,50 @@ public class GameManagement {
 
     public static void getNewGame()
     {
-        engimonLiar = new ArrayList<>();
-        player = new Player("User1");
-        peta = new Peta();
+        try {
+            engimonLiar = new ArrayList<>();
+            player = new Player("User1");
+            player.setPosition(new Position(13, 0));
+            peta = new Peta();
+
+            Engimon engimonAwal = Database.getEngimonDB().get(0);
+            Skill s1 = Database.getSkillDB().get(0);
+            Skill s2 = Database.getSkillDB().get(1);
+
+            player.getInventorySkill().addInventory(s1);
+            player.getInventorySkill().addInventory(s2);
+            player.addEngimon(engimonAwal);
+
+            spawnFirst();
+        }
+        catch (Exception e)
+        {
+            System.out.println("Exception in getNewGame");
+            System.out.println(e.getMessage());
+        }
     }
+
+    public static void spawnFirst()
+    {
+        for (int i = 0; i < spawnPosition.length; i++)
+        {
+            Position position = spawnPosition[i];
+            Element element = spawnElement[i];
+
+            List<Engimon> engimons = Database.getEngimonDBbyElement(element);
+            if (engimons == null)
+                return;
+            int num = engimons.size();
+            if (num > 0)
+            {
+                int idx = randomInteger(0, num-1);
+                Engimon e = engimons.get(idx);
+                e.set_position(position);
+                engimonLiar.add(e);
+            }
+        }
+    }
+
 
     public static void getContinueGame()
     {
