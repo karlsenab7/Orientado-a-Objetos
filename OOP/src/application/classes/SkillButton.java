@@ -66,6 +66,7 @@ public class SkillButton extends Button
             Parent root = (Parent) loader.load();
             SkillDetailController sc = loader.getController();
             sc.setSkill(skill);
+            sc.setNItem(getSkillCount(this.skill));
             sc.resetState();
             Stage stage = new Stage();
             stage.setScene(new Scene(root));
@@ -98,5 +99,11 @@ public class SkillButton extends Button
         this.icon.setFitHeight(i1-3);
         this.icon.setFitWidth(i-3);
         this.setPrefSize(i, i1);
+    }
+
+    public Integer getSkillCount(Skill skill) {
+        Integer skillIdx = GameManagement.getPlayer().getInventorySkill().getInventory().indexOf(skill);
+        Integer count = GameManagement.getPlayer().getInventorySkill().getInventoryCount(skillIdx);
+        return count;
     }
 }

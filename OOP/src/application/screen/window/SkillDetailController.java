@@ -1,21 +1,19 @@
 package application.screen.window;
 
-import application.classes.Element;
+import application.classes.GameManagement;
 import application.classes.Skill;
-import application.screen.ScreenController;
 import javafx.event.ActionEvent;
-import javafx.event.EventHandler;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
 import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
+import javafx.scene.control.ComboBox;
 import javafx.scene.control.TextArea;
-import javafx.scene.control.TextField;
 import javafx.stage.Stage;
 
 import java.io.IOException;
-import java.util.List;
 
 
 public class SkillDetailController {
@@ -25,6 +23,7 @@ public class SkillDetailController {
     private Scene scene;
     private Parent root;
     private Skill skill;
+    private Integer NItem;
 
     @FXML
     private Button close;
@@ -35,21 +34,30 @@ public class SkillDetailController {
     private Button learn_skill;
 
     @FXML
-    private TextField NBuang;
+    private ComboBox<Integer> NBuang;
 
     @FXML
     private Button Buang;
 
-
-
     public void resetState()
     {
-        NBuang.setText("");
+        NBuang.getSelectionModel().clearSelection();
+        NBuang.getItems().clear();
+
+        for (int i = 1; i <= NItem; i++) {
+            NBuang.getItems().add(i);
+        }
+
+
         showSkillDesc();
     }
 
     public void setSkill(Skill skill) {
         this.skill = skill;
+    }
+
+    public void setNItem(Integer NItem) {
+        this.NItem = NItem;
     }
 
     public void showSkillDesc() {
@@ -77,17 +85,34 @@ public class SkillDetailController {
     }
 
     public void handleButtonLearnSkill(ActionEvent event) throws IOException {
-        if (event.getSource() == learn_skill) {
-            System.out.println("Learn Skill");
-            ScreenController.callPopupWindow("LearnSkill", "Learn Skill");
+        System.out.println("Learn Skill");
+//        ScreenController.callPopupWindow("LearnSkill", "Learn Skill");
+
+        try {
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/application/screen/window/LearnSkill.fxml"));
+            Parent root = (Parent) loader.load();
+            LearnSkillController lc = loader.getController();
+            lc.setSkill(skill);
+            lc.resetState();
+            Stage stage = new Stage();
+            stage.setScene(new Scene(root));
+            stage.show();
+        } catch (IOException e) {
+            System.out.println("Couldn't load file :(");
+            e.printStackTrace();
         }
+
     }
 
     public void handleButtonBuang(ActionEvent event) throws  IOException {
         if (event.getSource() == Buang) {
             System.out.println("Membuang Skill");
-            String count = NBuang.getText();
-            System.out.println("Total yang dibuang : " + count);
+            Integer selectedIdx = NBuang.getSelectionModel().getSelectedIndex();
+            Integer selectedVal = NBuang.getItems().get(selectedIdx); // total yang dibuang
+            System.out.println("Total yang dibuang : " + selectedVal);
+            Integer skillIdx = GameManagement.getPlayer().getInventorySkill().getInventory().indexOf(skill);
+
+            GameManagement.player.discardItem(skillIdx, selectedVal);
         }
     }
 }

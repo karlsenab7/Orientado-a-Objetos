@@ -3,9 +3,9 @@
 <?import javafx.geometry.Insets?>
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.ButtonBar?>
+<?import javafx.scene.control.ComboBox?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.TextArea?>
-<?import javafx.scene.control.TextField?>
 <?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.HBox?>
@@ -54,7 +54,7 @@
          <children>
             <ButtonBar prefHeight="290.0" prefWidth="863.0">
                <buttons>
-                  <TextField fx:id="NBuang" promptText="JUMLAH YANG DIUANG" />
+                  <ComboBox fx:id="NBuang" prefWidth="150.0" promptText="Jumlah dibuang" />
                 <Button fx:id="Buang" mnemonicParsing="false" onAction="#handleButtonBuang" prefHeight="26.0" text="BUANG" />
                </buttons>
             </ButtonBar>
