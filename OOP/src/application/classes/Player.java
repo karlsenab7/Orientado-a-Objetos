@@ -281,7 +281,7 @@ public class Player {
     // Melepaskan Engimon
     public void discardEngimon(int index, int amount) {
         int sisa = inventoryEngimon.getInventoryCount(index) - amount;
-        if (sisa <= 0)
+        if (sisa <= 0 && GameManagement.player.getActiveEngimonIdx() == index)
             set_activeEngimonIdx(-1);
         inventoryEngimon.removeInventory(index, amount);
     }

@@ -11,9 +11,11 @@ public class GameManagement {
     public static Player player;
     public static List<Engimon> engimonLiar;
     public static Peta peta;
+    public static int moveCounter;
 
     public GameManagement(boolean newGame)
     {
+        moveCounter = 0;
         try {
             if (newGame) {
                 getNewGame();
@@ -29,6 +31,22 @@ public class GameManagement {
         }
 
     }
+
+    public static void incMove()
+    {
+        moveCounter++;
+    }
+
+    public static int getMove()
+    {
+        return moveCounter;
+    }
+
+    public static void moveEngimon()
+    {
+
+    }
+
 
     public static void getNewGame()
     {

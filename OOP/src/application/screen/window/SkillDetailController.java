@@ -44,7 +44,8 @@ public class SkillDetailController {
     {
         NBuang.getSelectionModel().clearSelection();
         NBuang.getItems().clear();
-
+        if (!learnable || NItem == -1)
+            return;
         for (int i = 1; i <= NItem; i++) {
             NBuang.getItems().add(i);
         }
@@ -79,17 +80,18 @@ public class SkillDetailController {
         );
     }
     public void handleButtonClose(ActionEvent event) throws IOException {
-        if (event.getSource() == close) {
-            stage = (Stage)((Node)event.getSource()).getScene().getWindow();
-            resetState();
-            stage.close();
-        }
+        stage = (Stage)((Node)event.getSource()).getScene().getWindow();
+        resetState();
+        stage.close();
     }
 
     public void handleButtonLearnSkill(ActionEvent event) throws IOException {
-        System.out.println("Learn Skill");
 //        ScreenController.callPopupWindow("LearnSkill", "Learn Skill");
-
+        if (!learnable) {
+            System.out.println("Cannot learn");
+            return;
+        }
+        System.out.println("Learn Skill");
         try {
             FXMLLoader loader = new FXMLLoader(getClass().getResource("/application/screen/window/LearnSkill.fxml"));
             Parent root = (Parent) loader.load();
@@ -107,14 +109,17 @@ public class SkillDetailController {
     }
 
     public void handleButtonBuang(ActionEvent event) throws  IOException {
-        if (event.getSource() == Buang && learnable) {
-            System.out.println("Membuang Skill");
+        if (event.getSource() == Buang && NItem != -1) {
+//            System.out.println("Membuang Skill");
             Integer selectedIdx = NBuang.getSelectionModel().getSelectedIndex();
+            if (selectedIdx == -1)
+                return;
             Integer selectedVal = NBuang.getItems().get(selectedIdx); // total yang dibuang
-            System.out.println("Total yang dibuang : " + selectedVal);
+//            System.out.println("Total yang dibuang : " + selectedVal);
             Integer skillIdx = GameManagement.getPlayer().getInventorySkill().getInventory().indexOf(skill);
 
-            GameManagement.player.discardItem(skillIdx, selectedVal);
+            GameManagement.player.discardSkill(skillIdx, selectedVal);
+            handleButtonClose(event);
         }
     }
 }

@@ -104,7 +104,11 @@ public class SkillButton extends Button
     }
 
     public Integer getSkillCount(Skill skill) {
-        Integer skillIdx = GameManagement.getPlayer().getInventorySkill().getInventory().indexOf(skill);
+        if (!learnable)
+            return -1;
+        Integer skillIdx = GameManagement.player.getInventorySkill().getInventory().indexOf(skill);
+        if (skillIdx == -1)
+            return -1;
         Integer count = GameManagement.getPlayer().getInventorySkill().getInventoryCount(skillIdx);
         return count;
     }
