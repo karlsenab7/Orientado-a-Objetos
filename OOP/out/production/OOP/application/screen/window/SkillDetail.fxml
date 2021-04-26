@@ -31,7 +31,7 @@
                   <VBox prefHeight="307.0" prefWidth="600.0" style="-fx-background-color: green;">
                      <children>
                         <Label alignment="CENTER" contentDisplay="BOTTOM" prefHeight="61.0" prefWidth="608.0" text="DETAIL SKILL" textFill="WHITE" />
-                        <TextArea editable="false" prefHeight="200.0" prefWidth="200.0" text="LOREM IPSUM &#10;LOREM IPSUM &#10;LOREM IPSUM &#10;LOREM IPSUM &#10;LOREM IPSUM LOREM IPSUM LOREM IPSUM LOREM IPSUM &#10;LOREM IPSUM LOREM IPSUM LOREM IPSUM LOREM IPSUM &#10;LOREM IPSUM &#10;LOREM IPSUM " wrapText="true" />
+                        <TextArea fx:id="skillDesc" editable="false" prefHeight="200.0" prefWidth="200.0" wrapText="true" />
                      </children>
                   </VBox>
                </children></HBox>

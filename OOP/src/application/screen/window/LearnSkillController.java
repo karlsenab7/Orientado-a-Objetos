@@ -1,5 +1,6 @@
 package application.screen.window;
 
+import application.classes.Skill;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.Node;
@@ -51,6 +52,7 @@ public class LearnSkillController {
         assert learnSkill != null : "fx:id=\"learnSkill\" was not injected: check your FXML file 'LearnSkill.fxml'.";
         resetState();
     }
+
 
     public void resetState() {
         slotSkill.getSelectionModel().clearSelection();
