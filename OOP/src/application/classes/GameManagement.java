@@ -1,5 +1,6 @@
 package application.classes;
 
+import application.screen.ScreenController;
 import com.sun.nio.sctp.PeerAddressChangeNotification;
 import javafx.geometry.Pos;
 
@@ -136,6 +137,7 @@ public class GameManagement {
     public static void gameOver()
     {
         System.out.println("Game Over");
+        ScreenController.activate("GameOver");
     }
 
     public static boolean isPlayerOrActiveEngimonInPos(Position position)

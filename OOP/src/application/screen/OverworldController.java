@@ -9,6 +9,7 @@ import javafx.fxml.Initializable;
 import javafx.geometry.Insets;
 import javafx.geometry.Orientation;
 import javafx.geometry.Pos;
+import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
@@ -101,7 +102,8 @@ public class OverworldController {
     public void handleExitButton(ActionEvent event) throws IOException {
         // Untuk mengganti scene
         // Jika ingin digunakan merujuk ke scene lain, ganti isi getResource()
-        ScreenController.activate("MainMenu");
+        Stage stage = (Stage)((Node)event.getSource()).getScene().getWindow();
+        stage.close();
     }
 
     // Tombol Breeding

@@ -19,7 +19,7 @@
       </HBox>
       <HBox alignment="CENTER" prefHeight="242.0" prefWidth="1024.0">
          <children>
-            <Button fx:id="backToMenuButton" mnemonicParsing="false" onAction="#backToMenuButtonActionClick" prefHeight="60.0" prefWidth="120.0" text="Back To Menu">
+            <Button fx:id="backToMenuButton" mnemonicParsing="false" onAction="#backToMenuButtonActionClick" prefHeight="60.0" prefWidth="120.0" text="CLOSE">
                <font>
                   <Font name="System Bold" size="13.0" />
                </font>

@@ -56,6 +56,8 @@ public class SkillDetailController {
         String assetPath = "application/assets/";
         img.setImage(new Image(assetPath + skill.getIcon()));
 
+        showSkillDesc();
+
         if (!learnable || NItem == -1)
             return;
         for (int i = 1; i <= NItem; i++) {
@@ -63,7 +65,7 @@ public class SkillDetailController {
         }
 
 
-        showSkillDesc();
+
     }
 
     public void setSkill(Skill skill, boolean learnable) {
