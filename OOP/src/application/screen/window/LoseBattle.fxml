@@ -1,14 +1,14 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import javafx.scene.image.*?>
-<?import java.lang.*?>
-<?import java.util.*?>
-<?import javafx.scene.control.*?>
-<?import javafx.scene.layout.*?>
-<?import javafx.scene.paint.*?>
-<?import javafx.scene.text.*?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Font?>
 
-<VBox prefHeight="400.0" prefWidth="640.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1">
+<VBox prefHeight="400.0" prefWidth="640.0" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1" fx:controller="application.screen.window.LoseBattleController">
   <children>
     <AnchorPane maxHeight="-1.0" maxWidth="-1.0" prefHeight="-1.0" prefWidth="-1.0" VBox.vgrow="ALWAYS">
       <children>
@@ -17,9 +17,30 @@
             <Font name="Impact" size="53.0" />
           </font>
         </Label>
-            <ImageView fitHeight="249.0" fitWidth="224.0" layoutX="50.0" layoutY="106.0" pickOnBounds="true" preserveRatio="true" />
-            <Label fx:id="Status" layoutX="438.0" layoutY="166.0" text="Status or DEAD" />
-            <Button fx:id="closebutton" layoutX="549.0" layoutY="355.0" mnemonicParsing="false" text="CLOSE" />
+            <ImageView fx:id="imageViewEngimon" fitHeight="249.0" fitWidth="224.0" layoutX="51.0" layoutY="90.0" pickOnBounds="true" preserveRatio="true" />
+            <Button fx:id="closeButton" layoutX="549.0" layoutY="355.0" mnemonicParsing="false" onAction="#handleCloseButton" text="CLOSE" />
+            <VBox alignment="TOP_CENTER" layoutX="403.0" layoutY="90.0" prefHeight="255.0" prefWidth="224.0" spacing="30.0">
+               <children>
+                  <HBox prefHeight="210.0" prefWidth="224.0">
+                     <children>
+                        <Label fx:id="statusLabel" prefHeight="200.0" prefWidth="223.0" text="status">
+                           <font>
+                              <Font size="17.0" />
+                           </font>
+                        </Label>
+                     </children>
+                  </HBox>
+                  <HBox alignment="CENTER" prefHeight="34.0" prefWidth="224.0">
+                     <children>
+                        <Label fx:id="deadLabel" text="Dead">
+                           <font>
+                              <Font name="System Bold Italic" size="24.0" />
+                           </font>
+                        </Label>
+                     </children>
+                  </HBox>
+               </children>
+            </VBox>
       </children>
     </AnchorPane>
   </children>

@@ -52,4 +52,13 @@ public class EngimonButton extends Button {
         };
     }
 
+    public void changeSize(double w, double h)
+    {
+        this.setMaxSize(w, h);
+        this.icon.setFitWidth(w-3);
+        this.icon.setFitHeight(h-3);
+        this.setPrefSize(w, h);
+
+    }
+
 }

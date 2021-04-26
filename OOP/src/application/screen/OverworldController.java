@@ -117,19 +117,21 @@ public class OverworldController {
 
     public void handleBattleButton(ActionEvent event)
     {
-//        ScreenController.callPopupWindow("Battle", "Battle");
-//        BattleController bc = new BattleController();
-//        bc.resetStateBattle(new Engimon());
         try{
-            FXMLLoader loader = new FXMLLoader(getClass().getResource("/application/screen/window/Battle.fxml"));
-            Pane root = loader.load();
-            BattleController bc = loader.getController();
-            Scene scene = new Scene(root);
-            Stage stage = new Stage();
-            stage.setScene(scene);
-            bc.resetStateBattle(GameManagement.player.getActiveEngimon());
-            stage.show();
 
+            Engimon enemy = lookingForEnemy(GameManagement.player.getPosition());
+
+            if (enemy == null)
+                return;
+
+
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/application/screen/window/Battle.fxml"));
+            Parent root = (Parent) loader.load();
+            BattleController bc = loader.getController();
+            bc.resetStateBattle(enemy);
+            Stage stage = new Stage();
+            stage.setScene(new Scene(root));
+            stage.show();
         }
         catch (Exception e)
         {
@@ -137,49 +139,47 @@ public class OverworldController {
             System.out.println(e.getMessage());
         }
 
-
-
-//        if (GameManagement.player.getActiveEngimonIdx() == -1)
-//        {
-//            System.out.println("Engimon is not active!!");
-//            return;
-//        }
-//
-//        try {
-//            Position playerPosition = GameManagement.player.getPosition();
-//            Engimon e = null;
-//            for (int i = 0; i < 4; i++)
-//            {
-//                Position p;
-//                if (i == 0)
-//                    p = new Position(playerPosition.getX()+1, playerPosition.getY());
-//                else if (i == 1)
-//                    p = new Position(playerPosition.getX()-1, playerPosition.getY());
-//                else if (i == 2)
-//                    p = new Position(playerPosition.getX(), playerPosition.getY()+1);
-//                else
-//                    p = new Position(playerPosition.getX(), playerPosition.getY()-1);
-//
-//                e = GameManagement.getEngimonLiarInPos(p);
-//                if (e != null)
-//                    break;
-//            }
-//            if (e == null)
-//            {
-//                System.out.println("Enemy is not found!!");
-//                return;
-//            }
-//
-//            GameManagement.player.battle(e);
-//        }
-//        catch (Exception e)
-//        {
-//            System.out.println("Exception in handleBattleButton");
-//            System.out.println(e.getMessage());
-//        }
-
-
     }
+
+    public Engimon lookingForEnemy(Position playerPosition)
+    {
+        if (GameManagement.player.getActiveEngimonIdx() == -1)
+        {
+            System.out.println("Engimon is not active!!");
+            return null;
+        }
+
+        try {
+            Engimon e = null;
+            for (int i = 0; i < 4; i++)
+            {
+                Position p;
+                if (i == 0)
+                    p = new Position(playerPosition.getX()+1, playerPosition.getY());
+                else if (i == 1)
+                    p = new Position(playerPosition.getX()-1, playerPosition.getY());
+                else if (i == 2)
+                    p = new Position(playerPosition.getX(), playerPosition.getY()+1);
+                else
+                    p = new Position(playerPosition.getX(), playerPosition.getY()-1);
+
+                e = GameManagement.getEngimonLiarInPos(p);
+                if (e != null)
+                    return e;
+            }
+
+            System.out.println("Enemy is not found!!");
+
+            return null;
+        }
+        catch (Exception e)
+        {
+            System.out.println("Exception in lookingForEnemy");
+            System.out.println(e.getMessage());
+            return null;
+        }
+    }
+
 
     public void handleSaveButton(ActionEvent event) throws IOException
     {
@@ -359,7 +359,7 @@ public class OverworldController {
             HBox inventHbox = new HBox();
             inventHbox.setMaxSize(36, 18);
 
-            SkillButton sb = new SkillButton(s);
+            SkillButton sb = new SkillButton(s, true);
 
             Label countLabel = new Label();
             countLabel.setMaxSize(18, 18);

@@ -1,2 +1,2 @@
-1,QQQQ,sita/jojo,zoro/mongo,10,2,1212,1
-2,Karlsen,Master/sda,sads/dasd,20,2,1232,0
+1,QQQQ,sita/jojo,zoro/mongo,1,1,50,0
+2,Karlsen,Master/sda,sads/dasd,1,1,50,1

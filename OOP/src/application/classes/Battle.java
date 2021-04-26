@@ -1,5 +1,13 @@
 package application.classes;
 
+import application.screen.window.BattleController;
+import application.screen.window.LoseBattleController;
+import application.screen.window.WinBattleController;
+import javafx.fxml.FXMLLoader;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
+import javafx.stage.Stage;
+
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
@@ -100,6 +108,8 @@ public class Battle {
 
     public void get_reward()
     {
+        int EXP_REWARD = 50;
+
          List<Skill> skills = second.get_engimon_skills();
          Skill s = skills.get(0);
         // inventorySkill.addInventory(s);
@@ -115,6 +125,8 @@ public class Battle {
             GameManagement.player.getInventoryEngimon().addInventory(engimonReward);
             GameManagement.player.getInventorySkill().addInventory(s);
             GameManagement.getEngimonLiar().remove(second);
+//            GameManagement.player.getActiveEngimon().add_exp(EXP_REWARD);
+            showWinWindow(engimonReward, s);
         }
         catch (Exception e)
         {
@@ -123,11 +135,50 @@ public class Battle {
         }
     }
 
+    public void showWinWindow(Engimon engimon, Skill skill)
+    {
+       try
+       {
+           FXMLLoader loader = new FXMLLoader(getClass().getResource("/application/screen/window/WinBattle.fxml"));
+           Parent root = (Parent) loader.load();
+           WinBattleController wc = loader.getController();
+           wc.resetState(engimon, skill);
+           Stage stage = new Stage();
+           stage.setScene(new Scene(root));
+           stage.show();
+       }
+       catch (Exception e)
+       {
+           System.out.println("Exception in showWinWindow");
+           System.out.println(e.getMessage());
+       }
+    }
+
     public void get_penalty()
     {
         // inventoryEngimon.removeInventory(idxOwnEngimon);
 //        System.out.println("Your active engimon is dead!!\n\n");
-        GameManagement.player.getActiveEngimon().set_live(GameManagement.player.getActiveEngimon().get_live()-1);
+        showLoseWindow();
+        GameManagement.player.getActiveEngimon().takeDamage(1);
+    }
+
+    public void showLoseWindow()
+    {
+        try
+        {
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/application/screen/window/LoseBattle.fxml"));
+            Parent root = (Parent) loader.load();
+            LoseBattleController lc = loader.getController();
+            lc.resetState(GameManagement.player.getActiveEngimon());
+            Stage stage = new Stage();
+            stage.setScene(new Scene(root));
+            stage.show();
+        }
+        catch (Exception e)
+        {
+            System.out.println("Exception in showLoseWindow");
+            System.out.println(e.getMessage());
+        }
     }
 
 }
