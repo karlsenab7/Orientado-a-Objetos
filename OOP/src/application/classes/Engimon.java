@@ -299,4 +299,13 @@ public class Engimon {
         return false;
     }
 
+    public void takeDamage(int i) {
+        this.live -= i;
+        if (live <= 0)
+        {
+            System.out.println("Engimon " + engimon_name + " is death");
+            GameManagement.player.getInventoryEngimon().getInventory().remove(this);
+            GameManagement.player.set_activeEngimonIdx(-1);
+        }
+    }
 }

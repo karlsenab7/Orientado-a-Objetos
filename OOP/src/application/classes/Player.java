@@ -53,7 +53,8 @@ public class Player {
     public void set_activeEngimonIdx(int idx)
     {
         this.activeEngimonIdx = idx;
-        this.inventoryEngimon.getInventory().get(idx).set_active(1);
+        if (idx != -1)
+            this.inventoryEngimon.getInventory().get(idx).set_active(1);
     }
 
     public void switchActivEngimon(int idx)

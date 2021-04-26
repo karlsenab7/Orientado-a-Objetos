@@ -30,7 +30,7 @@ public class SkillButton extends Button
     private Skill skill;
     private ImageView icon;
 
-    public SkillButton(Skill skillTemp)
+    public SkillButton(Skill skillTemp, boolean learnable)
     {
         super();
         this.setMaxSize(18, 18);
@@ -73,5 +73,12 @@ public class SkillButton extends Button
             case "ice" -> iceHex;
             default -> groundHex;
         };
+    }
+
+    public void changeSize(int i, int i1) {
+        this.setMaxSize(i, i1);
+        this.icon.setFitHeight(i1-3);
+        this.icon.setFitWidth(i-3);
+        this.setPrefSize(i, i1);
     }
 }

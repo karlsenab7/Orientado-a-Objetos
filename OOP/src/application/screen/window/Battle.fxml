@@ -18,7 +18,7 @@
       <Button fx:id="runbutton" layoutX="444.0" layoutY="476.0" mnemonicParsing="false" onAction="#handleRunButton" prefHeight="68.0" prefWidth="200.0" text="Run" />
       <VBox alignment="TOP_CENTER" layoutX="78.0" layoutY="135.0" prefHeight="305.0" prefWidth="259.0" spacing="10.0">
          <children>
-            <ImageView id="image1" fx:id="imageViewOwn" fitHeight="153.0" fitWidth="200.0" pickOnBounds="true" />
+            <ImageView id="image1" fx:id="imageViewOwn" fitHeight="153.0" fitWidth="200.0" pickOnBounds="true" preserveRatio="true" />
             <Label fx:id="statusLabelOwn" text="Status" />
          </children>
       </VBox>

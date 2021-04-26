@@ -41,6 +41,11 @@ public class BattleController {
     private int activeEngimon;
     private static Engimon enemyEngimon = null;
 
+    public void initialize()
+    {
+//        imageViewEnemy.setImage(new Image("application/assets/1.png"));
+    }
+
     // Tombol back
     public void handleBackButton(ActionEvent event) throws IOException {
         // Untuk mengganti scene
@@ -49,21 +54,11 @@ public class BattleController {
         stage.close();
     }
     
-    public void handleFightButton(ActionEvent event) throws IOException {
-        // Inisialisasi terlebih dahulu active engimon dan enemy engimon
-        //Battle current_battle = new Battle(this.ActiveEngimon, this.EnemyEngimon);
-        //current_battle.fight();
-        System.out.println("Battling");
-        // Yang bawah belum bener implementasinya, baru gambaran kasar
-//        if(current_battle.fight() == win){
-//            root = FXMLLoader.load(getClass().getResource("/Scenes/WinBattle.fxml"));
-//        } else {
-//            root = FXMLLoader.load(getClass().getResource("/Scenes/LoseBattle.fxml"));
-//        }
-//        stage = (Stage)((Node)event.getSource()).getScene().getWindow();
-//        scene = new Scene(root);
-//        stage.setScene(scene);
-//        stage.show();
+    public void handleFightButton(ActionEvent event) throws IOException
+    {
+        GameManagement.player.battle(enemyEngimon);
+        stage = (Stage)((Node)event.getSource()).getScene().getWindow();
+        stage.close();
     }
 
     public void handleRunButton(ActionEvent event) throws IOException{
@@ -88,8 +83,8 @@ public class BattleController {
 
     public void resetEnemyState()
     {
-        imageViewEnemy = new ImageView();
-        statusLabelEnemy = new Label();
+//        imageViewEnemy = new ImageView();
+//        statusLabelEnemy = new Label();
         String assetPath = "application/assets/";
         imageViewEnemy.setImage(new Image(assetPath + enemyEngimon.get_icon()));
         statusLabelEnemy.setText(
@@ -105,8 +100,8 @@ public class BattleController {
 
     public void resetOwnEngimonState()
     {
-        imageViewOwn = new ImageView();
-        statusLabelOwn = new Label();
+//        imageViewOwn = new ImageView();
+//        statusLabelOwn = new Label();
         String assetPath = "application/assets/";
         Engimon e = GameManagement.player.getActiveEngimon();
         imageViewOwn.setImage(new Image(assetPath + e.get_icon()));
