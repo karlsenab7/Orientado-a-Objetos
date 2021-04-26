@@ -307,6 +307,14 @@ public class Engimon {
             System.out.println("Engimon " + engimon_name + " is death");
             GameManagement.player.getInventoryEngimon().getInventory().remove(this);
             GameManagement.player.set_activeEngimonIdx(-1);
+            if (GameManagement.player.getInventoryEngimon().getInventory().size() == 0)
+                GameManagement.gameOver();
         }
     }
+
+    public void move(Position p)
+    {
+        this.position = new Position(p.getX(), p.getY());
+    }
+
 }

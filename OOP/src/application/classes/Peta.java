@@ -1,5 +1,7 @@
 package application.classes;
 
+import javafx.geometry.Pos;
+
 import java.io.File;
 import java.util.ArrayList;
 import java.util.List;
@@ -151,6 +153,49 @@ public class Peta {
     {
         this.showPeta();
         this.showLegend();
+    }
+
+    public boolean canMove(Position position, List<Element> els)
+    {
+        if (position.getX() < 0 || position.getX() > sizeX-1 || position.getY() < 0 || position.getY() > sizeY-1)
+            return false;
+
+        CellType type = arrOfCell.get(position.getY()).get(position.getX()).getCellType();
+
+        if (type == CellType.grassland)
+        {
+            for(Element el : els)
+            {
+                if (el.get_element().equals("ground") || el.get_element().equals("electric"))
+                    return true;
+            }
+        }
+        else if (type == CellType.sea)
+        {
+            for (Element el : els)
+            {
+                if (el.get_element().equals("water"))
+                    return true;
+            }
+        }
+        else if (type == CellType.mountain)
+        {
+            for (Element el : els)
+            {
+                if (el.get_element().equals("fire"))
+                    return true;
+            }
+        }
+        else
+        {
+            for (Element el : els)
+            {
+                if (el.get_element().equals("ice"))
+                    return true;
+            }
+        }
+
+        return false;
     }
 
     // void spawnMonster(vector<int> arrOfEngimonGlobal) // ganti int dengan Engimon

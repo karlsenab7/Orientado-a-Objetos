@@ -42,6 +42,11 @@ public class Player {
 //        }
     }
 
+    public void setPosition(Position position)
+    {
+        this.position = new Position(position.getX(), position.getY());
+    }
+
     public void set_name(String name) {
         this.name = name;
     }

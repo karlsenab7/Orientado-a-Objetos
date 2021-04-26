@@ -57,6 +57,7 @@ public class OverworldController {
         map.setCellContent(new Position(oldX,oldY), Content.air);
         map.setCellContent(p.getPosition(), Content.player);
         Map.getChildren().clear();
+        GameManagement.incMove();
         loadImageMap();
     }
 
@@ -68,6 +69,7 @@ public class OverworldController {
         map.setCellContent(new Position(oldX,oldY), Content.air);
         map.setCellContent(p.getPosition(), Content.player);
         Map.getChildren().clear();
+        GameManagement.incMove();
         loadImageMap();
     }
 
@@ -79,6 +81,7 @@ public class OverworldController {
         map.setCellContent(new Position(oldX,oldY), Content.air);
         map.setCellContent(p.getPosition(), Content.player);
         Map.getChildren().clear();
+        GameManagement.incMove();
         loadImageMap();
     }
 
@@ -90,6 +93,7 @@ public class OverworldController {
         map.setCellContent(new Position(oldX,oldY), Content.air);
         map.setCellContent(p.getPosition(), Content.player);
         Map.getChildren().clear();
+        GameManagement.incMove();
         loadImageMap();
     }
 
