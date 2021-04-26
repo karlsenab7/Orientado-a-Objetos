@@ -59,7 +59,7 @@ public class OverworldController {
         map.setCellContent(p.getPosition(), Content.player);
         Map.getChildren().clear();
         GameManagement.incMove();
-        loadImageMap();
+        refreshScreen();
     }
 
     // Tombol Down
@@ -71,7 +71,7 @@ public class OverworldController {
         map.setCellContent(p.getPosition(), Content.player);
         Map.getChildren().clear();
         GameManagement.incMove();
-        loadImageMap();
+        refreshScreen();
     }
 
     // Tombol Right
@@ -83,7 +83,7 @@ public class OverworldController {
         map.setCellContent(p.getPosition(), Content.player);
         Map.getChildren().clear();
         GameManagement.incMove();
-        loadImageMap();
+        refreshScreen();
     }
 
     // Tombol Left
@@ -95,7 +95,7 @@ public class OverworldController {
         map.setCellContent(p.getPosition(), Content.player);
         Map.getChildren().clear();
         GameManagement.incMove();
-        loadImageMap();
+        refreshScreen();
     }
 
     // Tombol Exit
@@ -224,8 +224,17 @@ public class OverworldController {
         p = GameManagement.getPlayer();
 //        System.out.println(p.getActiveEngimonPosition().getX()+ p.getActiveEngimonPosition().getY());
         System.out.println(p.getPosition().getX() + p.getPosition().getY());
+//        loadImageMap();
+//        loadEngimon();
+//        resetActivEngimonView();
+        refreshScreen();
+    }
+
+    public void refreshScreen()
+    {
         loadImageMap();
         loadEngimon();
+        loadSkill();
         resetActivEngimonView();
     }
 

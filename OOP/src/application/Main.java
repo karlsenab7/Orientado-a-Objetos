@@ -18,12 +18,14 @@ public class Main extends Application {
 
         Pane rootMainMenu = FXMLLoader.load(getClass().getResource("screen/MainMenu.fxml"));
         Pane rootOption = FXMLLoader.load(getClass().getResource("screen/Option.fxml"));
+        Pane rootLegend = FXMLLoader.load(getClass().getResource("screen/window/Legend.fxml"));
 
         Scene mainScene = new Scene(rootMainMenu, 1024, 768);
 
         ScreenController sc = new ScreenController(mainScene);
         sc.addScreen("MainMenu", rootMainMenu);
         sc.addScreen("Option", rootOption);
+        sc.addScreen("Legend", rootLegend);
 
         primaryStage.setScene(mainScene);
         primaryStage.setTitle("Gokemon GO!!");

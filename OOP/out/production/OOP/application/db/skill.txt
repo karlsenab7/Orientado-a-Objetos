@@ -1,2 +1,8 @@
-s1,electric,fight,10,1,master Karlsen,s1.png
-s2,fire,salto,20,3,sadas,s2.png
+s1,fire,fight,5,1,master Karlsen,s1.png
+s2,water,salto,5,1,sadas,s2.png
+s3,ground,tonjok,5,1,tonjok,s3.png
+s4,electric,setrum,5,1,nyetrum banget,s4.png
+s5,ice,stright,5,1,es batu,s5.png
+s6,fire,bakarbakar,7,1,bakar itb,s6.png
+s7,ice,wizard,12,1,dingin euy,s7.png
+s8,water,tsunami,15,1,wawwww,s8.png

@@ -68,7 +68,7 @@ public class MainMenuController {
 
             Pane rootEngimonInventory = FXMLLoader.load(getClass().getResource("window/EngimonInventory.fxml"));
             Pane rootBreedScene = FXMLLoader.load(getClass().getResource("window/BreedScene.fxml"));
-            Pane rootLegend = FXMLLoader.load(getClass().getResource("window/Legend.fxml"));
+
             Pane ParentException = FXMLLoader.load(getClass().getResource("window/ParentLevelException.fxml"));
             Pane rootBattle = FXMLLoader.load(getClass().getResource("window/Battle.fxml"));
 
@@ -84,7 +84,7 @@ public class MainMenuController {
 
             sc.addScreen("EngimonInventory", rootEngimonInventory);
             sc.addScreen("BreedScene", rootBreedScene);
-            sc.addScreen("Legend", rootLegend);
+
             sc.addScreen("ParentLevelException", ParentException);
             sc.addScreen("Battle", rootBattle);
         }
